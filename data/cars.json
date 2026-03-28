@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Toyota Sequoia",
+    "price": 180,
+    "seats": 4
+  },
+  {
+    "name": "Toyota Land Cruiser",
+    "price": 220,
+    "seats": 4
+  }
+]
