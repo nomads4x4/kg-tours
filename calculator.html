@@ -6,149 +6,115 @@
 <title>Рассчитать тур</title>
 
 <style>
-body{
-font-family:Arial;
-margin:0;
-background:#f5f7fb;
-}
-
-.container{
-max-width:900px;
-margin:auto;
-padding:20px;
-}
-
-h1{
-text-align:center;
-}
-
-.card{
-background:white;
-padding:20px;
-border-radius:12px;
-box-shadow:0 5px 15px rgba(0,0,0,0.08);
-margin-bottom:20px;
-}
-
-label{
-display:block;
-margin-top:10px;
-font-weight:bold;
-}
-
-select,input{
-width:100%;
-padding:10px;
-margin-top:5px;
-border-radius:8px;
-border:1px solid #ddd;
-}
-
-button{
-margin-top:15px;
-padding:12px;
-border:none;
-border-radius:8px;
-font-weight:bold;
-cursor:pointer;
-width:100%;
-}
-
-.calc{
-background:#2A7FFF;
-color:white;
-}
-
-.whatsapp{
-background:#25D366;
-color:white;
-}
-
-.telegram{
-background:#0088cc;
-color:white;
-}
-
-.result{
-font-size:20px;
-font-weight:bold;
-margin-top:10px;
-}
+body{font-family:Arial;margin:0;background:#f5f7fb;}
+.container{max-width:900px;margin:auto;padding:20px;}
+.card{background:white;padding:20px;border-radius:12px;box-shadow:0 5px 15px rgba(0,0,0,0.08);}
+label{display:block;margin-top:10px;font-weight:bold;}
+select,input{width:100%;padding:10px;margin-top:5px;border-radius:8px;border:1px solid #ddd;}
+button{margin-top:15px;padding:12px;border:none;border-radius:8px;font-weight:bold;cursor:pointer;width:100%;}
+.calc{background:#2A7FFF;color:white;}
+.whatsapp{background:#25D366;color:white;}
+.telegram{background:#0088cc;color:white;}
+.result{font-size:20px;font-weight:bold;margin-top:10px;}
 </style>
 </head>
 
 <body>
 
 <div class="container">
-
 <h1>Рассчитать тур</h1>
 
 <div class="card">
 
 <label>Маршрут</label>
-<select id="route">
-<option value="200">Иссык-Куль</option>
-<option value="300">Сон-Куль</option>
-<option value="400">Алай</option>
-</select>
+<select id="route"></select>
 
 <label>Количество дней</label>
-<input type="number" id="days" value="2" min="1">
+<input type="number" id="days" value="1" min="1">
 
 <label>Количество человек</label>
 <input type="number" id="people" value="1" min="1">
 
 <label>Гид</label>
-<select id="guide">
-<option value="150">Стандарт</option>
-<option value="200">Профи</option>
-</select>
+<select id="guide"></select>
 
 <label>Машина</label>
-<select id="car">
-<option value="180">Toyota Sequoia</option>
-<option value="200">Toyota Land Cruiser</option>
-</select>
+<select id="car"></select>
 
 <button class="calc" onclick="calculate()">Рассчитать</button>
 
 <div class="result" id="result">Стоимость: -</div>
 
-<button class="whatsapp" onclick="sendWhatsApp()">Отправить в WhatsApp</button>
-<button class="telegram" onclick="sendTelegram()">Написать в Telegram</button>
+<button class="whatsapp" onclick="sendWhatsApp()">WhatsApp</button>
+<button class="telegram" onclick="sendTelegram()">Telegram</button>
 
 </div>
-
 </div>
 
 <script>
 
-let totalPrice = 0;
+let tours=[], guides=[], cars=[]
+let totalPrice=0
+
+async function loadData(){
+
+tours = await fetch('data/tours.json').then(r=>r.json())
+guides = await fetch('data/guides.json').then(r=>r.json())
+cars = await fetch('data/cars.json').then(r=>r.json())
+
+const routeSelect = document.getElementById("route")
+tours.forEach((t,i)=>{
+routeSelect.innerHTML += `<option value="${i}">${t.name}</option>`
+})
+
+const guideSelect = document.getElementById("guide")
+guides.forEach((g,i)=>{
+guideSelect.innerHTML += `<option value="${i}">${g.name}</option>`
+})
+
+const carSelect = document.getElementById("car")
+cars.forEach((c,i)=>{
+carSelect.innerHTML += `<option value="${i}">${c.name}</option>`
+})
+
+}
+
+loadData()
 
 function calculate(){
 
-let route = +document.getElementById("route").value
+let routeIndex = document.getElementById("route").value
+let guideIndex = document.getElementById("guide").value
+let carIndex = document.getElementById("car").value
 let days = +document.getElementById("days").value
 let people = +document.getElementById("people").value
-let guide = +document.getElementById("guide").value
-let car = +document.getElementById("car").value
 
-totalPrice = (route * days) + (guide * days) + (car * days)
+let tour = tours[routeIndex]
+let guide = guides[guideIndex]
+let car = cars[carIndex]
+
+let carsNeeded = Math.ceil(people / car.seats)
+
+totalPrice =
+(tour.price * days) +
+(guide.price * days * carsNeeded) +
+(car.price * days * carsNeeded)
 
 document.getElementById("result").innerText =
 "Стоимость: " + totalPrice + " USD"
+
 }
 
 function buildMessage(){
 
-let route = document.getElementById("route").selectedOptions[0].text
+let route = tours[route.value].name
+let guide = guides[guide.value].name
+let car = cars[car.value].name
 let days = document.getElementById("days").value
 let people = document.getElementById("people").value
-let guide = document.getElementById("guide").selectedOptions[0].text
-let car = document.getElementById("car").selectedOptions[0].text
 
-return `Добрый день! 
-Я подобрал тур:
+return `Добрый день!
+Параметры тура:
 
 Маршрут: ${route}
 Дней: ${days}
@@ -156,19 +122,17 @@ return `Добрый день!
 Гид: ${guide}
 Машина: ${car}
 
-Расчетная стоимость: ${totalPrice} USD
-
-Хотел бы обсудить покупку тура.`
+Стоимость: ${totalPrice} USD`
 }
 
 function sendWhatsApp(){
 let text = encodeURIComponent(buildMessage())
-window.open(`https://wa.me/996555900855?text=${text}`,'_blank')
+window.open(`https://wa.me/996555900855?text=${text}`)
 }
 
 function sendTelegram(){
 let text = encodeURIComponent(buildMessage())
-window.open(`https://t.me/ErkinMms?text=${text}`,'_blank')
+window.open(`https://t.me/ErkinMms?text=${text}`)
 }
 
 </script>
