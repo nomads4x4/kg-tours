@@ -86,23 +86,27 @@ function calculate(){
 let routeIndex = document.getElementById("route").value
 let guideIndex = document.getElementById("guide").value
 let carIndex = document.getElementById("car").value
-let days = +document.getElementById("days").value
-let people = +document.getElementById("people").value
+let days = Number(document.getElementById("days").value)
+let people = Number(document.getElementById("people").value)
 
 let tour = tours[routeIndex]
 let guide = guides[guideIndex]
 let car = cars[carIndex]
 
+if(!tour || !guide || !car){
+document.getElementById("result").innerText = "Ошибка данных"
+return
+}
+
 let carsNeeded = Math.ceil(people / car.seats)
 
 totalPrice =
-(tour.price * days) +
-(guide.price * days * carsNeeded) +
-(car.price * days * carsNeeded)
+(Number(tour.price) * days) +
+(Number(guide.price) * days * carsNeeded) +
+(Number(car.price) * days * carsNeeded)
 
 document.getElementById("result").innerText =
 "Стоимость: " + totalPrice + " USD"
-
 }
 
 function buildMessage(){
