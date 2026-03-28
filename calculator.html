@@ -111,20 +111,25 @@ document.getElementById("result").innerText =
 
 function buildMessage(){
 
-let route = tours[route.value].name
-let guide = guides[guide.value].name
-let car = cars[car.value].name
+let routeIndex = document.getElementById("route").value
+let guideIndex = document.getElementById("guide").value
+let carIndex = document.getElementById("car").value
+
+let routeName = tours[routeIndex].name
+let guideName = guides[guideIndex].name
+let carName = cars[carIndex].name
+
 let days = document.getElementById("days").value
 let people = document.getElementById("people").value
 
 return `Добрый день!
 Параметры тура:
 
-Маршрут: ${route}
+Маршрут: ${routeName}
 Дней: ${days}
 Человек: ${people}
-Гид: ${guide}
-Машина: ${car}
+Гид: ${guideName}
+Машина: ${carName}
 
 Стоимость: ${totalPrice} USD`
 }
