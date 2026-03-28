@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Имярек",
+    "type": "Горный гид",
+    "image": "images/guides/azamat.jpg",
+    "description": "10 лет опыта, треккинг и альпинизм"
+  },
+  {
+    "name": "Эркин",
+    "type": "Фототуры",
+    "image": "images/guides/ruslan.jpg",
+    "description": "Лучшие локации для фотографов"
+  }
+]
