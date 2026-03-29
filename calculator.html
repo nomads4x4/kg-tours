@@ -123,15 +123,16 @@ let days = document.getElementById("days").value
 let people = document.getElementById("people").value
 
 return `Добрый день!
-Параметры тура:
 
+Параметры тура:
 Маршрут: ${routeName}
 Дней: ${days}
 Человек: ${people}
 Гид: ${guideName}
 Машина: ${carName}
+Стоимость: ${totalPrice} USD
 
-Стоимость: ${totalPrice} USD`
+Хотел бы забронировать тур с этими параметрами (-:`
 }
 
 function sendWhatsApp(){
