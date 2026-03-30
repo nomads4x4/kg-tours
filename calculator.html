@@ -85,6 +85,19 @@ font-weight:bold;
 margin-top:10px;
 text-align:center;
 }
+
+.activity-item{
+display:flex;
+align-items:center;
+gap:10px;
+margin:6px 0;
+}
+
+.activity-item input{
+width:18px;
+height:18px;
+cursor:pointer;
+}
 </style>
 </head>
 
@@ -154,9 +167,9 @@ carSelect.innerHTML += `<option value="${i}">${c.name}</option>`
 const actContainer = document.getElementById("activities")
 activities.forEach((a,i)=>{
 actContainer.innerHTML += `
-<label>
-<span>${a.name} (+${a.price}$)</span>
+<label class="activity-item">
 <input type="checkbox" value="${i}">
+<span>${a.name} (+${a.price}$)</span>
 </label>`
 })
 
