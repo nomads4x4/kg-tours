@@ -1,13 +1,13 @@
 [
   {
-    "name": "Иссык-Куль",
+    "name": "Ysyk-Kol",
     "price": 200,
     "days": 3,
     "image": "images/tours/issyk-kul.jpg",
     "description": "Озеро, каньоны и горные панорамы"
   },
   {
-    "name": "Сон-Куль",
+    "name": "Son-Kol",
     "price": 300,
     "days": 2,
     "image": "images/tours/son-kul.jpg",
