@@ -1,21 +1,49 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tour Calculator</title>
 
 <style>
-body{font-family:Arial;margin:0;background:#f5f7fb;}
-.container{max-width:900px;margin:auto;padding:20px;}
-.card{background:white;padding:20px;border-radius:12px;box-shadow:0 5px 15px rgba(0,0,0,0.08);}
-label{display:block;margin-top:10px;font-weight:bold;}
-select,input{width:100%;padding:10px;margin-top:5px;border-radius:8px;border:1px solid #ddd;}
-button{margin-top:15px;padding:12px;border:none;border-radius:8px;font-weight:bold;cursor:pointer;width:100%;}
-.calc{background:#2A7FFF;color:white;}
-.whatsapp{background:#25D366;color:white;}
-.telegram{background:#0088cc;color:white;}
-.result{font-size:20px;font-weight:bold;margin-top:10px;}
+body{
+font-family:Arial;
+margin:0;
+background:#f5f7fb;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+padding:20px;
+}
+
+h1{
+text-align:center;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:12px;
+box-shadow:0 5px 15px rgba(0,0,0,0.08);
+margin-bottom:20px;
+}
+
+label{
+display:block;
+margin-top:10px;
+font-weight:bold;
+}
+
+select,input{
+width:100%;
+padding:10px;
+margin-top:5px;
+border-radius:8px;
+border:1px solid #ddd;
+}
+
 #activities label{
 display:flex;
 justify-content:space-between;
@@ -25,12 +53,45 @@ border-radius:6px;
 margin-top:5px;
 cursor:pointer;
 }
+
+button{
+margin-top:15px;
+padding:12px;
+border:none;
+border-radius:8px;
+font-weight:bold;
+cursor:pointer;
+width:100%;
+}
+
+.calc{
+background:#2A7FFF;
+color:white;
+}
+
+.whatsapp{
+background:#25D366;
+color:white;
+}
+
+.telegram{
+background:#0088cc;
+color:white;
+}
+
+.result{
+font-size:20px;
+font-weight:bold;
+margin-top:10px;
+text-align:center;
+}
 </style>
 </head>
 
 <body>
 
 <div class="container">
+
 <h1>Tour Calculator</h1>
 
 <div class="card">
@@ -38,7 +99,7 @@ cursor:pointer;
 <label>Route</label>
 <select id="route"></select>
 
-<label>RouteDays</label>
+<label>Days</label>
 <input type="number" id="days" value="1" min="1">
 
 <label>People</label>
@@ -55,10 +116,10 @@ cursor:pointer;
 
 <button class="calc" onclick="calculate()">Calculate</button>
 
-<div class="result" id="result">Стоимость: -</div>
+<div class="result" id="result">Total price: -</div>
 
-<button class="whatsapp" onclick="sendWhatsApp()">WhatsApp</button>
-<button class="telegram" onclick="sendTelegram()">Telegram</button>
+<button class="whatsapp" onclick="sendWhatsApp()">Send to WhatsApp</button>
+<button class="telegram" onclick="sendTelegram()">Send to Telegram</button>
 
 </div>
 </div>
@@ -73,6 +134,7 @@ async function loadData(){
 tours = await fetch('data/tours.json').then(r=>r.json())
 guides = await fetch('data/guides.json').then(r=>r.json())
 cars = await fetch('data/cars.json').then(r=>r.json())
+activities = await fetch('data/activities.json').then(r=>r.json())
 
 const routeSelect = document.getElementById("route")
 tours.forEach((t,i)=>{
@@ -89,21 +151,19 @@ cars.forEach((c,i)=>{
 carSelect.innerHTML += `<option value="${i}">${c.name}</option>`
 })
 
-}
-
-loadData()
-
-activities = await fetch('data/activities.json').then(r=>r.json())
-
 const actContainer = document.getElementById("activities")
 activities.forEach((a,i)=>{
 actContainer.innerHTML += `
 <label>
-<span>${a.name}</span>
+<span>${a.name} (+${a.price}$)</span>
 <input type="checkbox" value="${i}">
 </label>`
 })
-  
+
+}
+
+loadData()
+
 function calculate(){
 
 let routeIndex = document.getElementById("route").value
@@ -169,12 +229,12 @@ I'd like to discuss booking.`
 
 function sendWhatsApp(){
 let text = encodeURIComponent(buildMessage())
-window.open(`https://wa.me/996555900855?text=${text}`)
+window.open(`https://wa.me/996555900855?text=${text}`,'_blank')
 }
 
 function sendTelegram(){
 let text = encodeURIComponent(buildMessage())
-window.open(`https://t.me/ErkinMms?text=${text}`)
+window.open(`https://t.me/ErkinMms?text=${text}`,'_blank')
 }
 
 </script>
