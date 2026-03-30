@@ -1,13 +1,13 @@
 [
   {
-    "name": "Имярек",
+    "name": "JohnSmth",
     "price": 150,
     "type": "Горный гид",
     "image": "images/guides/imyarek.jpg",
     "description": "10 лет опыта, треккинг и альпинизм"
   },
   {
-    "name": "Эркин",
+    "name": "Erkin",
     "price": 180,
     "type": "Фототуры",
     "image": "images/guides/erkin.jpg",
