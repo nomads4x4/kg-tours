@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Рассчитать тур</title>
+<title>Tour Calculator</title>
 
 <style>
 body{font-family:Arial;margin:0;background:#f5f7fb;}
@@ -16,32 +16,44 @@ button{margin-top:15px;padding:12px;border:none;border-radius:8px;font-weight:bo
 .whatsapp{background:#25D366;color:white;}
 .telegram{background:#0088cc;color:white;}
 .result{font-size:20px;font-weight:bold;margin-top:10px;}
+#activities label{
+display:flex;
+justify-content:space-between;
+background:#f5f7fb;
+padding:8px;
+border-radius:6px;
+margin-top:5px;
+cursor:pointer;
+}
 </style>
 </head>
 
 <body>
 
 <div class="container">
-<h1>Рассчитать тур</h1>
+<h1>Tour Calculator</h1>
 
 <div class="card">
 
-<label>Маршрут</label>
+<label>Route</label>
 <select id="route"></select>
 
-<label>Количество дней</label>
+<label>RouteDays</label>
 <input type="number" id="days" value="1" min="1">
 
-<label>Количество человек</label>
+<label>People</label>
 <input type="number" id="people" value="1" min="1">
 
-<label>Гид</label>
+<label>Guide</label>
 <select id="guide"></select>
 
-<label>Машина</label>
+<label>Car</label>
 <select id="car"></select>
 
-<button class="calc" onclick="calculate()">Рассчитать</button>
+<label>Activities</label>
+<div id="activities"></div>
+
+<button class="calc" onclick="calculate()">Calculate</button>
 
 <div class="result" id="result">Стоимость: -</div>
 
@@ -53,7 +65,7 @@ button{margin-top:15px;padding:12px;border:none;border-radius:8px;font-weight:bo
 
 <script>
 
-let tours=[], guides=[], cars=[]
+let tours=[], guides=[], cars=[], activities=[]
 let totalPrice=0
 
 async function loadData(){
@@ -81,6 +93,17 @@ carSelect.innerHTML += `<option value="${i}">${c.name}</option>`
 
 loadData()
 
+activities = await fetch('data/activities.json').then(r=>r.json())
+
+const actContainer = document.getElementById("activities")
+activities.forEach((a,i)=>{
+actContainer.innerHTML += `
+<label>
+<span>${a.name}</span>
+<input type="checkbox" value="${i}">
+</label>`
+})
+  
 function calculate(){
 
 let routeIndex = document.getElementById("route").value
@@ -93,20 +116,24 @@ let tour = tours[routeIndex]
 let guide = guides[guideIndex]
 let car = cars[carIndex]
 
-if(!tour || !guide || !car){
-document.getElementById("result").innerText = "Ошибка данных"
-return
-}
-
 let carsNeeded = Math.ceil(people / car.seats)
+
+let activitiesTotal = 0
+
+document.querySelectorAll("#activities input:checked")
+.forEach(cb=>{
+let act = activities[cb.value]
+activitiesTotal += Number(act.price) * people
+})
 
 totalPrice =
 (Number(tour.price) * days) +
 (Number(guide.price) * days * carsNeeded) +
-(Number(car.price) * days * carsNeeded)
+(Number(car.price) * days * carsNeeded) +
+activitiesTotal
 
 document.getElementById("result").innerText =
-"Стоимость: " + totalPrice + " USD"
+"Total price: " + totalPrice + " USD"
 }
 
 function buildMessage(){
@@ -115,24 +142,29 @@ let routeIndex = document.getElementById("route").value
 let guideIndex = document.getElementById("guide").value
 let carIndex = document.getElementById("car").value
 
-let routeName = tours[routeIndex].name
-let guideName = guides[guideIndex].name
-let carName = cars[carIndex].name
-
 let days = document.getElementById("days").value
 let people = document.getElementById("people").value
 
-return `Добрый день!
+let selectedActivities = []
 
-Параметры тура:
-Маршрут: ${routeName}
-Дней: ${days}
-Человек: ${people}
-Гид: ${guideName}
-Машина: ${carName}
-Стоимость: ${totalPrice} USD
+document.querySelectorAll("#activities input:checked")
+.forEach(cb=>{
+selectedActivities.push(activities[cb.value].name)
+})
 
-Хотел бы забронировать тур с этими параметрами (-:`
+return `Hello!
+I selected the following tour:
+
+Route: ${tours[routeIndex].name}
+Days: ${days}
+People: ${people}
+Guide: ${guides[guideIndex].name}
+Car: ${cars[carIndex].name}
+Activities: ${selectedActivities.join(", ") || "None"}
+
+Estimated price: ${totalPrice} USD
+
+I'd like to discuss booking.`
 }
 
 function sendWhatsApp(){
