@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Details</title>
+
+<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+.item-hero img{
+width:100%;
+height:420px;
+object-fit:cover;
+}
+
+.item-content{
+max-width:900px;
+margin:40px auto;
+padding:0 20px;
+}
+
+.back{
+display:inline-block;
+margin-bottom:20px;
+text-decoration:none;
+color:#111;
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+<div class="container nav">
+<a href="index.html" class="logo">Nomads4x4</a>
+<nav class="menu">
+<a href="index.html#tours">Tours</a>
+<a href="index.html#places">Places</a>
+<a href="index.html#activities">Activities</a>
+<a href="index.html#guides">Guides</a>
+<a href="calculator.html">Calculator</a>
+</nav>
+</div>
+</header>
+
+<div id="item"></div>
+
+<script>
+function params(){
+const p=new URLSearchParams(location.search);
+return {type:p.get('type'),id:p.get('id')}
+}
+
+async function load(){
+
+const {type,id}=params()
+
+const map={
+tour:'data/tours.json',
+place:'data/places.json',
+activity:'data/activities.json',
+guide:'data/guides.json'
+}
+
+const data=await fetch(map[type]).then(r=>r.json())
+const item=data.find(i=>i.id===id)
+
+document.getElementById('item').innerHTML=`
+<div class="item-hero">
+<img src="${item.image}">
+</div>
+
+<div class="item-content">
+<a href="index.html" class="back">← Back</a>
+<h1>${item.name}</h1>
+<p>${item.description || ''}</p>
+</div>
+`
+}
+
+load()
+</script>
+
+</body>
+</html>
