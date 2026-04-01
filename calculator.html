@@ -121,7 +121,12 @@ document.getElementById('activities').innerHTML+=`
 function calculate(){
 
 const people=parseInt(document.getElementById('people').value)
-const tour=tours[route.value]
+
+const routeSelect=document.getElementById('route')
+const guideSelect=document.getElementById('guide')
+const carSelect=document.getElementById('car')
+
+const tour=tours[routeSelect.value]
 const guide=guides[guideSelect.value]
 const car=cars[carSelect.value]
 
