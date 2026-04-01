@@ -1,16 +1,20 @@
 [
   {
-    "name": "JohnSmth",
+    "id": "erkin",
+    "name": "Erkin",
     "price": 150,
-    "type": "Горный гид",
-    "image": "images/guides/imyarek.jpg",
-    "description": "10 лет опыта, треккинг и альпинизм"
+    "car_id": "prado",
+    "image": "images/guides/erkin.jpg",
+    "experience": "10 years",
+    "description": "Professional mountain guide"
   },
   {
-    "name": "Erkin",
-    "price": 180,
-    "type": "Фототуры",
-    "image": "images/guides/erkin.jpg",
-    "description": "Лучшие локации для фотографов"
+    "id": "bek",
+    "name": "Bek",
+    "price": 130,
+    "car_id": "delica",
+    "image": "images/guides/bek.jpg",
+    "experience": "7 years",
+    "description": "Off-road specialist"
   }
 ]
