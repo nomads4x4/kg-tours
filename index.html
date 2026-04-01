@@ -1,143 +1,150 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Туры по Кыргызстану</title>
+<title>Kyrgyzstan 4x4 Tours</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-body {
-font-family: Arial;
-margin: 0;
-background: #f5f7fb;
+:root{
+--bg:#F8F9FA;
+--text:#333333;
+--accent:#1f2a44;
+--card-bg:#ffffff;
 }
 
-.hero {
-padding: 40px 20px;
-text-align: center;
-background: white;
+*{box-sizing:border-box;margin:0;padding:0;}
+
+body{
+font-family:'Inter',sans-serif;
+background:var(--bg);
+color:var(--text);
 }
 
-.hero h1 {
-margin-bottom: 10px;
+.container{
+max-width:1100px;
+margin:auto;
+padding:20px;
 }
 
-.hero p {
-color: #555;
+.hero{
+position:relative;
+height:420px;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+color:white;
 }
 
-.btn {
-display: inline-block;
-margin-top: 15px;
-padding: 12px 20px;
-background: #2A7FFF;
-color: white;
-border-radius: 8px;
-text-decoration: none;
-font-weight: bold;
+.hero::before{
+content:"";
+position:absolute;
+inset:0;
+background:url('images/hero.jpg') center/cover no-repeat;
 }
 
-.section {
-padding: 20px;
+.hero::after{
+content:"";
+position:absolute;
+inset:0;
+background:rgba(0,0,0,.45);
 }
 
-.section h2 {
-margin-bottom: 15px;
+.hero-content{
+position:relative;
+z-index:2;
 }
 
-.carousel {
-display: flex;
-gap: 15px;
-overflow-x: auto;
-padding-bottom: 10px;
+.hero h1{
+font-size:42px;
+margin-bottom:12px;
 }
 
-.card {
-min-width: 250px;
-background: white;
-border-radius: 12px;
-overflow: hidden;
-box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+.hero button{
+background:white;
+border:none;
+padding:14px 28px;
+border-radius:8px;
+cursor:pointer;
 }
 
-.card img {
-width: 100%;
-height: 160px;
-object-fit: cover;
+.card-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:24px;
+margin-top:20px;
 }
 
-.card-content {
-padding: 15px;
+.card{
+background:white;
+border-radius:12px;
+padding:24px;
+box-shadow:0 2px 8px rgba(0,0,0,.05);
 }
 
-.card-content h3 {
-margin: 0 0 5px 0;
+.card img{
+width:100%;
+border-radius:8px;
+margin-bottom:10px;
 }
 
-.card-content p {
-margin: 0;
-color: #555;
-font-size: 14px;
-}
+h2{margin-top:40px;}
+
 </style>
 </head>
 
 <body>
 
-<div class="hero">
-<h1>Туры по Кыргызстану</h1>
-<p>Индивидуальные путешествия с профессиональными гидами. Горы, озёра и настоящая кочевая культура.</p>
-<a href="calculator.html" class="btn">Рассчитать стоимость тура</a>
+<section class="hero">
+<div class="hero-content">
+<h1>Kyrgyzstan 4x4 Tours</h1>
+<p>Private adventures with local guides</p>
+<a href="calculator.html"><button>Calculate your tour</button></a>
 </div>
+</section>
 
-<div class="section">
-<h2>Популярные маршруты</h2>
-<div class="carousel" id="tours"></div>
-</div>
+<div class="container">
 
-<div class="section">
-<h2>Наши гиды</h2>
-<div class="carousel" id="guides"></div>
+<h2>Tours</h2>
+<div id="tours" class="card-grid"></div>
+
+<h2>Guides</h2>
+<div id="guides" class="card-grid"></div>
+
 </div>
 
 <script>
+async function load(){
 
-fetch('data/tours.json')
-.then(res => res.json())
-.then(tours => {
-const container = document.getElementById('tours')
+const tours = await fetch('./data/tours.json').then(r=>r.json())
+const guides = await fetch('./data/guides.json').then(r=>r.json())
 
-tours.forEach(t => {
-container.innerHTML += `
+const toursContainer=document.getElementById('tours')
+tours.forEach(t=>{
+toursContainer.innerHTML+=`
 <div class="card">
-<img src="${t.image}" loading="lazy">
-<div class="card-content">
+<img src="${t.image}">
 <h3>${t.name}</h3>
 <p>${t.description}</p>
-<p>${t.days} дней</p>
-</div>
 </div>`
 })
-})
 
-fetch('data/guides.json')
-.then(res => res.json())
-.then(guides => {
-const container = document.getElementById('guides')
-
-guides.forEach(g => {
-container.innerHTML += `
+const guidesContainer=document.getElementById('guides')
+guides.forEach(g=>{
+guidesContainer.innerHTML+=`
 <div class="card">
-<img src="${g.image}" loading="lazy">
-<div class="card-content">
+<img src="${g.image}">
 <h3>${g.name}</h3>
-<p>${g.type}</p>
 <p>${g.description}</p>
-</div>
 </div>`
 })
-})
 
+}
+
+load()
 </script>
 
 </body>
