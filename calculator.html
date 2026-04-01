@@ -60,41 +60,7 @@
 </div>
 </section>
 
-<script>
-async function loadJSON(path){
-return fetch(path).then(r=>r.json())
-}
-
-function createCard(item,type){
-const card=document.createElement('div')
-card.className='card'
-card.innerHTML=`
-<img src="${item.image}">
-<div class="card-body">
-<h3>${item.name}</h3>
-<p>${item.short_description || ''}</p>
-<div class="card-meta">
-${item.days?item.days+' days':''}
-${item.price?' • $'+item.price:''}
-</div>
-</div>`
-card.onclick=()=>location.href=`item.html?type=${type}&id=${item.id}`
-return card
-}
-
-async function load(){
-const tours=await loadJSON('data/tours.json')
-const places=await loadJSON('data/places.json')
-const activities=await loadJSON('data/activities.json')
-const guides=await loadJSON('data/guides.json')
-
-tours.forEach(i=>tours-container.appendChild(createCard(i,'tour')))
-places.forEach(i=>places-container.appendChild(createCard(i,'place')))
-activities.forEach(i=>activities-container.appendChild(createCard(i,'activity')))
-guides.forEach(i=>guides-container.appendChild(createCard(i,'guide')))
-}
-load()
-</script>
+<script src="app.js"></script>
 
 </body>
 </html>
