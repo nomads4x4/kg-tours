@@ -1,12 +1,16 @@
 [
   {
-    "name": "Toyota Sequoia",
+    "id": "prado",
+    "name": "Toyota Prado",
+    "seats": 4,
     "price": 180,
-    "seats": 4
+    "image": "images/cars/prado.jpg"
   },
   {
-    "name": "Toyota Land Cruiser",
-    "price": 220,
-    "seats": 4
+    "id": "delica",
+    "name": "Mitsubishi Delica",
+    "seats": 4,
+    "price": 160,
+    "image": "images/cars/delica.jpg"
   }
 ]
