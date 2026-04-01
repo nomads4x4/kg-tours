@@ -1,37 +1,22 @@
 [
   {
-    "name": "Ysyk-Kol",
-    "price": 200,
+    "id": "sonkul",
+    "name": "Son Kul Lake",
     "days": 3,
-    "image": "images/tours/issyk-kul.jpg",
-    "description": "Озеро, каньоны и горные панорамы"
+    "price": 450,
+    "image": "images/tours/sonkul.jpg",
+    "short_description": "High mountain lake tour",
+    "description": "Detailed description of Son Kul tour...",
+    "max_people": 4
   },
   {
-    "name": "Son-Kol",
-    "price": 300,
-    "days": 2,
-    "image": "images/tours/son-kul.jpg",
-    "description": "Юрты, лошади и высокогорное озеро"
-  },
-  {
-    "name": "Son-Kol",
-    "price": 300,
-    "days": 2,
-    "image": "images/tours/son-kul.jpg",
-    "description": "Юрты, лошади и высокогорное озеро"
-  },
-  {
-    "name": "Son-Kol",
-    "price": 300,
-    "days": 2,
-    "image": "images/tours/son-kul.jpg",
-    "description": "Юрты, лошади и высокогорное озеро"
-  },
-  {
-    "name": "Son-Kol",
-    "price": 300,
-    "days": 2,
-    "image": "images/tours/son-kul.jpg",
-    "description": "Юрты, лошади и высокогорное озеро"
+    "id": "kel-suu",
+    "name": "Kel Suu Lake",
+    "days": 4,
+    "price": 650,
+    "image": "images/tours/kelsuu.jpg",
+    "short_description": "Remote alpine lake",
+    "description": "Detailed description of Kel Suu tour...",
+    "max_people": 4
   }
 ]
