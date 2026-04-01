@@ -12,5 +12,26 @@
     "days": 2,
     "image": "images/tours/son-kul.jpg",
     "description": "Юрты, лошади и высокогорное озеро"
+  },
+  {
+    "name": "Son-Kol",
+    "price": 300,
+    "days": 2,
+    "image": "images/tours/son-kul.jpg",
+    "description": "Юрты, лошади и высокогорное озеро"
+  },
+  {
+    "name": "Son-Kol",
+    "price": 300,
+    "days": 2,
+    "image": "images/tours/son-kul.jpg",
+    "description": "Юрты, лошади и высокогорное озеро"
+  },
+  {
+    "name": "Son-Kol",
+    "price": 300,
+    "days": 2,
+    "image": "images/tours/son-kul.jpg",
+    "description": "Юрты, лошади и высокогорное озеро"
   }
 ]
