@@ -3,61 +3,96 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kyrgyzstan 4x4 Tours</title>
+<title>Nomads4x4 Tours</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
-
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-<section class="hero">
+<header class="header">
+<div class="container nav">
+<a href="#" class="logo">Nomads4x4</a>
+<nav class="menu">
+<a href="#tours">Tours</a>
+<a href="#places">Places</a>
+<a href="#activities">Activities</a>
+<a href="#guides">Guides</a>
+<a href="calculator.html">Calculator</a>
+</nav>
+</div>
+</header>
+
+<section class="hero" style="background:url('images/hero.jpg') center/cover no-repeat;">
 <div class="hero-content">
-<h1>Kyrgyzstan 4x4 Tours</h1>
-<p>Private adventures with local guides</p>
-<a href="calculator.html"><button>Calculate your tour</button></a>
+<h1>Kyrgyzstan Off-Road Tours</h1>
+<p>Private 4x4 adventures with experienced local guides</p>
+<a href="calculator.html" class="hero-button">Calculate Tour</a>
 </div>
 </section>
 
+<section id="tours" class="section">
 <div class="container">
-
 <h2>Tours</h2>
-<div id="tours" class="card-grid"></div>
-
-<h2>Guides</h2>
-<div id="guides" class="card-grid"></div>
-
+<div class="cards" id="tours-container"></div>
 </div>
+</section>
+
+<section id="places" class="section">
+<div class="container">
+<h2>Places</h2>
+<div class="cards" id="places-container"></div>
+</div>
+</section>
+
+<section id="activities" class="section">
+<div class="container">
+<h2>Activities</h2>
+<div class="cards" id="activities-container"></div>
+</div>
+</section>
+
+<section id="guides" class="section">
+<div class="container">
+<h2>Guides</h2>
+<div class="cards" id="guides-container"></div>
+</div>
+</section>
 
 <script>
-async function load(){
-
-const tours = await fetch('./data/tours.json').then(r=>r.json())
-const guides = await fetch('./data/guides.json').then(r=>r.json())
-
-const toursContainer=document.getElementById('tours')
-tours.forEach(t=>{
-toursContainer.innerHTML+=`
-<div class="card">
-<img src="${t.image}">
-<h3>${t.name}</h3>
-<p>${t.description}</p>
-</div>`
-})
-
-const guidesContainer=document.getElementById('guides')
-guides.forEach(g=>{
-guidesContainer.innerHTML+=`
-<div class="card">
-<img src="${g.image}">
-<h3>${g.name}</h3>
-<p>${g.description}</p>
-</div>`
-})
-
+async function loadJSON(path){
+return fetch(path).then(r=>r.json())
 }
 
+function createCard(item,type){
+const card=document.createElement('div')
+card.className='card'
+card.innerHTML=`
+<img src="${item.image}">
+<div class="card-body">
+<h3>${item.name}</h3>
+<p>${item.short_description || ''}</p>
+<div class="card-meta">
+${item.days?item.days+' days':''}
+${item.price?' • $'+item.price:''}
+</div>
+</div>`
+card.onclick=()=>location.href=`item.html?type=${type}&id=${item.id}`
+return card
+}
+
+async function load(){
+const tours=await loadJSON('data/tours.json')
+const places=await loadJSON('data/places.json')
+const activities=await loadJSON('data/activities.json')
+const guides=await loadJSON('data/guides.json')
+
+tours.forEach(i=>tours-container.appendChild(createCard(i,'tour')))
+places.forEach(i=>places-container.appendChild(createCard(i,'place')))
+activities.forEach(i=>activities-container.appendChild(createCard(i,'activity')))
+guides.forEach(i=>guides-container.appendChild(createCard(i,'guide')))
+}
 load()
 </script>
 
