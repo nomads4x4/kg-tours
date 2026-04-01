@@ -1,0 +1,120 @@
+:root{
+--bg:#F8F9FA;
+--text:#333333;
+--accent:#1f2a44;
+--card-bg:#ffffff;
+}
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+body{
+font-family:Inter,system-ui,sans-serif;
+background:var(--bg);
+color:var(--text);
+line-height:1.6;
+}
+
+.container{
+max-width:1100px;
+margin:auto;
+padding:20px;
+}
+
+/* HERO */
+
+.hero{
+position:relative;
+height:420px;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+color:white;
+}
+
+.hero::before{
+content:"";
+position:absolute;
+inset:0;
+background:url('images/hero.jpg') center/cover no-repeat;
+}
+
+.hero::after{
+content:"";
+position:absolute;
+inset:0;
+background:rgba(0,0,0,.45);
+}
+
+.hero-content{
+position:relative;
+z-index:2;
+}
+
+/* GRID */
+
+.card-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:24px;
+margin-top:20px;
+}
+
+/* CARD */
+
+.card{
+background:var(--card-bg);
+border-radius:12px;
+padding:24px;
+box-shadow:0 2px 8px rgba(0,0,0,.05);
+}
+
+.card img{
+width:100%;
+border-radius:8px;
+margin-bottom:10px;
+}
+
+/* FORM */
+
+input,select{
+width:100%;
+padding:10px;
+border-radius:8px;
+border:1px solid #ddd;
+margin-bottom:15px;
+}
+
+/* BUTTON */
+
+button{
+background:var(--accent);
+color:white;
+border:none;
+padding:12px 20px;
+border-radius:8px;
+cursor:pointer;
+}
+
+/* ACTIVITIES */
+
+.activity-item{
+display:flex;
+align-items:center;
+gap:10px;
+margin-bottom:8px;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.hero{height:320px;}
+
+.container{padding:16px;}
+
+}
