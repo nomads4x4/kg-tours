@@ -1,22 +1,18 @@
 [
   {
-    "name": "Horse riding",
-    "price": 40
+    "id": "horse",
+    "name": "Horse Riding",
+    "type": "per_person",
+    "price": 40,
+    "image": "images/activities/horse.jpg",
+    "description": "Horse riding experience"
   },
   {
-    "name": "Shyrdak мастер-класс",
-    "price": 30
-  },
-  {
-    "name": "Eagle hunting show",
-    "price": 50
-  },
-  {
-    "name": "Photo session with eagle",
-    "price": 35
-  },
-  {
-    "name": "Photo session with eagle",
-    "price": 35
+    "id": "eagle",
+    "name": "Eagle Hunting Show",
+    "type": "per_group",
+    "price": 120,
+    "image": "images/activities/eagle.jpg",
+    "description": "Traditional eagle show"
   }
 ]
