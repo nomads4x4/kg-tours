@@ -4,7 +4,7 @@
     "name": "Son Kul Lake",
     "days": 3,
     "price": 450,
-    "image": "images/tours/sonkul.jpg",
+    "image": "images/sonkul.jpg",
     "short_description": "High mountain lake tour",
     "description": "Detailed description of Son Kul tour...",
     "max_people": 4
@@ -14,7 +14,7 @@
     "name": "Kel Suu Lake",
     "days": 4,
     "price": 650,
-    "image": "images/tours/kelsuu.jpg",
+    "image": "images/kelsuu.jpg",
     "short_description": "Remote alpine lake",
     "description": "Detailed description of Kel Suu tour...",
     "max_people": 4
