@@ -3,116 +3,97 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tour Calculator</title>
+<title>Nomads4x4 Tours</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
-
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
+<header class="header">
+<div class="container nav">
+<a href="#" class="logo">Nomads4x4</a>
+<nav class="menu">
+<a href="#tours">Tours</a>
+<a href="#places">Places</a>
+<a href="#activities">Activities</a>
+<a href="#guides">Guides</a>
+<a href="calculator.html">Calculator</a>
+</nav>
+</div>
+</header>
+
+<section class="hero" style="background:url('images/hero.jpg') center/cover no-repeat;">
+<div class="hero-content">
+<h1>Kyrgyzstan Off-Road Tours</h1>
+<p>Private 4x4 adventures with experienced local guides</p>
+<a href="calculator.html" class="hero-button">Calculate Tour</a>
+</div>
+</section>
+
+<section id="tours" class="section">
 <div class="container">
-<div class="card">
-
-<h2>Calculate your tour</h2>
-
-<label>People</label>
-<input type="number" id="people" value="2">
-
-<label>Route</label>
-<select id="route"></select>
-
-<label>Guide</label>
-<select id="guide"></select>
-
-<label>Car</label>
-<select id="car"></select>
-
-<label>Activities</label>
-<div id="activities"></div>
-
-<button onclick="calculate()">Calculate</button>
-
-<h3 id="result"></h3>
-
-<a id="wa" target="_blank">WhatsApp</a><br>
-<a id="tg" target="_blank">Telegram</a>
-
+<h2>Tours</h2>
+<div class="cards" id="tours-container"></div>
 </div>
+</section>
+
+<section id="places" class="section">
+<div class="container">
+<h2>Places</h2>
+<div class="cards" id="places-container"></div>
 </div>
+</section>
+
+<section id="activities" class="section">
+<div class="container">
+<h2>Activities</h2>
+<div class="cards" id="activities-container"></div>
+</div>
+</section>
+
+<section id="guides" class="section">
+<div class="container">
+<h2>Guides</h2>
+<div class="cards" id="guides-container"></div>
+</div>
+</section>
 
 <script>
+async function loadJSON(path){
+return fetch(path).then(r=>r.json())
+}
 
-let tours=[],guides=[],cars=[],activities=[]
+function createCard(item,type){
+const card=document.createElement('div')
+card.className='card'
+card.innerHTML=`
+<img src="${item.image}">
+<div class="card-body">
+<h3>${item.name}</h3>
+<p>${item.short_description || ''}</p>
+<div class="card-meta">
+${item.days?item.days+' days':''}
+${item.price?' • $'+item.price:''}
+</div>
+</div>`
+card.onclick=()=>location.href=`item.html?type=${type}&id=${item.id}`
+return card
+}
 
 async function load(){
+const tours=await loadJSON('data/tours.json')
+const places=await loadJSON('data/places.json')
+const activities=await loadJSON('data/activities.json')
+const guides=await loadJSON('data/guides.json')
 
-tours=await fetch('./data/tours.json').then(r=>r.json())
-guides=await fetch('./data/guides.json').then(r=>r.json())
-cars=await fetch('./data/cars.json').then(r=>r.json())
-activities=await fetch('./data/activities.json').then(r=>r.json())
-
-tours.forEach((t,i)=>{
-route.innerHTML+=`<option value="${i}">${t.name}</option>`
-})
-
-guides.forEach((g,i)=>{
-guide.innerHTML+=`<option value="${i}">${g.name}</option>`
-})
-
-cars.forEach((c,i)=>{
-car.innerHTML+=`<option value="${i}">${c.name}</option>`
-})
-
-activities.forEach((a,i)=>{
-document.getElementById('activities').innerHTML+=`
-<label class="activity-item">
-<input type="checkbox" value="${i}">
-<span>${a.name} (+${a.price}$)</span>
-</label>`
-})
-
+tours.forEach(i=>tours-container.appendChild(createCard(i,'tour')))
+places.forEach(i=>places-container.appendChild(createCard(i,'place')))
+activities.forEach(i=>activities-container.appendChild(createCard(i,'activity')))
+guides.forEach(i=>guides-container.appendChild(createCard(i,'guide')))
 }
-
-function calculate(){
-
-const people=parseInt(document.getElementById('people').value)
-
-const routeSelect=document.getElementById('route')
-const guideSelect=document.getElementById('guide')
-const carSelect=document.getElementById('car')
-
-const tour=tours[routeSelect.value]
-const guide=guides[guideSelect.value]
-const car=cars[carSelect.value]
-
-let carsNeeded=Math.ceil(people/car.seats)
-
-let total=tour.price + guide.price + car.price*carsNeeded
-
-document.querySelectorAll('#activities input:checked').forEach(cb=>{
-total+=activities[cb.value].price
-})
-
-document.getElementById('result').innerText="Total: "+total+" USD"
-
-const text=`Hello! I selected:
-People: ${people}
-Route: ${tour.name}
-Guide: ${guide.name}
-Car: ${car.name}
-Total: ${total} USD`
-
-document.getElementById('wa').href=
-"https://wa.me/996555900855?text="+encodeURIComponent(text)
-
-document.getElementById('tg').href=
-"https://t.me/ErkinMms?text="+encodeURIComponent(text)
-
-}
-
 load()
-
 </script>
 
 </body>
