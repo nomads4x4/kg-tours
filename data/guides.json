@@ -1,7 +1,7 @@
 [
-{"id":1,"title":"Гид стандарт","price":120,"image":"images/guides/1.jpg","description":"4x4"},
-{"id":2,"title":"Гид комфорт","price":150,"image":"images/guides/2.jpg","description":"SUV"},
-{"id":3,"title":"Гид VIP","price":200,"image":"images/guides/3.jpg","description":"Premium"},
-{"id":4,"title":"Гид фото","price":180,"image":"images/guides/4.jpg","description":"Фото"},
-{"id":5,"title":"Гид трек","price":130,"image":"images/guides/5.jpg","description":"Поход"}
+{"id":"erkin","name":"Erkin","description":"Mountain guide","price":120,"images":["erkin_main.jpg"]},
+{"id":"bakyt","name":"Bakyt","description":"Driver guide","price":110,"images":["bakyt_main.jpg"]},
+{"id":"nurlan","name":"Nurlan","description":"English guide","price":130,"images":["nurlan_main.jpg"]},
+{"id":"timur","name":"Timur","description":"Adventure guide","price":125,"images":["timur_main.jpg"]},
+{"id":"askar","name":"Askar","description":"Local expert","price":115,"images":["askar_main.jpg"]}
 ]
