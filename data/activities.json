@@ -1,7 +1,7 @@
 [
-{"id":1,"title":"Конные прогулки","price":50,"type":"per_person","image":"images/activities/1.jpg","description":"Лошади"},
-{"id":2,"title":"Рафтинг","price":200,"type":"per_group","image":"images/activities/2.jpg","description":"Река"},
-{"id":3,"title":"Треккинг","price":30,"type":"per_person","image":"images/activities/3.jpg","description":"Поход"},
-{"id":4,"title":"Юрта","price":150,"type":"per_group","image":"images/activities/4.jpg","description":"Ночь"},
-{"id":5,"title":"Фототур","price":70,"type":"per_person","image":"images/activities/5.jpg","description":"Фото"}
+{"id":"eagle","title":"Eagle show","description":"Traditional","price":100,"perPerson":false,"images":["eagle_main.jpg"]},
+{"id":"yurt","title":"Yurt stay","description":"Nomad","price":50,"perPerson":true,"images":["yurt_main.jpg"]},
+{"id":"horse","title":"Horse riding","description":"Ride","price":80,"perPerson":true,"images":["horse_main.jpg"]},
+{"id":"felt","title":"Felt masterclass","description":"Craft","price":60,"perPerson":false,"images":["felt_main.jpg"]},
+{"id":"hunting","title":"Hunting demo","description":"Demo","price":120,"perPerson":false,"images":["hunting_main.jpg"]}
 ]
