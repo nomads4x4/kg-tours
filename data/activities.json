@@ -1,7 +1,62 @@
 [
-{"id":"eagle","title":"Eagle show","description":"Traditional","price":100,"perPerson":false,"images":["eagle_main.jpg"]},
-{"id":"yurt","title":"Yurt stay","description":"Nomad","price":50,"perPerson":true,"images":["yurt_main.jpg"]},
-{"id":"horse","title":"Horse riding","description":"Ride","price":80,"perPerson":true,"images":["horse_main.jpg"]},
-{"id":"felt","title":"Felt masterclass","description":"Craft","price":60,"perPerson":false,"images":["felt_main.jpg"]},
-{"id":"hunting","title":"Hunting demo","description":"Demo","price":120,"perPerson":false,"images":["hunting_main.jpg"]}
+  {
+    "id": "shyrdak",
+    "name": "Shyrdak Carpet Workshop",
+    "shortDescription": "Learn to make traditional Kyrgyz felt carpets.",
+    "images": [
+      "images/activities/shyrdak_main.jpg",
+      "images/activities/shyrdak_1.jpg"
+    ],
+    "price": 15
+  },
+  {
+    "id": "berkut",
+    "name": "Eagle Hunting Show",
+    "shortDescription": "Watch trained eagles demonstrate hunting skills.",
+    "images": [
+      "images/activities/berkut_main.jpg",
+      "images/activities/berkut_1.jpg"
+    ],
+    "price": 25
+  },
+  {
+    "id": "horseback",
+    "name": "Horseback Riding",
+    "shortDescription": "Ride through valleys and mountains like a local.",
+    "images": [
+      "images/activities/horseback_main.jpg",
+      "images/activities/horseback_1.jpg"
+    ],
+    "price": 30
+  },
+  {
+    "id": "cooking",
+    "name": "Kyrgyz Cooking Class",
+    "shortDescription": "Prepare traditional dishes like Beshbarmak.",
+    "images": [
+      "images/activities/cooking_main.jpg",
+      "images/activities/cooking_1.jpg"
+    ],
+    "price": 20
+  },
+  {
+    "id": "falconry",
+    "name": "Falconry Experience",
+    "shortDescription": "Hands-on with trained birds of prey.",
+    "images": [
+      "images/activities/falconry_main.jpg",
+      "images/activities/falconry_1.jpg"
+    ],
+    "price": 35
+  },
+  {
+    "id": "fishing",
+    "name": "Mountain Lake Fishing",
+    "shortDescription": "Catch fish in pristine alpine lakes.",
+    "images": [
+      "images/activities/fishing_main.jpg",
+      "images/activities/fishing_1.jpg"
+    ],
+    "price": 15
+  }
 ]
