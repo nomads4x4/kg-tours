@@ -1,22 +1,7 @@
 [
-  {
-    "id": "sonkul",
-    "name": "Son Kul Lake",
-    "days": 3,
-    "price": 450,
-    "image": "images/sonkul.jpg",
-    "short_description": "High mountain lake tour",
-    "description": "Detailed description of Son Kul tour...",
-    "max_people": 4
-  },
-  {
-    "id": "kel-suu",
-    "name": "Kel Suu Lake",
-    "days": 4,
-    "price": 650,
-    "image": "images/kelsuu.jpg",
-    "short_description": "Remote alpine lake",
-    "description": "Detailed description of Kel Suu tour...",
-    "max_people": 4
-  }
+{"id":1,"title":"Иссык-Куль 3 дня","price":600,"days":3,"image":"images/tours/1.jpg","description":"Озеро"},
+{"id":2,"title":"Сон-Куль","price":800,"days":4,"image":"images/tours/2.jpg","description":"Юрты"},
+{"id":3,"title":"Ала-Арча","price":300,"days":2,"image":"images/tours/3.jpg","description":"Горы"},
+{"id":4,"title":"Ош","price":700,"days":3,"image":"images/tours/4.jpg","description":"Юг"},
+{"id":5,"title":"Нарын","price":650,"days":3,"image":"images/tours/5.jpg","description":"Плато"}
 ]
