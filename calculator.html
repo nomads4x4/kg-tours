@@ -1,66 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nomads4x4 Tours</title>
-
+<title>Calculator</title>
 <link rel="stylesheet" href="styles.css">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
-<header class="header">
-<div class="container nav">
-<a href="#" class="logo">Nomads4x4</a>
-<nav class="menu">
-<a href="#tours">Tours</a>
-<a href="#places">Places</a>
-<a href="#activities">Activities</a>
-<a href="#guides">Guides</a>
-<a href="calculator.html">Calculator</a>
-</nav>
-</div>
-</header>
+<h1>Калькулятор тура</h1>
 
-<section class="hero" style="background:url('images/hero.jpg') center/cover no-repeat;">
-<div class="hero-content">
-<h1>Kyrgyzstan Off-Road Tours</h1>
-<p>Private 4x4 adventures with experienced local guides</p>
-<a href="calculator.html" class="hero-button">Calculate Tour</a>
-</div>
-</section>
+<select id="tourSelect"></select>
+<input type="number" id="people" value="2" min="1" />
+<input type="date" id="date" />
 
-<section id="tours" class="section">
-<div class="container">
-<h2>Tours</h2>
-<div class="cards" id="tours-container"></div>
-</div>
-</section>
+<div id="places"></div>
+<div id="activities"></div>
 
-<section id="places" class="section">
-<div class="container">
-<h2>Places</h2>
-<div class="cards" id="places-container"></div>
-</div>
-</section>
-
-<section id="activities" class="section">
-<div class="container">
-<h2>Activities</h2>
-<div class="cards" id="activities-container"></div>
-</div>
-</section>
-
-<section id="guides" class="section">
-<div class="container">
-<h2>Guides</h2>
-<div class="cards" id="guides-container"></div>
-</div>
-</section>
+<h2 id="result"></h2>
 
 <script src="app.js"></script>
-
 </body>
 </html>
