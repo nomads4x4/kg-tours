@@ -1,50 +1,59 @@
 [
   {
-    "id": "skazka",
-    "title": "Skazka Canyon",
-    "description": "Colorful sandstone formations",
-    "days": 0.5,
-    "price": 40,
-    "images": ["main.jpg", "1.jpg"]
-  },
-  {
-    "id": "jeti-oguz",
-    "title": "Jeti-Oguz Rocks",
-    "description": "Famous red rock formations",
-    "days": 0.5,
-    "price": 35,
-    "images": ["main.jpg"]
-  },
-  {
     "id": "burana",
-    "title": "Burana Tower",
-    "description": "Ancient minaret and museum",
-    "days": 0.5,
-    "price": 25,
-    "images": ["main.jpg"]
+    "name": "Burana Tower",
+    "shortDescription": "Visit the ancient minaret near Tokmok.",
+    "images": [
+      "images/places/burana_main.jpg",
+      "images/places/burana_1.jpg"
+    ],
+    "days": 0,
+    "price": 10
   },
   {
-    "id": "bokonbaevo",
-    "title": "Bokonbaevo Village",
-    "description": "Traditional eagle hunting village",
+    "id": "jyrgalan",
+    "name": "Jyrgalan Valley",
+    "shortDescription": "A hidden valley perfect for trekking and nature lovers.",
+    "images": [
+      "images/places/jyrgalan_main.jpg",
+      "images/places/jyrgalan_1.jpg",
+      "images/places/jyrgalan_2.jpg"
+    ],
     "days": 1,
-    "price": 60,
-    "images": ["main.jpg"]
+    "price": 30
   },
   {
-    "id": "kochkor",
-    "title": "Kochkor Village",
-    "description": "Felt handicrafts center",
-    "days": 0.5,
-    "price": 30,
-    "images": ["main.jpg"]
-  },
-  {
-    "id": "chong-kemin",
-    "title": "Chong-Kemin Valley",
-    "description": "Green valley with horse riding",
+    "id": "alamedinvalley",
+    "name": "Alamedin Valley",
+    "shortDescription": "Scenic valley with waterfalls and picnic spots.",
+    "images": [
+      "images/places/alamedinvalley_main.jpg",
+      "images/places/alamedinvalley_1.jpg"
+    ],
     "days": 1,
-    "price": 70,
-    "images": ["main.jpg"]
+    "price": 25
+  },
+  {
+    "id": "arslanbob",
+    "name": "Arslanbob Walnut Forest",
+    "shortDescription": "Walk through the largest walnut forest in the world.",
+    "images": [
+      "images/places/arslanbob_main.jpg",
+      "images/places/arslanbob_1.jpg",
+      "images/places/arslanbob_2.jpg"
+    ],
+    "days": 1,
+    "price": 20
+  },
+  {
+    "id": "sonkulcamp",
+    "name": "Song-Kul Nomad Camp",
+    "shortDescription": "Experience authentic nomadic lifestyle and yurts.",
+    "images": [
+      "images/places/sonkulcamp_main.jpg",
+      "images/places/sonkulcamp_1.jpg"
+    ],
+    "days": 0,
+    "price": 40
   }
 ]
