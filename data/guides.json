@@ -1,7 +1,52 @@
 [
-{"id":"erkin","name":"Erkin","description":"Mountain guide","price":120,"images":["erkin_main.jpg"]},
-{"id":"bakyt","name":"Bakyt","description":"Driver guide","price":110,"images":["bakyt_main.jpg"]},
-{"id":"nurlan","name":"Nurlan","description":"English guide","price":130,"images":["nurlan_main.jpg"]},
-{"id":"timur","name":"Timur","description":"Adventure guide","price":125,"images":["timur_main.jpg"]},
-{"id":"askar","name":"Askar","description":"Local expert","price":115,"images":["askar_main.jpg"]}
+  {
+    "id": "erkin",
+    "name": "Erkin",
+    "shortDescription": "Expert guide with 10 years of experience in Kyrgyz mountains.",
+    "images": [
+      "images/guides/erkin_main.jpg",
+      "images/guides/erkin_1.jpg"
+    ],
+    "price": 50
+  },
+  {
+    "id": "aina",
+    "name": "Aina",
+    "shortDescription": "Specialist in cultural tours and local traditions.",
+    "images": [
+      "images/guides/aina_main.jpg",
+      "images/guides/aina_1.jpg"
+    ],
+    "price": 45
+  },
+  {
+    "id": "bek",
+    "name": "Bek",
+    "shortDescription": "Adventure guide for trekking and horseback riding.",
+    "images": [
+      "images/guides/bek_main.jpg",
+      "images/guides/bek_1.jpg"
+    ],
+    "price": 55
+  },
+  {
+    "id": "gulnara",
+    "name": "Gulnara",
+    "shortDescription": "Professional guide for lake tours and scenic hikes.",
+    "images": [
+      "images/guides/gulnara_main.jpg",
+      "images/guides/gulnara_1.jpg"
+    ],
+    "price": 40
+  },
+  {
+    "id": "mirlan",
+    "name": "Mirlan",
+    "shortDescription": "Local expert in off-the-beaten-path routes.",
+    "images": [
+      "images/guides/mirlan_main.jpg",
+      "images/guides/mirlan_1.jpg"
+    ],
+    "price": 60
+  }
 ]
