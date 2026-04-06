@@ -1,7 +1,7 @@
 [
-{"id":1,"title":"Джети-Огуз","price":100,"days":1,"image":"images/places/1.jpg","description":"Скалы"},
-{"id":2,"title":"Каракол","price":120,"days":1,"image":"images/places/2.jpg","description":"Город"},
-{"id":3,"title":"Барскоон","price":90,"days":1,"image":"images/places/3.jpg","description":"Водопад"},
-{"id":4,"title":"Таш-Рабат","price":150,"days":1,"image":"images/places/4.jpg","description":"Караван"},
-{"id":5,"title":"Кочкор","price":80,"days":1,"image":"images/places/5.jpg","description":"Село"}
+{"id":"fairytale","title":"Fairytale Canyon","description":"Canyon","days":1,"price":100,"images":["fairytale_main.jpg"]},
+{"id":"jeti","title":"Jeti Oguz","description":"Rocks","days":1,"price":120,"images":["jeti_main.jpg"]},
+{"id":"skazka","title":"Skazka","description":"Red canyon","days":1,"price":100,"images":["skazka_main.jpg"]},
+{"id":"burana","title":"Burana Tower","description":"Historical","days":0.5,"price":80,"images":["burana_main.jpg"]},
+{"id":"kochkor","title":"Kochkor","description":"Village","days":1,"price":90,"images":["kochkor_main.jpg"]}
 ]
