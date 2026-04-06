@@ -1,20 +1,7 @@
 [
-  {
-    "id": "erkin",
-    "name": "Erkin",
-    "price": 150,
-    "car_id": "prado",
-    "image": "images/guides/erkin.jpg",
-    "experience": "10 years",
-    "description": "Professional mountain guide"
-  },
-  {
-    "id": "bek",
-    "name": "Bek",
-    "price": 130,
-    "car_id": "delica",
-    "image": "images/guides/bek.jpg",
-    "experience": "7 years",
-    "description": "Off-road specialist"
-  }
+{"id":1,"title":"Гид стандарт","price":120,"image":"images/guides/1.jpg","description":"4x4"},
+{"id":2,"title":"Гид комфорт","price":150,"image":"images/guides/2.jpg","description":"SUV"},
+{"id":3,"title":"Гид VIP","price":200,"image":"images/guides/3.jpg","description":"Premium"},
+{"id":4,"title":"Гид фото","price":180,"image":"images/guides/4.jpg","description":"Фото"},
+{"id":5,"title":"Гид трек","price":130,"image":"images/guides/5.jpg","description":"Поход"}
 ]
