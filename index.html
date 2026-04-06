@@ -3,58 +3,100 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kyrgyzstan Tours</title>
+  <title>Tours in Kyrgyzstan</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <h1 id="hero-title">Tours in Kyrgyzstan with Professional Guides</h1>
-    <p id="hero-description">Discover the best routes, hidden places, and unique activities across Kyrgyzstan</p>
-    <button onclick="window.location.href='calculator.html'">Calculate Your Tour</button>
-  </section>
-
   <!-- Sticky Navigation -->
   <nav>
-    <a href="#tours-section">Tours</a>
-    <a href="#places-section">Places</a>
-    <a href="#activities-section">Activities</a>
-    <a href="#guides-section">Guides</a>
+    <a href="#tours">Tours</a>
+    <a href="#places">Places</a>
+    <a href="#activities">Activities</a>
+    <a href="#guides">Guides</a>
   </nav>
 
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <h1 id="hero-title">Tours in Kyrgyzstan with Professional Guides</h1>
+    <p id="hero-description">Discover the breathtaking landscapes of Kyrgyzstan with experienced guides. Explore scenic routes, cultural activities, and unforgettable adventures.</p>
+    <a href="calculator.html" class="btn">Calculate Your Tour</a>
+  </section>
+
   <!-- Tours Section -->
-  <section id="tours-section">
+  <section id="tours">
     <h2>Tours</h2>
     <div class="carousel" id="tours-carousel">
-      <!-- JS will render tour cards here -->
+      <!-- JS will populate cards from data/tours.json -->
     </div>
   </section>
 
   <!-- Places Section -->
-  <section id="places-section">
+  <section id="places">
     <h2>Places</h2>
     <div class="carousel" id="places-carousel">
-      <!-- JS will render place cards here -->
+      <!-- JS will populate cards from data/places.json -->
     </div>
   </section>
 
   <!-- Activities Section -->
-  <section id="activities-section">
+  <section id="activities">
     <h2>Activities</h2>
     <div class="carousel" id="activities-carousel">
-      <!-- JS will render activity cards here -->
+      <!-- JS will populate cards from data/activities.json -->
     </div>
   </section>
 
   <!-- Guides Section -->
-  <section id="guides-section">
+  <section id="guides">
     <h2>Guides</h2>
     <div class="carousel" id="guides-carousel">
-      <!-- JS will render guide cards here -->
+      <!-- JS will populate cards from data/guides.json -->
     </div>
   </section>
 
+  <!-- JS -->
   <script src="app.js"></script>
+  <script>
+    // Example: load hero from JSON
+    fetch('data/hero.json')
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('hero-title').textContent = data.title;
+        document.getElementById('hero-description').textContent = data.description;
+        document.querySelector('.hero').style.backgroundImage = `url('images/hero/${data.image}')`;
+      });
+
+    // Example: populate carousel from JSON
+    function populateCarousel(jsonFile, carouselId) {
+      fetch(jsonFile)
+        .then(res => res.json())
+        .then(items => {
+          const carousel = document.getElementById(carouselId);
+          items.forEach(item => {
+            // only include main photo for homepage
+            const mainPhoto = item.photos.find(p => p.main);
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+              <img src="images/${carouselId.split('-')[0]}/${mainPhoto.filename}" alt="${item.name}">
+              <div class="card-content">
+                <h3>${item.name}</h3>
+                <p>${item.shortDescription}</p>
+              </div>
+            `;
+            card.addEventListener('click', () => {
+              window.location.href = `item.html?type=${carouselId.split('-')[0]}&id=${item.id}`;
+            });
+            carousel.appendChild(card);
+          });
+        });
+    }
+
+    populateCarousel('data/tours.json', 'tours-carousel');
+    populateCarousel('data/places.json', 'places-carousel');
+    populateCarousel('data/activities.json', 'activities-carousel');
+    populateCarousel('data/guides.json', 'guides-carousel');
+  </script>
 </body>
 </html>
