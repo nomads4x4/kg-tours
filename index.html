@@ -1,39 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Anchor test</title>
-<link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kyrgyzstan Tours</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
+<!-- ================= HERO ================= -->
+
+<header class="hero">
+    <img src="images/hero/hero.jpg" alt="Kyrgyzstan">
+    <div class="hero-content">
+        <h1 id="hero-title">Loading...</h1>
+        <p id="hero-subtitle">Loading...</p>
+        <a href="calculator.html" class="btn">Calculate Tour</a>
+    </div>
+</header>
+
+<!-- ================= NAV ================= -->
+
 <nav class="navbar">
-  <a href="#tours">Tours</a>
-  <a href="#places">Places</a>
-  <a href="#activities">Activities</a>
-  <a href="#guides">Guides</a>
+    <ul>
+        <li><a href="#tours">Tours</a></li>
+        <li><a href="#places">Places</a></li>
+        <li><a href="#activities">Activities</a></li>
+        <li><a href="#guides">Guides</a></li>
+    </ul>
 </nav>
 
+<!-- ================= TOURS ================= -->
+
 <section id="tours" class="section">
-  <h2>Tours</h2>
-  <p>Content...</p>
+    <h2>Tours</h2>
+
+    <div class="carousel" id="tours-carousel">
+        <!-- JS renders cards -->
+    </div>
 </section>
+
+<!-- ================= PLACES ================= -->
 
 <section id="places" class="section">
-  <h2>Places</h2>
-  <p>Content...</p>
+    <h2>Places</h2>
+
+    <div class="carousel" id="places-carousel">
+        <!-- JS renders cards -->
+    </div>
 </section>
+
+<!-- ================= ACTIVITIES ================= -->
 
 <section id="activities" class="section">
-  <h2>Activities</h2>
-  <p>Content...</p>
+    <h2>Activities</h2>
+
+    <div class="carousel" id="activities-carousel">
+        <!-- JS renders cards -->
+    </div>
 </section>
 
+<!-- ================= GUIDES ================= -->
+
 <section id="guides" class="section">
-  <h2>Guides (last section)</h2>
-  <p>Even this one will align to top</p>
+    <h2>Guides</h2>
+
+    <div class="carousel" id="guides-carousel">
+        <!-- JS renders cards -->
+    </div>
 </section>
+
+<script src="app.js"></script>
 
 </body>
 </html>
