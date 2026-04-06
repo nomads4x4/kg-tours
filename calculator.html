@@ -1,24 +1,48 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Calculator</title>
+<title>Tour Calculator</title>
 <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
-<h1>Калькулятор тура</h1>
+<div class="container">
 
-<select id="tourSelect"></select>
-<input type="number" id="people" value="2" min="1" />
-<input type="date" id="date" />
+<h1>Tour Calculator</h1>
 
-<div id="places"></div>
-<div id="activities"></div>
+<label>People</label>
+<input type="number" id="people" value="1">
 
-<h2 id="result"></h2>
+<label>Date</label>
+<input type="date" id="date">
+
+<label>Tour</label>
+<select id="tour"></select>
+
+<label>Places</label>
+<select id="places" multiple></select>
+
+<label>Activities</label>
+<select id="activities" multiple></select>
+
+<label>Guide</label>
+<select id="guide"></select>
+
+<button id="calculate">Calculate</button>
+
+<div id="result"></div>
+
+<a id="whatsapp" class="btn">WhatsApp</a>
+<a id="telegram" class="btn">Telegram</a>
+
+<a href="index.html" class="back">← Back</a>
+
+</div>
 
 <script src="app.js"></script>
+
 </body>
 </html>
