@@ -1,28 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kyrgyzstan Tours</title>
-<link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kyrgyzstan Tours</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
 
-<header id="hero"></header>
+  <!-- Sticky Navigation -->
+  <nav class="navbar">
+    <ul>
+      <li><a href="#tours">Tours</a></li>
+      <li><a href="#places">Places</a></li>
+      <li><a href="#activities">Activities</a></li>
+      <li><a href="#guides">Guides</a></li>
+    </ul>
+  </nav>
 
-<nav id="sticky-nav">
-<a href="#tours">Tours</a>
-<a href="#places">Places</a>
-<a href="#activities">Activities</a>
-<a href="#guides">Guides</a>
-</nav>
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Kyrgyzstan Tours with Professional Guides</h1>
+    <p>Explore the stunning landscapes, cultural treasures, and adventure activities of Kyrgyzstan with carefully curated tours and experienced guides.</p>
+    <button onclick="window.location.href='calculator.html'">Calculate Your Tour</button>
+  </section>
 
-<section id="tours"></section>
-<section id="places"></section>
-<section id="activities"></section>
-<section id="guides"></section>
+  <!-- Tours Section -->
+  <section id="tours" class="section">
+    <h2>Tours</h2>
+    <div class="carousel" id="tours-carousel">
+      <!-- JS will inject tour cards here -->
+    </div>
+  </section>
 
-<script src="app.js"></script>
+  <!-- Places Section -->
+  <section id="places" class="section">
+    <h2>Additional Places</h2>
+    <div class="carousel" id="places-carousel">
+      <!-- JS will inject place cards here -->
+    </div>
+  </section>
+
+  <!-- Activities Section -->
+  <section id="activities" class="section">
+    <h2>Activities</h2>
+    <div class="carousel" id="activities-carousel">
+      <!-- JS will inject activity cards here -->
+    </div>
+  </section>
+
+  <!-- Guides Section -->
+  <section id="guides" class="section">
+    <h2>Guides</h2>
+    <div class="carousel" id="guides-carousel">
+      <!-- JS will inject guide cards here -->
+    </div>
+  </section>
+
+  <script src="app.js"></script>
 </body>
 </html>
