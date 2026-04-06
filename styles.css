@@ -1,196 +1,200 @@
 /* =========================
-   RESET
+RESET
 ========================= */
+
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  }
 
 html {
-    scroll-behavior: smooth;
+scroll-behavior: smooth;
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    background: #f4f7f8;
-    color: #2c3e50;
-    line-height: 1.5;
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+background: #f4f7f8;
+color: #2c3e50;
+line-height: 1.5;
 }
 
 /* =========================
-   COLORS
+COLORS
 ========================= */
 :root {
-    --primary: #3a8d99;
-    --primary-soft: #6bb3bd;
-    --secondary: #6c7a89;
-    --accent: #4fc3c7;
-    --bg-light: #f4f7f8;
-    --card-bg: #ffffff;
-    --shadow: 0 8px 24px rgba(0,0,0,0.08);
-    --radius: 16px;
+--primary: #3a8d99;
+--primary-soft: #6bb3bd;
+--secondary: #6c7a89;
+--accent: #4fc3c7;
+--bg-light: #f4f7f8;
+--card-bg: #ffffff;
+--shadow: 0 8px 24px rgba(0,0,0,0.08);
+--radius: 16px;
 }
 
 /* =========================
-   CONTAINER
+CONTAINER
 ========================= */
 .container {
-    width: 90%;
-    max-width: 1200px;
-    margin: auto;
+width: 90%;
+max-width: 1200px;
+margin: auto;
 }
 
 /* =========================
-   HERO
+HERO
 ========================= */
 .hero {
-    height: 25vh;
-    min-height: 220px;
-    background-size: cover;
-    background-position: center;
-    position: relative;
-    display: flex;
-    align-items: center;
+height: 25vh;
+min-height: 220px;
+background-size: cover;
+background-position: center;
+position: relative;
+display: flex;
+align-items: center;
 }
 
 .hero-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,0.35);
+position: absolute;
+inset: 0;
+background: rgba(0,0,0,0.35);
 }
 
 .hero-content {
-    position: relative;
-    color: white;
-    padding: 20px;
+position: relative;
+color: white;
+padding: 20px;
 }
 
 .hero h1 {
-    font-size: 32px;
-    margin-bottom: 10px;
+font-size: 32px;
+margin-bottom: 10px;
 }
 
 .hero p {
-    opacity: 0.9;
+opacity: 0.9;
 }
 
 /* =========================
-   BUTTON
+BUTTON
 ========================= */
 .btn {
-    display: inline-block;
-    padding: 12px 20px;
-    background: linear-gradient(135deg, var(--primary), var(--accent));
-    color: white;
-    border-radius: var(--radius);
-    text-decoration: none;
-    margin-top: 15px;
-    box-shadow: var(--shadow);
-    transition: 0.3s ease;
+display: inline-block;
+padding: 12px 20px;
+background: linear-gradient(135deg, var(--primary), var(--accent));
+color: white;
+border-radius: var(--radius);
+text-decoration: none;
+margin-top: 15px;
+box-shadow: var(--shadow);
+transition: 0.3s ease;
 }
 
 .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+transform: translateY(-2px);
+box-shadow: 0 12px 30px rgba(0,0,0,0.12);
 }
 
 /* =========================
-   STICKY NAV
+STICKY NAV
 ========================= */
 .nav {
-    position: sticky;
-    top: 0;
-    backdrop-filter: blur(10px);
-    background: rgba(255,255,255,0.8);
-    z-index: 100;
+position: sticky;
+top: 0;
+backdrop-filter: blur(10px);
+background: rgba(255,255,255,0.8);
+z-index: 100;
 }
 
 .nav ul {
-    display: flex;
-    justify-content: space-around;
-    list-style: none;
-    padding: 12px;
+display: flex;
+justify-content: space-around;
+list-style: none;
+padding: 12px;
 }
 
 .nav a {
-    text-decoration: none;
-    color: var(--secondary);
-    font-weight: 500;
+text-decoration: none;
+color: var(--secondary);
+font-weight: 500;
 }
 
 .nav a:hover {
-    color: var(--primary);
+color: var(--primary);
 }
 
 /* =========================
-   SECTION
+SECTION
 ========================= */
 .section {
-    padding: 40px 0;
+padding: 40px 0;
 }
 
 .section h2 {
-    margin-bottom: 20px;
+margin-bottom: 20px;
 }
 
 /* =========================
-   CAROUSEL
+CAROUSEL
 ========================= */
 .carousel {
-    display: flex;
-    overflow-x: auto;
-    gap: 20px;
-    scroll-snap-type: x mandatory;
-    padding-bottom: 10px;
+display: flex;
+overflow-x: auto;
+gap: 20px;
+scroll-snap-type: x mandatory;
+padding-bottom: 10px;
 }
 
 .carousel::-webkit-scrollbar {
-    display: none;
+display: none;
 }
 
 /* =========================
-   CARD
+CARD
 ========================= */
 .card {
-    min-width: 260px;
-    background: var(--card-bg);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    overflow: hidden;
-    scroll-snap-align: start;
-    transition: 0.3s ease;
+min-width: 260px;
+background: var(--card-bg);
+border-radius: var(--radius);
+box-shadow: var(--shadow);
+overflow: hidden;
+scroll-snap-align: start;
+transition: 0.3s ease;
+cursor: pointer;
 }
 
 .card:hover {
-    transform: translateY(-5px);
+transform: translateY(-5px);
 }
 
 .card img {
-    width: 100%;
-    height: 160px;
-    object-fit: cover;
+width: 100%;
+height: 160px;
+object-fit: cover;
 }
 
 .card-content {
-    padding: 15px;
+padding: 15px;
 }
 
 /* =========================
-   MOBILE
+MOBILE
 ========================= */
 @media (max-width: 768px) {
 
-    .hero {
-        height: 33vh;
-    }
+```
+.hero {
+    height: 33vh;
+}
 
-    .hero h1 {
-        font-size: 24px;
-    }
+.hero h1 {
+    font-size: 24px;
+}
 
-    .card {
-        min-width: 220px;
-    }
+.card {
+    min-width: 220px;
+}
+```
 
 }
