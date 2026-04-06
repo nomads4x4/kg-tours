@@ -1,6 +1,9 @@
-{
-  "season_start": "05-15",
-  "season_end": "09-30",
-  "high_season_multiplier": 1,
-  "low_season_multiplier": 0.9
-}
+[
+{"month":"-01-","coef":0.8},
+{"month":"-02-","coef":0.8},
+{"month":"-03-","coef":0.9},
+{"month":"-06-","coef":1.2},
+{"month":"-07-","coef":1.3},
+{"month":"-08-","coef":1.3},
+{"month":"-12-","coef":1.1}
+]
