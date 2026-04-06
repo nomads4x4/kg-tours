@@ -20,7 +20,7 @@ if(p==="calculator.html") initCalculator()
 /* ---------- HERO ---------- */
 
 function renderHero(){
-hero.innerHTML=`
+document.getElementById("hero").innerHTML=`
 <h1>Kyrgyzstan Tours with Professional Guides</h1>
 <p>Discover mountains, lakes and nomadic culture</p>
 <a href="calculator.html" class="btn">Calculate Tour</a>
@@ -90,7 +90,7 @@ ${item.images.map(img=>`<img src="images/${type}/${img}">`).join("")}
 <h1>${item.title || item.name}</h1>
 <p>${item.description}</p>
 <p>Days: ${item.days || "-"}</p>
-<p>Price: ${item.price}</p>
+<p>Price: ${item.price || "-"}</p>
 `
 
 }
@@ -110,13 +110,26 @@ fillSelect("places",places)
 fillSelect("activities",activities)
 fillSelect("guide",guides)
 
-calculate.onclick=()=>{
+const calculateBtn = document.getElementById("calculate")
+const resultEl = document.getElementById("result")
+const whatsapp = document.getElementById("whatsapp")
+const telegram = document.getElementById("telegram")
+
+calculateBtn.onclick=()=>{
 
 const people=+document.getElementById("people").value
 const date=document.getElementById("date").value
 
-const tour=tours[tour.value]
-const guide=guides[guideSelect.value]
+const tourIndex=document.getElementById("tour").value
+const guideIndex=document.getElementById("guide").value
+
+if(tourIndex==="" || guideIndex===""){
+resultEl.innerHTML="Select tour and guide"
+return
+}
+
+const tour=tours[tourIndex]
+const guide=guides[guideIndex]
 
 const selectedPlaces=getSelected("places",places)
 const selectedActivities=getSelected("activities",activities)
@@ -146,15 +159,20 @@ const multiplier=getSeasonMultiplier(date,season)
 
 total*=multiplier
 
-result.innerHTML=`Total: $${Math.round(total)}`
+total=Math.round(total)
+
+resultEl.innerHTML=`Total: $${total}`
 
 const text=`Hello. I selected:
 People: ${people}
+Date: ${date}
 Tour: ${tour.title}
-Places: ${selectedPlaces.map(p=>p.title).join(",")}
-Activities: ${selectedActivities.map(a=>a.title).join(",")}
+Places: ${selectedPlaces.map(p=>p.title).join(", ")}
+Activities: ${selectedActivities.map(a=>a.title).join(", ")}
 Guide: ${guide.name}
-Total: ${total}
+Total: ${total}$
+
+I would like to discuss booking this tour.
 `
 
 whatsapp.href=`https://wa.me/996555900855?text=${encodeURIComponent(text)}`
