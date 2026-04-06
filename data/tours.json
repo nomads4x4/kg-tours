@@ -1,7 +1,7 @@
 [
-{"id":1,"title":"Иссык-Куль 3 дня","price":600,"days":3,"image":"images/tours/1.jpg","description":"Озеро"},
-{"id":2,"title":"Сон-Куль","price":800,"days":4,"image":"images/tours/2.jpg","description":"Юрты"},
-{"id":3,"title":"Ала-Арча","price":300,"days":2,"image":"images/tours/3.jpg","description":"Горы"},
-{"id":4,"title":"Ош","price":700,"days":3,"image":"images/tours/4.jpg","description":"Юг"},
-{"id":5,"title":"Нарын","price":650,"days":3,"image":"images/tours/5.jpg","description":"Плато"}
+{"id":"sonkul","title":"Song Kul","description":"Lake trip","days":3,"price":500,"images":["sonkul_main.jpg","sonkul_1.jpg"]},
+{"id":"alaarcha","title":"Ala Archa","description":"National park","days":1,"price":200,"images":["alaarcha_main.jpg"]},
+{"id":"issyk","title":"Issyk Kul","description":"Lake tour","days":2,"price":400,"images":["issyk_main.jpg"]},
+{"id":"tashrabat","title":"Tash Rabat","description":"Caravanserai","days":2,"price":450,"images":["tashrabat_main.jpg"]},
+{"id":"kel","title":"Kel Suu","description":"Mountain lake","days":4,"price":700,"images":["kel_main.jpg"]}
 ]
