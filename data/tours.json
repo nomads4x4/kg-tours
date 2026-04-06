@@ -1,7 +1,50 @@
 [
-{"id":"sonkul","title":"Song Kul","description":"Lake trip","days":3,"price":500,"images":["sonkul_main.jpg","sonkul_1.jpg"]},
-{"id":"alaarcha","title":"Ala Archa","description":"National park","days":1,"price":200,"images":["alaarcha_main.jpg"]},
-{"id":"issyk","title":"Issyk Kul","description":"Lake tour","days":2,"price":400,"images":["issyk_main.jpg"]},
-{"id":"tashrabat","title":"Tash Rabat","description":"Caravanserai","days":2,"price":450,"images":["tashrabat_main.jpg"]},
-{"id":"kel","title":"Kel Suu","description":"Mountain lake","days":4,"price":700,"images":["kel_main.jpg"]}
+  {
+    "id": "issyk-kul",
+    "title": "Issyk-Kul Lake",
+    "description": "Classic tour to the largest alpine lake",
+    "days": 3,
+    "price": 450,
+    "images": ["main.jpg", "1.jpg", "2.jpg"]
+  },
+  {
+    "id": "son-kul",
+    "title": "Son-Kul Lake",
+    "description": "Nomadic experience in high mountains",
+    "days": 2,
+    "price": 380,
+    "images": ["main.jpg", "1.jpg", "2.jpg"]
+  },
+  {
+    "id": "ala-archa",
+    "title": "Ala-Archa National Park",
+    "description": "One day hiking near Bishkek",
+    "days": 1,
+    "price": 120,
+    "images": ["main.jpg", "1.jpg"]
+  },
+  {
+    "id": "kel-suu",
+    "title": "Kel-Suu Lake",
+    "description": "Remote alpine lake adventure",
+    "days": 4,
+    "price": 690,
+    "images": ["main.jpg", "1.jpg", "2.jpg"]
+  },
+  {
+    "id": "osh-tour",
+    "title": "Osh & South Kyrgyzstan",
+    "description": "Cultural tour in southern regions",
+    "days": 3,
+    "price": 520,
+    "images": ["main.jpg", "1.jpg"]
+  },
+  {
+    "id": "tash-rabat",
+    "title": "Tash Rabat Caravanserai",
+    "description": "Silk Road historical tour",
+    "days": 2,
+    "price": 410,
+    "images": ["main.jpg", "1.jpg"]
+  }
 ]
