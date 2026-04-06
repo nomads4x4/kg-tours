@@ -1,7 +1,50 @@
 [
-{"id":"fairytale","title":"Fairytale Canyon","description":"Canyon","days":1,"price":100,"images":["fairytale_main.jpg"]},
-{"id":"jeti","title":"Jeti Oguz","description":"Rocks","days":1,"price":120,"images":["jeti_main.jpg"]},
-{"id":"skazka","title":"Skazka","description":"Red canyon","days":1,"price":100,"images":["skazka_main.jpg"]},
-{"id":"burana","title":"Burana Tower","description":"Historical","days":0.5,"price":80,"images":["burana_main.jpg"]},
-{"id":"kochkor","title":"Kochkor","description":"Village","days":1,"price":90,"images":["kochkor_main.jpg"]}
+  {
+    "id": "skazka",
+    "title": "Skazka Canyon",
+    "description": "Colorful sandstone formations",
+    "days": 0.5,
+    "price": 40,
+    "images": ["main.jpg", "1.jpg"]
+  },
+  {
+    "id": "jeti-oguz",
+    "title": "Jeti-Oguz Rocks",
+    "description": "Famous red rock formations",
+    "days": 0.5,
+    "price": 35,
+    "images": ["main.jpg"]
+  },
+  {
+    "id": "burana",
+    "title": "Burana Tower",
+    "description": "Ancient minaret and museum",
+    "days": 0.5,
+    "price": 25,
+    "images": ["main.jpg"]
+  },
+  {
+    "id": "bokonbaevo",
+    "title": "Bokonbaevo Village",
+    "description": "Traditional eagle hunting village",
+    "days": 1,
+    "price": 60,
+    "images": ["main.jpg"]
+  },
+  {
+    "id": "kochkor",
+    "title": "Kochkor Village",
+    "description": "Felt handicrafts center",
+    "days": 0.5,
+    "price": 30,
+    "images": ["main.jpg"]
+  },
+  {
+    "id": "chong-kemin",
+    "title": "Chong-Kemin Valley",
+    "description": "Green valley with horse riding",
+    "days": 1,
+    "price": 70,
+    "images": ["main.jpg"]
+  }
 ]
