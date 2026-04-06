@@ -1,58 +1,126 @@
 async function loadJSON(path){
-  const res = await fetch(path);
-  return res.json();
+const res = await fetch(path)
+return res.json()
 }
 
-function renderCards(list, containerId, type){
-  const container = document.getElementById(containerId);
-  if(!container) return;
-
-  container.innerHTML = list.map(item => `
-    <div class="card">
-      <img src="${item.image}" />
-      <h3>${item.title}</h3>
-      <p>${item.description}</p>
-      <a href="item.html?type=${type}&id=${item.id}">Подробнее</a>
-    </div>
-  `).join("");
+function getPage(){
+return location.pathname.split("/").pop()
 }
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+const page = getPage()
+
+if(page === "" || page === "index.html") initIndex()
+if(page === "item.html") initItem()
+if(page === "calculator.html") initCalculator()
+
+})
 
 async function initIndex(){
-  const tours = await loadJSON('./data/tours.json');
-  const places = await loadJSON('./data/places.json');
-  const activities = await loadJSON('./data/activities.json');
-  const guides = await loadJSON('./data/guides.json');
 
-  renderCards(tours,'toursList','tours');
-  renderCards(places,'placesList','places');
-  renderCards(activities,'activitiesList','activities');
-  renderCards(guides,'guidesList','guides');
+renderHero()
+
+renderSection("tours")
+renderSection("places")
+renderSection("activities")
+renderSection("guides")
+
+}
+
+function renderHero(){
+
+document.getElementById("hero").innerHTML = `
+<h1>Kyrgyzstan Tours with Professional Guides</h1>
+<p>Discover mountains, lakes and nomadic culture</p>
+<a href="calculator.html" class="btn">Calculate Tour</a>
+`
+
+}
+
+async function renderSection(type){
+
+const data = await loadJSON(`data/${type}.json`)
+const section = document.getElementById(type)
+
+section.innerHTML = `<h2>${type}</h2><div class="carousel"></div>`
+
+const carousel = section.querySelector(".carousel")
+
+data.forEach(item=>{
+
+const card = document.createElement("div")
+card.className="card"
+
+card.innerHTML=`
+<img src="images/${type}/${item.id}_main.jpg">
+<h3>${item.title || item.name}</h3>
+<p>${item.description}</p>
+`
+
+card.onclick=()=>{
+location.href=`item.html?type=${type}&id=${item.id}`
+}
+
+carousel.appendChild(card)
+
+})
+
 }
 
 async function initItem(){
-  const params = new URLSearchParams(location.search);
-  const type = params.get('type');
-  const id = params.get('id');
 
-  if(!type || !id) return;
+const params = new URLSearchParams(location.search)
+const type = params.get("type")
+const id = params.get("id")
 
-  const data = await loadJSON(`./data/${type}.json`);
-  const item = data.find(i => i.id == id);
+const data = await loadJSON(`data/${type}.json`)
+const item = data.find(i=>i.id===id)
 
-  const el = document.getElementById('item');
-  if(!el || !item) return;
+document.getElementById("item").innerHTML = `
+<div class="carousel">
+${item.images.map(img=>`<img src="images/${type}/${img}">`).join("")}
+</div>
 
-  el.innerHTML = `
-    <h1>${item.title}</h1>
-    <img src="${item.image}" />
-    <p>${item.description}</p>
-    <p>Цена: ${item.price || ''}</p>
-  `;
+<h1>${item.title || item.name}</h1>
+<p>${item.description}</p>
+<p>Days: ${item.days || "-"}</p>
+<p>Price: ${item.price}</p>
+`
+
 }
 
 async function initCalculator(){
-  const tourSelect = document.getElementById('tourSelect');
-  if(!tourSelect) return;
 
-  const tours = await loadJSON('./data/tours.json');
-initCalculator();
+const tours = await loadJSON("data/tours.json")
+const places = await loadJSON("data/places.json")
+const activities = await loadJSON("data/activities.json")
+const guides = await loadJSON("data/guides.json")
+const season = await loadJSON("data/season.json")
+
+fillSelect("tour", tours)
+fillSelect("places", places)
+fillSelect("activities", activities)
+fillSelect("guide", guides)
+
+document.getElementById("calculate").onclick=()=>{
+
+const people = +people.value
+const tour = tours[tourSelect.value]
+
+}
+
+}
+
+function fillSelect(id,data){
+
+const select = document.getElementById(id)
+
+data.forEach((item,i)=>{
+const option = document.createElement("option")
+option.value=i
+option.text=item.title || item.name
+select.appendChild(option)
+})
+
+}
