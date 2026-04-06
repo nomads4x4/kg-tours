@@ -16,7 +16,7 @@ async function renderHero() {
         document.getElementById('hero-title').textContent = heroData.title;
         document.getElementById('hero-subtitle').textContent = heroData.subtitle;
         const heroImg = document.querySelector('.hero img');
-        if (heroData.image) heroImg.src = heroData.image;
+        if (heroData.images && heroData.images.length > 0) heroImg.src = heroData.images[0];
     } catch (err) {
         console.error('Error loading hero:', err);
     }
@@ -67,23 +67,13 @@ async function renderSection(sectionId, jsonPath, type) {
 }
 
 // ==========================
-// SCROLL TO SECTION (FIX FOR BOTTOM SECTIONS)
+// SCROLL TO SECTION
 // ==========================
 function scrollToSection(targetSection) {
-    const rect = targetSection.getBoundingClientRect();
-    const scrollTop = window.pageYOffset;
-    const offsetTop = rect.top + scrollTop;
-
+    const offsetTop = targetSection.offsetTop;
     const windowHeight = window.innerHeight;
-    const sectionHeight = targetSection.offsetHeight;
-
-    // Если секция ниже окна, сдвигаем так, чтобы была вверху
-    const top = (sectionHeight < windowHeight) ? offsetTop - (windowHeight - sectionHeight) : offsetTop;
-
-    window.scrollTo({
-        top: top,
-        behavior: 'smooth'
-    });
+    const maxScroll = document.body.scrollHeight - windowHeight;
+    window.scrollTo({ top: Math.min(offsetTop, maxScroll), behavior: 'smooth' });
 }
 
 // ==========================
@@ -96,9 +86,7 @@ function setupNavScroll() {
             e.preventDefault();
             const targetId = link.getAttribute('href').substring(1);
             const targetSection = document.getElementById(targetId);
-            if (targetSection) {
-                scrollToSection(targetSection);
-            }
+            if (targetSection) scrollToSection(targetSection);
         });
     });
 }
