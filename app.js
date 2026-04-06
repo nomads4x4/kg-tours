@@ -3,19 +3,31 @@ const res = await fetch(path)
 return res.json()
 }
 
-function getPage(){
+function page(){
 return location.pathname.split("/").pop()
 }
 
 document.addEventListener("DOMContentLoaded",()=>{
 
-const page = getPage()
+const p = page()
 
-if(page === "" || page === "index.html") initIndex()
-if(page === "item.html") initItem()
-if(page === "calculator.html") initCalculator()
+if(p==="" || p==="index.html") initIndex()
+if(p==="item.html") initItem()
+if(p==="calculator.html") initCalculator()
 
 })
+
+/* ---------- HERO ---------- */
+
+function renderHero(){
+hero.innerHTML=`
+<h1>Kyrgyzstan Tours with Professional Guides</h1>
+<p>Discover mountains, lakes and nomadic culture</p>
+<a href="calculator.html" class="btn">Calculate Tour</a>
+`
+}
+
+/* ---------- INDEX ---------- */
 
 async function initIndex(){
 
@@ -28,28 +40,18 @@ renderSection("guides")
 
 }
 
-function renderHero(){
-
-document.getElementById("hero").innerHTML = `
-<h1>Kyrgyzstan Tours with Professional Guides</h1>
-<p>Discover mountains, lakes and nomadic culture</p>
-<a href="calculator.html" class="btn">Calculate Tour</a>
-`
-
-}
-
 async function renderSection(type){
 
 const data = await loadJSON(`data/${type}.json`)
 const section = document.getElementById(type)
 
-section.innerHTML = `<h2>${type}</h2><div class="carousel"></div>`
+section.innerHTML=`<h2>${type}</h2><div class="carousel"></div>`
 
 const carousel = section.querySelector(".carousel")
 
 data.forEach(item=>{
 
-const card = document.createElement("div")
+const card=document.createElement("div")
 card.className="card"
 
 card.innerHTML=`
@@ -68,17 +70,20 @@ carousel.appendChild(card)
 
 }
 
+/* ---------- ITEM ---------- */
+
 async function initItem(){
 
-const params = new URLSearchParams(location.search)
-const type = params.get("type")
-const id = params.get("id")
+const params=new URLSearchParams(location.search)
+const type=params.get("type")
+const id=params.get("id")
 
-const data = await loadJSON(`data/${type}.json`)
-const item = data.find(i=>i.id===id)
+const data=await loadJSON(`data/${type}.json`)
+const item=data.find(i=>i.id===id)
 
-document.getElementById("item").innerHTML = `
-<div class="carousel">
+document.getElementById("item").innerHTML=`
+
+<div class="gallery">
 ${item.images.map(img=>`<img src="images/${type}/${img}">`).join("")}
 </div>
 
@@ -90,37 +95,99 @@ ${item.images.map(img=>`<img src="images/${type}/${img}">`).join("")}
 
 }
 
+/* ---------- CALCULATOR ---------- */
+
 async function initCalculator(){
 
-const tours = await loadJSON("data/tours.json")
-const places = await loadJSON("data/places.json")
-const activities = await loadJSON("data/activities.json")
-const guides = await loadJSON("data/guides.json")
-const season = await loadJSON("data/season.json")
+const tours=await loadJSON("data/tours.json")
+const places=await loadJSON("data/places.json")
+const activities=await loadJSON("data/activities.json")
+const guides=await loadJSON("data/guides.json")
+const season=await loadJSON("data/season.json")
 
-fillSelect("tour", tours)
-fillSelect("places", places)
-fillSelect("activities", activities)
-fillSelect("guide", guides)
+fillSelect("tour",tours)
+fillSelect("places",places)
+fillSelect("activities",activities)
+fillSelect("guide",guides)
 
-document.getElementById("calculate").onclick=()=>{
+calculate.onclick=()=>{
 
-const people = +people.value
-const tour = tours[tourSelect.value]
+const people=+document.getElementById("people").value
+const date=document.getElementById("date").value
+
+const tour=tours[tour.value]
+const guide=guides[guideSelect.value]
+
+const selectedPlaces=getSelected("places",places)
+const selectedActivities=getSelected("activities",activities)
+
+const totalDays=
+tour.days+
+selectedPlaces.reduce((s,p)=>s+(p.days||0),0)
+
+const guidesCount=Math.ceil(people/4)
+
+const activitiesPrice=
+selectedActivities.reduce((sum,a)=>{
+if(a.perPerson) return sum+(a.price*people)
+return sum+a.price
+},0)
+
+const placesPrice=
+selectedPlaces.reduce((s,p)=>s+p.price,0)
+
+let total=
+tour.price+
+placesPrice+
+activitiesPrice+
+(guidesCount*guide.price*totalDays)
+
+const multiplier=getSeasonMultiplier(date,season)
+
+total*=multiplier
+
+result.innerHTML=`Total: $${Math.round(total)}`
+
+const text=`Hello. I selected:
+People: ${people}
+Tour: ${tour.title}
+Places: ${selectedPlaces.map(p=>p.title).join(",")}
+Activities: ${selectedActivities.map(a=>a.title).join(",")}
+Guide: ${guide.name}
+Total: ${total}
+`
+
+whatsapp.href=`https://wa.me/996555900855?text=${encodeURIComponent(text)}`
+telegram.href=`https://t.me/ErkinMms?text=${encodeURIComponent(text)}`
 
 }
 
 }
 
 function fillSelect(id,data){
-
-const select = document.getElementById(id)
-
+const select=document.getElementById(id)
 data.forEach((item,i)=>{
-const option = document.createElement("option")
-option.value=i
-option.text=item.title || item.name
-select.appendChild(option)
+const opt=document.createElement("option")
+opt.value=i
+opt.text=item.title || item.name
+select.appendChild(opt)
 })
+}
 
+function getSelected(id,data){
+const select=document.getElementById(id)
+return Array.from(select.selectedOptions).map(o=>data[o.value])
+}
+
+function getSeasonMultiplier(date,season){
+
+if(!date) return 1
+
+const d=date.slice(5)
+
+if(d>=season.seasonStart && d<=season.seasonEnd){
+return season.high
+}
+
+return season.low
 }
