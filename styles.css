@@ -1,200 +1,255 @@
 /* =========================
-RESET
+   RESET
 ========================= */
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  }
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 html {
-scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
 body {
-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-background: #f4f7f8;
-color: #2c3e50;
-line-height: 1.5;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #f5f7f8;
+    color: #2c2c2c;
+    line-height: 1.6;
 }
 
 /* =========================
-COLORS
+   VARIABLES
 ========================= */
+
 :root {
---primary: #3a8d99;
---primary-soft: #6bb3bd;
---secondary: #6c7a89;
---accent: #4fc3c7;
---bg-light: #f4f7f8;
---card-bg: #ffffff;
---shadow: 0 8px 24px rgba(0,0,0,0.08);
---radius: 16px;
+    --primary: #2a7f8f;
+    --secondary: #7aa6b1;
+    --bg: #f5f7f8;
+    --card-bg: #ffffff;
+    --text: #2c2c2c;
+    --radius: 16px;
+    --shadow: 0 10px 30px rgba(0,0,0,0.08);
 }
 
 /* =========================
-CONTAINER
+   HERO
 ========================= */
-.container {
-width: 90%;
-max-width: 1200px;
-margin: auto;
-}
 
-/* =========================
-HERO
-========================= */
 .hero {
-height: 25vh;
-min-height: 220px;
-background-size: cover;
-background-position: center;
-position: relative;
-display: flex;
-align-items: center;
+    position: relative;
+    height: 25vh;
+    min-height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    overflow: hidden;
 }
 
-.hero-overlay {
-position: absolute;
-inset: 0;
-background: rgba(0,0,0,0.35);
+.hero img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 1;
 }
 
 .hero-content {
-position: relative;
-color: white;
-padding: 20px;
+    position: relative;
+    z-index: 2;
+    padding: 20px;
 }
 
 .hero h1 {
-font-size: 32px;
-margin-bottom: 10px;
+    font-size: 2rem;
+    margin-bottom: 10px;
 }
 
 .hero p {
-opacity: 0.9;
+    opacity: 0.9;
+    margin-bottom: 20px;
 }
 
 /* =========================
-BUTTON
+   BUTTON
 ========================= */
+
 .btn {
-display: inline-block;
-padding: 12px 20px;
-background: linear-gradient(135deg, var(--primary), var(--accent));
-color: white;
-border-radius: var(--radius);
-text-decoration: none;
-margin-top: 15px;
-box-shadow: var(--shadow);
-transition: 0.3s ease;
+    display: inline-block;
+    padding: 12px 24px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.2s ease;
 }
 
 .btn:hover {
-transform: translateY(-2px);
-box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
 /* =========================
-STICKY NAV
+   NAVBAR
 ========================= */
-.nav {
-position: sticky;
-top: 0;
-backdrop-filter: blur(10px);
-background: rgba(255,255,255,0.8);
-z-index: 100;
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
 }
 
-.nav ul {
-display: flex;
-justify-content: space-around;
-list-style: none;
-padding: 12px;
+.navbar ul {
+    display: flex;
+    overflow-x: auto;
+    list-style: none;
 }
 
-.nav a {
-text-decoration: none;
-color: var(--secondary);
-font-weight: 500;
+.navbar li {
+    flex: 1;
 }
 
-.nav a:hover {
-color: var(--primary);
+.navbar a {
+    display: block;
+    padding: 14px;
+    text-align: center;
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 500;
+}
+
+.navbar a:hover {
+    background: rgba(0,0,0,0.05);
 }
 
 /* =========================
-SECTION
+   SECTIONS
 ========================= */
+
 .section {
-padding: 40px 0;
+    padding: 40px 20px;
 }
 
 .section h2 {
-margin-bottom: 20px;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
 }
 
 /* =========================
-CAROUSEL
+   CAROUSEL
 ========================= */
+
 .carousel {
-display: flex;
-overflow-x: auto;
-gap: 20px;
-scroll-snap-type: x mandatory;
-padding-bottom: 10px;
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 10px;
 }
 
 .carousel::-webkit-scrollbar {
-display: none;
+    display: none;
 }
 
 /* =========================
-CARD
+   CARD
 ========================= */
+
 .card {
-min-width: 260px;
-background: var(--card-bg);
-border-radius: var(--radius);
-box-shadow: var(--shadow);
-overflow: hidden;
-scroll-snap-align: start;
-transition: 0.3s ease;
-cursor: pointer;
+    min-width: 280px;
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    scroll-snap-align: start;
+    cursor: pointer;
+    transition: 0.2s ease;
 }
 
 .card:hover {
-transform: translateY(-5px);
+    transform: translateY(-4px);
 }
 
 .card img {
-width: 100%;
-height: 160px;
-object-fit: cover;
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
 }
 
 .card-content {
-padding: 15px;
+    padding: 16px;
+}
+
+.card h3 {
+    margin-bottom: 8px;
+}
+
+.card p {
+    font-size: 0.9rem;
+    opacity: 0.8;
 }
 
 /* =========================
-MOBILE
+   ITEM PAGE
 ========================= */
+
+.page-header {
+    height: 25vh;
+    min-height: 200px;
+    position: relative;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.page-header::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+}
+
+.page-header h1 {
+    position: relative;
+    z-index: 2;
+}
+
+.content {
+    padding: 20px;
+}
+
+.back-btn {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
 @media (max-width: 768px) {
+    .hero {
+        height: 33vh;
+    }
 
-```
-.hero {
-    height: 33vh;
-}
-
-.hero h1 {
-    font-size: 24px;
-}
-
-.card {
-    min-width: 220px;
-}
-```
-
+    .hero h1 {
+        font-size: 1.5rem;
+    }
 }
