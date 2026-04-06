@@ -1,18 +1,7 @@
 [
-  {
-    "id": "horse",
-    "name": "Horse Riding",
-    "type": "per_person",
-    "price": 40,
-    "image": "images/activities/horse.jpg",
-    "description": "Horse riding experience"
-  },
-  {
-    "id": "eagle",
-    "name": "Eagle Hunting Show",
-    "type": "per_group",
-    "price": 120,
-    "image": "images/activities/eagle.jpg",
-    "description": "Traditional eagle show"
-  }
+{"id":1,"title":"Конные прогулки","price":50,"type":"per_person","image":"images/activities/1.jpg","description":"Лошади"},
+{"id":2,"title":"Рафтинг","price":200,"type":"per_group","image":"images/activities/2.jpg","description":"Река"},
+{"id":3,"title":"Треккинг","price":30,"type":"per_person","image":"images/activities/3.jpg","description":"Поход"},
+{"id":4,"title":"Юрта","price":150,"type":"per_group","image":"images/activities/4.jpg","description":"Ночь"},
+{"id":5,"title":"Фототур","price":70,"type":"per_person","image":"images/activities/5.jpg","description":"Фото"}
 ]
