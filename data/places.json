@@ -1,20 +1,7 @@
 [
-  {
-    "id": "tash-rabat",
-    "name": "Tash Rabat",
-    "days": 1,
-    "price": 120,
-    "image": "images/places/tashrabat.jpg",
-    "short_description": "Caravansarai in mountains",
-    "description": "Detailed description..."
-  },
-  {
-    "id": "skazka",
-    "name": "Skazka Canyon",
-    "days": 1,
-    "price": 80,
-    "image": "images/places/skazka.jpg",
-    "short_description": "Colorful canyon",
-    "description": "Detailed description..."
-  }
+{"id":1,"title":"Джети-Огуз","price":100,"days":1,"image":"images/places/1.jpg","description":"Скалы"},
+{"id":2,"title":"Каракол","price":120,"days":1,"image":"images/places/2.jpg","description":"Город"},
+{"id":3,"title":"Барскоон","price":90,"days":1,"image":"images/places/3.jpg","description":"Водопад"},
+{"id":4,"title":"Таш-Рабат","price":150,"days":1,"image":"images/places/4.jpg","description":"Караван"},
+{"id":5,"title":"Кочкор","price":80,"days":1,"image":"images/places/5.jpg","description":"Село"}
 ]
