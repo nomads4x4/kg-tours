@@ -1,50 +1,75 @@
 [
   {
-    "id": "issyk-kul",
-    "title": "Issyk-Kul Lake",
-    "description": "Classic tour to the largest alpine lake",
+    "id": "sonkul",
+    "name": "Song-Kul Lake Tour",
+    "shortDescription": "Experience nomadic life and breathtaking mountain views at Song-Kul.",
+    "images": [
+      "images/tours/sonkul_main.jpg",
+      "images/tours/sonkul_1.jpg",
+      "images/tours/sonkul_2.jpg"
+    ],
     "days": 3,
-    "price": 450,
-    "images": ["main.jpg", "1.jpg", "2.jpg"]
+    "price": 120
   },
   {
-    "id": "son-kul",
-    "title": "Son-Kul Lake",
-    "description": "Nomadic experience in high mountains",
-    "days": 2,
-    "price": 380,
-    "images": ["main.jpg", "1.jpg", "2.jpg"]
-  },
-  {
-    "id": "ala-archa",
-    "title": "Ala-Archa National Park",
-    "description": "One day hiking near Bishkek",
-    "days": 1,
-    "price": 120,
-    "images": ["main.jpg", "1.jpg"]
-  },
-  {
-    "id": "kel-suu",
-    "title": "Kel-Suu Lake",
-    "description": "Remote alpine lake adventure",
+    "id": "issykul",
+    "name": "Issyk-Kul Adventure",
+    "shortDescription": "Relax by the lake and explore nearby cultural sites.",
+    "images": [
+      "images/tours/issykul_main.jpg",
+      "images/tours/issykul_1.jpg",
+      "images/tours/issykul_2.jpg",
+      "images/tours/issykul_3.jpg"
+    ],
     "days": 4,
-    "price": 690,
-    "images": ["main.jpg", "1.jpg", "2.jpg"]
+    "price": 150
   },
   {
-    "id": "osh-tour",
-    "title": "Osh & South Kyrgyzstan",
-    "description": "Cultural tour in southern regions",
-    "days": 3,
-    "price": 520,
-    "images": ["main.jpg", "1.jpg"]
-  },
-  {
-    "id": "tash-rabat",
-    "title": "Tash Rabat Caravanserai",
-    "description": "Silk Road historical tour",
+    "id": "alamedin",
+    "name": "Alamedin Gorge Trek",
+    "shortDescription": "A scenic trek through the beautiful Alamedin Gorge.",
+    "images": [
+      "images/tours/alamedin_main.jpg",
+      "images/tours/alamedin_1.jpg",
+      "images/tours/alamedin_2.jpg"
+    ],
     "days": 2,
-    "price": 410,
-    "images": ["main.jpg", "1.jpg"]
+    "price": 100
+  },
+  {
+    "id": "tashrabat",
+    "name": "Tash-Rabat Caravanserai Visit",
+    "shortDescription": "Discover the ancient Silk Road fortress in the mountains.",
+    "images": [
+      "images/tours/tashrabat_main.jpg",
+      "images/tours/tashrabat_1.jpg",
+      "images/tours/tashrabat_2.jpg"
+    ],
+    "days": 2,
+    "price": 90
+  },
+  {
+    "id": "sarychelek",
+    "name": "Sary-Chelek Lake Hike",
+    "shortDescription": "Hike around pristine alpine lakes and valleys.",
+    "images": [
+      "images/tours/sarychelek_main.jpg",
+      "images/tours/sarychelek_1.jpg",
+      "images/tours/sarychelek_2.jpg"
+    ],
+    "days": 3,
+    "price": 130
+  },
+  {
+    "id": "kyrgyzalp",
+    "name": "Kyrgyz Alpinism Experience",
+    "shortDescription": "Mountaineering and camping in Kyrgyzstan’s highest peaks.",
+    "images": [
+      "images/tours/kyrgyzalp_main.jpg",
+      "images/tours/kyrgyzalp_1.jpg",
+      "images/tours/kyrgyzalp_2.jpg"
+    ],
+    "days": 5,
+    "price": 200
   }
 ]
