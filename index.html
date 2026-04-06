@@ -1,28 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kyrgyzstan Tours</title>
-    <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kyrgyzstan Tours</title>
+<link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
 
 <!-- ================= HERO ================= -->
-
-<header class="hero">
-    <img src="images/hero/hero.jpg" alt="Kyrgyzstan">
+<section class="hero" id="hero">
+    <img src="" alt="Hero Image">
     <div class="hero-content">
         <h1 id="hero-title">Loading...</h1>
-        <p id="hero-subtitle">Loading...</p>
-        <a href="calculator.html" class="btn">Calculate Tour</a>
+        <p id="hero-subtitle"></p>
+        <a href="calculator.html" class="hero-button">Calculate Tour</a>
     </div>
-</header>
+</section>
 
-<!-- ================= NAV ================= -->
-
-<nav class="navbar">
+<!-- ================= STICKY NAV ================= -->
+<nav class="sticky-nav">
     <ul>
         <li><a href="#tours">Tours</a></li>
         <li><a href="#places">Places</a></li>
@@ -32,46 +29,32 @@
 </nav>
 
 <!-- ================= TOURS ================= -->
-
-<section id="tours" class="section">
+<section id="tours">
     <h2>Tours</h2>
-
-    <div class="carousel" id="tours-carousel">
-        <!-- JS renders cards -->
-    </div>
+    <div id="tours-carousel" class="carousel"></div>
 </section>
 
 <!-- ================= PLACES ================= -->
-
-<section id="places" class="section">
+<section id="places">
     <h2>Places</h2>
-
-    <div class="carousel" id="places-carousel">
-        <!-- JS renders cards -->
-    </div>
+    <div id="places-carousel" class="carousel"></div>
 </section>
 
 <!-- ================= ACTIVITIES ================= -->
-
-<section id="activities" class="section">
+<section id="activities">
     <h2>Activities</h2>
-
-    <div class="carousel" id="activities-carousel">
-        <!-- JS renders cards -->
-    </div>
+    <div id="activities-carousel" class="carousel"></div>
 </section>
 
 <!-- ================= GUIDES ================= -->
-
-<section id="guides" class="section">
+<section id="guides">
     <h2>Guides</h2>
-
-    <div class="carousel" id="guides-carousel">
-        <!-- JS renders cards -->
-    </div>
+    <div id="guides-carousel" class="carousel"></div>
 </section>
 
-<script src="app.js"></script>
+<!-- ================= EMPTY BLOCK FOR BOTTOM SCROLL ================= -->
+<div style="height:100vh;"></div>
 
+<script src="app.js"></script>
 </body>
 </html>
