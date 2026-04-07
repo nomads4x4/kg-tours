@@ -1,32 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Calculator</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tour Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .item-hero {
+            width: 100%;
+            height: 25vh;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #46828f;
+            color: white;
+            padding: 1rem;
+        }
+        .calculator {
+            max-width: 800px;
+            margin: auto;
+            padding: 1rem;
+        }
+        .calculator label {
+            display: block;
+            margin: 0.5rem 0 0.2rem;
+        }
+        .calculator select, 
+        .calculator input {
+            width: 100%;
+            padding: 0.5rem;
+            border-radius: 25px;
+            border: 1px solid #ccc;
+            margin-bottom: 1rem;
+        }
+        .calculate-btn, .back-button {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: #46828f;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-right: 1rem;
+        }
+        .calculate-btn:hover, .back-button:hover {
+            background-color: #21867a;
+        }
+        .result {
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+    </style>
 </head>
-
 <body>
 
-<h1>Calculator</h1>
+<div class="item-hero">
+    <h1>Tour Calculator</h1>
+</div>
 
-<label>People</label>
-<input id="people" type="number" value="1">
+<div class="calculator">
+    <label for="people">Number of People:</label>
+    <input type="number" id="people" value="1" min="1">
 
-<label>Date</label>
-<input id="date" type="date">
+    <label for="date">Trip Date:</label>
+    <input type="date" id="date">
 
-<label>Tour</label>
-<select id="tour"></select>
+    <label for="tour">Select Tour:</label>
+    <select id="tour"></select>
 
-<label>Guide</label>
-<select id="guide"></select>
+    <label for="places">Additional Places:</label>
+    <select id="places" multiple></select>
 
-<button id="calculate">Calculate</button>
+    <label for="activities">Additional Activities:</label>
+    <select id="activities" multiple></select>
 
-<div id="result"></div>
+    <label for="guide">Select Guide:</label>
+    <select id="guide"></select>
+
+    <button class="calculate-btn" id="calculate-btn">Calculate</button>
+    <button class="back-button" onclick="window.location.href='index.html'">Back</button>
+
+    <div class="result" id="result"></div>
+    <div class="result" id="link"></div>
+</div>
 
 <script src="app.js"></script>
+<script>
+async function loadJSON(path) {
+    const response = await fetch(path);
+    return await response.json();
+}
 
+async function setupCalculator() {
+    const tours = await loadJSON('data/tours.json');
+    const places = await loadJSON('data/places.json');
+    const activities = await loadJSON('data/activities.json');
+    const guides = await loadJSON('data/guides.json');
+    const seasonData = await loadJSON('data/season.json');
+
+    const tourSelect = document.getElementById('tour');
+    tours.forEach(t => tourSelect.add(new Option(t.name, t.id)));
+
+    const placesSelect = document.getElementById('places');
+    places.forEach(p => placesSelect.add(new Option(p.name, p.id)));
+
+    const activitiesSelect = document.getElementById('activities');
+    activities.forEach(a => activitiesSelect.add(new Option(a.name, a.id)));
+
+    const guideSelect = document.getElementById('guide');
+    guides.forEach(g => guideSelect.add(new Option(g.name, g.id)));
+
+    document.getElementById('calculate-btn').addEventListener('click', () => {
+        const people = parseInt(document.getElementById('people').value);
+        const date = new Date(document.getElementById('date').value);
+        const tourId = tourSelect.value;
+        const selectedPlaces = Array.from(placesSelect.selectedOptions).map(o => o.value);
+        const selectedActivities = Array.from(activitiesSelect.selectedOptions).map(o => o.value);
+        const guideId = guideSelect.value;
+
+        const tour = tours.find(t => t.id === tourId);
+        const placeObjs = places.filter(p => selectedPlaces.includes(p.id));
+        const activityObjs = activities.filter(a => selectedActivities.includes(a.id));
+        const guide = guides.find(g => g.id === guideId);
+
+        // Считаем totalDays
+        let totalDays = tour.days + placeObjs.reduce((sum,p)=>sum+p.days,0);
+
+        // Стоимость активностей (на всех людей)
+        let activitiesPrice = activityObjs.reduce((sum,a)=>sum + a.price * people,0);
+
+        // guidesCount
+        let guidesCount = Math.ceil(people/4);
+
+        // totalPrice
+        let basePrice = (tour.price + placeObjs.reduce((sum,p)=>sum+p.price,0) + activitiesPrice + (guidesCount*guide.price*totalDays));
+
+        // season multiplier
+        let seasonMultiplier = 0.9; // default off-season
+        const tripTime = date.getTime();
+        seasonData.forEach(s=>{
+            const start = new Date(s.start).getTime();
+            const end = new Date(s.end).getTime();
+            if(tripTime>=start && tripTime<=end) seasonMultiplier = s.multiplier || 1;
+        });
+
+        const totalPrice = Math.round(basePrice * seasonMultiplier);
+
+        // Результат
+        const resultDiv = document.getElementById('result');
+        resultDiv.textContent = `Total Price: $${totalPrice} for ${people} person(s) over ${totalDays} day(s)`;
+
+        // Формируем текст для WhatsApp/Telegram
+        let text = `Добрый день! Я подобрал следующие параметры для тура:\n`;
+        text += `People: ${people}\nTour: ${tour.name}\n`;
+        if(placeObjs.length>0) text += `Additional Places: ${placeObjs.map(p=>p.name).join(', ')}\n`;
+        if(activityObjs.length>0) text += `Activities: ${activityObjs.map(a=>a.name).join(', ')}\n`;
+        text += `Guide: ${guide.name}\nDate: ${date.toLocaleDateString()}\n`;
+        text += `Total Price: $${totalPrice}\nХочу обсудить покупку такого тура.`;
+
+        const linkDiv = document.getElementById('link');
+        const waLink = `https://wa.me/996555900855?text=${encodeURIComponent(text)}`;
+        const tgLink = `https://t.me/ErkinMms?text=${encodeURIComponent(text)}`;
+        linkDiv.innerHTML = `<a href="${waLink}" target="_blank">Contact via WhatsApp</a> | <a href="${tgLink}" target="_blank">Contact via Telegram</a>`;
+    });
+}
+
+setupCalculator();
+</script>
 </body>
 </html>
