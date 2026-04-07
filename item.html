@@ -1,130 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Item Page</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        /* Дополнительные стили для карусели на item.html */
-        .item-hero {
-            width: 100%;
-            height: 25vh;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background-size: cover;
-            background-position: center;
-            color: white;
-            padding: 1rem;
-        }
-        .item-carousel {
-            display: flex;
-            overflow-x: auto;
-            gap: 1rem;
-            padding: 1rem;
-        }
-        .item-carousel img {
-            border-radius: 12px;
-            height: 200px;
-            flex: 0 0 auto;
-        }
-        .item-description {
-            padding: 1rem;
-            max-width: 800px;
-            margin: auto;
-        }
-        .back-button {
-            display: inline-block;
-            margin: 2rem;
-            padding: 0.8rem 2rem;
-            background-color: var(--accent-color);
-            color: white;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-        }
-        .back-button:hover {
-            background-color: #21867a;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Item Details</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Дополнительные стили для item.html */
+    .item-hero {
+      width: 100%;
+      height: 25vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 1rem;
+      background-size: cover;
+      background-position: center;
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+    .item-carousel {
+      display: flex;
+      overflow-x: auto;
+      gap: 1rem;
+      padding: 1rem;
+      scroll-behavior: smooth;
+    }
+    .item-carousel img {
+      height: 200px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+    .item-details {
+      padding: 1rem;
+      max-width: 800px;
+      margin: auto;
+    }
+    .back-btn {
+      margin: 2rem 1rem;
+    }
+  </style>
 </head>
 <body>
 
-<!-- Hero / Заголовок страницы -->
-<div class="item-hero" id="item-hero">
-    <h1 id="item-title">Item Name</h1>
-</div>
+  <!-- Hero Section -->
+  <section class="item-hero" id="item-hero">
+    <h1 id="item-title">Loading...</h1>
+    <p id="item-type">Loading type...</p>
+  </section>
 
-<!-- Карусель изображений -->
-<div class="item-carousel" id="item-carousel">
-    <!-- JS вставит все изображения -->
-</div>
+  <!-- Carousel -->
+  <div class="item-carousel" id="item-carousel">
+    <!-- Фотографии будут рендериться сюда -->
+  </div>
 
-<!-- Подробное описание -->
-<div class="item-description" id="item-description">
-    <p id="item-text">Item full description goes here.</p>
-    <p id="item-info"></p>
-</div>
+  <!-- Details -->
+  <div class="item-details" id="item-details">
+    <!-- Описание и данные -->
+  </div>
 
-<!-- Кнопка возврата -->
-<button class="back-button" onclick="window.location.href='index.html'">Back to Home</button>
+  <!-- Back Button -->
+  <button class="btn back-btn" onclick="window.location.href='index.html'">Back to Home</button>
 
-<script src="app.js"></script>
-<script>
-/* --- JS для item.html --- */
-async function loadJSON(path) {
-    const response = await fetch(path);
-    return await response.json();
-}
-
-async function renderItem() {
+  <script src="app.js"></script>
+  <script>
+    // =========================
+    // Get URL parameters
+    // =========================
     const params = new URLSearchParams(window.location.search);
-    const type = params.get('type');
+    const type = params.get('type'); // tours, places, activities, guides
     const id = params.get('id');
 
-    if (!type || !id) return;
-
-    const data = await loadJSON(`data/${type}.json`);
-    const item = data.find(i => i.id === id);
-    if (!item) return;
-
-    // Hero
-    const hero = document.getElementById('item-hero');
-    hero.style.backgroundImage = `url('images/${type}/${item.mainImage}')`;
-    document.getElementById('item-title').textContent = item.name;
-
-    // Карусель изображений
-    const carousel = document.getElementById('item-carousel');
-
-    // На item.html показываем все изображения, кроме mainImage
-    const images = [];
-    for (let i = 1; i <= 5; i++) { // Предположим максимум 5 дополнительных фото
-        const imgPath = `images/${type}/${id}_${i}.jpeg`;
-        try {
-            const res = await fetch(imgPath);
-            if (res.ok) images.push(imgPath);
-        } catch {}
+    async function fetchJSON(path) {
+      const res = await fetch(path);
+      if (!res.ok) throw new Error(`Failed to load ${path}`);
+      return await res.json();
     }
-    images.unshift(`images/${type}/${item.mainImage}`); // mainImage первый
 
-    images.forEach(src => {
-        const img = document.createElement('img');
-        img.src = src;
-        carousel.appendChild(img);
-    });
+    // =========================
+    // Render Item
+    // =========================
+    async function renderItem() {
+      try {
+        const data = await fetchJSON(`data/${type}.json`);
+        const item = data.find(i => i.id === id);
+        if (!item) throw new Error('Item not found');
 
-    // Описание и данные
-    document.getElementById('item-text').textContent = item.fullDescription || item.shortDescription || '';
-    let info = '';
-    if (type === 'tours' || type === 'places') info = `Duration: ${item.days || '-'} day(s), Price: $${item.price || '-'}`;
-    if (type === 'activities' || type === 'guides') info = `Price: $${item.price || '-'}`;
-    document.getElementById('item-info').textContent = info;
-}
+        // Hero
+        const heroSection = document.getElementById('item-hero');
+        const mainImage = item.images.find(img => img.main) || item.images[0];
+        heroSection.style.backgroundImage = `url('images/${type}/${mainImage.file}')`;
+        document.getElementById('item-title').textContent = item.name;
+        document.getElementById('item-type').textContent = type.charAt(0).toUpperCase() + type.slice(1);
 
-renderItem();
-</script>
+        // Carousel
+        const carousel = document.getElementById('item-carousel');
+        item.images.forEach(img => {
+          const image = document.createElement('img');
+          image.src = `images/${type}/${img.file}`;
+          image.alt = item.name;
+          carousel.appendChild(image);
+        });
+
+        // Details
+        const details = document.getElementById('item-details');
+        let html = `<p>${item.description || item.shortDescription}</p>`;
+        if (type === 'tours' || type === 'places') {
+          if (item.days) html += `<p><strong>Duration:</strong> ${item.days} day(s)</p>`;
+          if (item.price) html += `<p><strong>Price:</strong> $${item.price}</p>`;
+        }
+        details.innerHTML = html;
+
+      } catch (err) {
+        console.error(err);
+        document.getElementById('item-title').textContent = 'Error loading item';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', renderItem);
+  </script>
 </body>
 </html>
