@@ -1,76 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kyrgyzstan Tours</title>
-<link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kyrgyzstan Tours</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<!-- --- Sticky Nav --- -->
-<nav class="navbar">
-  <a href="#tours" class="nav-link">Tours</a>
-  <a href="#places" class="nav-link">Places</a>
-  <a href="#activities" class="nav-link">Activities</a>
-  <a href="#guides" class="nav-link">Guides</a>
-</nav>
+  <!-- Hero Section -->
+  <section class="hero" id="hero" style="background-image: url('images/hero/hero1.jpeg');">
+    <div class="hero-content">
+      <h1>Tours in Kyrgyzstan with Professional Guides</h1>
+      <p>Discover the beauty of Kyrgyzstan through curated tours and activities. Adventure awaits!</p>
+      <button onclick="window.location.href='calculator.html'">Calculate Your Tour</button>
+    </div>
+  </section>
 
-<!-- --- Hero Section --- -->
-<section class="hero" id="hero" style="background-image: url('images/hero/hero1.jpeg');">
-  <h1>Kyrgyzstan Tours with Professional Guides</h1>
-  <p>Explore the beauty of Kyrgyzstan with experienced local guides. Discover unique routes, activities, and places.</p>
-  <a href="calculator.html" class="btn">Calculate Your Tour</a>
-</section>
+  <!-- Sticky Navigation -->
+  <nav class="sticky-nav">
+    <ul>
+      <li><a href="#tours" data-target="tours">Tours</a></li>
+      <li><a href="#places" data-target="places">Places</a></li>
+      <li><a href="#activities" data-target="activities">Activities</a></li>
+      <li><a href="#guides" data-target="guides">Guides</a></li>
+    </ul>
+  </nav>
 
-<!-- --- Tours Section --- -->
-<section id="tours">
-  <h2>Tours</h2>
-  <div class="carousel" id="tours-carousel">
-    <!-- JS will render tour cards here -->
-  </div>
-</section>
+  <!-- Tours Section -->
+  <section id="tours">
+    <h2>Main Tours</h2>
+    <div class="card-carousel" id="tours-carousel">
+      <!-- JS will populate cards here -->
+    </div>
+  </section>
 
-<!-- --- Places Section --- -->
-<section id="places">
-  <h2>Places</h2>
-  <div class="carousel" id="places-carousel">
-    <!-- JS will render place cards here -->
-  </div>
-</section>
+  <!-- Places Section -->
+  <section id="places">
+    <h2>Additional Places</h2>
+    <div class="card-carousel" id="places-carousel">
+      <!-- JS will populate cards here -->
+    </div>
+  </section>
 
-<!-- --- Activities Section --- -->
-<section id="activities">
-  <h2>Activities</h2>
-  <div class="carousel" id="activities-carousel">
-    <!-- JS will render activity cards here -->
-  </div>
-</section>
+  <!-- Activities Section -->
+  <section id="activities">
+    <h2>Activities</h2>
+    <div class="card-carousel" id="activities-carousel">
+      <!-- JS will populate cards here -->
+    </div>
+  </section>
 
-<!-- --- Guides Section --- -->
-<section id="guides">
-  <h2>Guides</h2>
-  <div class="carousel" id="guides-carousel">
-    <!-- JS will render guide cards here -->
-  </div>
-</section>
+  <!-- Guides Section -->
+  <section id="guides">
+    <h2>Guides</h2>
+    <div class="card-carousel" id="guides-carousel">
+      <!-- JS will populate cards here -->
+    </div>
+  </section>
 
-<script src="app.js"></script>
-<script>
-// --- Smooth Scroll и секция всегда сверху ---
-document.querySelectorAll('.nav-link').forEach(link => {
-  link.addEventListener('click', function(e){
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
-    target.scrollIntoView({behavior: 'smooth', block: 'start'});
-  });
-});
-
-// --- CSS для offset, чтобы секция не скрывалась под sticky nav ---
-document.querySelectorAll('section').forEach(sec => {
-  sec.style.scrollMarginTop = document.querySelector('.navbar').offsetHeight + 'px';
-});
-</script>
+  <script>
+    // Smooth scroll with offset for sticky nav
+    document.querySelectorAll('nav.sticky-nav a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('data-target');
+        const targetEl = document.getElementById(targetId);
+        const offset = document.querySelector('nav.sticky-nav').offsetHeight;
+        const bodyRect = document.body.getBoundingClientRect().top;
+        const elementRect = targetEl.getBoundingClientRect().top;
+        const elementPosition = elementRect - bodyRect;
+        const offsetPosition = elementPosition - offset;
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
+      });
+    });
+  </script>
 
 </body>
 </html>
