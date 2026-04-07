@@ -9,7 +9,7 @@
 <body>
 
   <!-- Hero Section -->
-  <section class="hero" id="hero" style="background-image: url('images/hero/hero.jpeg');">
+  <section class="hero" id="hero" style="background-image: url('images/hero/hero1.jpeg');">
     <div class="hero-content">
       <h1>Tours in Kyrgyzstan with Professional Guides</h1>
       <p>Discover the beauty of Kyrgyzstan through curated tours and activities. Adventure awaits!</p>
@@ -31,7 +31,7 @@
   <section id="tours">
     <h2>Main Tours</h2>
     <div class="card-carousel" id="tours-carousel">
-      <!-- JS will populate cards here -->
+      <!-- JS подставит карточки -->
     </div>
   </section>
 
@@ -39,7 +39,7 @@
   <section id="places">
     <h2>Additional Places</h2>
     <div class="card-carousel" id="places-carousel">
-      <!-- JS will populate cards here -->
+      <!-- JS подставит карточки -->
     </div>
   </section>
 
@@ -47,7 +47,7 @@
   <section id="activities">
     <h2>Activities</h2>
     <div class="card-carousel" id="activities-carousel">
-      <!-- JS will populate cards here -->
+      <!-- JS подставит карточки -->
     </div>
   </section>
 
@@ -55,12 +55,15 @@
   <section id="guides">
     <h2>Guides</h2>
     <div class="card-carousel" id="guides-carousel">
-      <!-- JS will populate cards here -->
+      <!-- JS подставит карточки -->
     </div>
   </section>
 
+  <!-- Подключение JS -->
+  <script src="app.js"></script>
+
+  <!-- Плавный скролл для sticky nav -->
   <script>
-    // Smooth scroll with offset for sticky nav
     document.querySelectorAll('nav.sticky-nav a').forEach(link => {
       link.addEventListener('click', function(e) {
         e.preventDefault();
