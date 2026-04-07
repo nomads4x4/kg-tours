@@ -8,7 +8,6 @@
 <link rel="stylesheet" href="styles.css">
 
 <style>
-/* LAYOUT */
 .calc-grid{
 display:grid;
 grid-template-columns:1fr 1fr;
@@ -26,12 +25,10 @@ box-shadow:0 10px 25px rgba(0,0,0,0.05);
 margin-bottom:12px;
 }
 
-/* FULL WIDTH */
 .calc-full{
 grid-column:1/-1;
 }
 
-/* INPUTS */
 select,input[type="date"]{
 width:100%;
 padding:14px;
@@ -40,7 +37,6 @@ border:1px solid #ddd;
 font-size:16px;
 }
 
-/* CHECKBOX LIST */
 .checkbox-list{
 display:flex;
 flex-direction:column;
@@ -53,15 +49,13 @@ gap:10px;
 cursor:pointer;
 }
 
-/* RESULT BAR */
 .total-bar{
-position:sticky;
-bottom:0;
+position:relative;
 background:white;
 padding:16px;
 margin-top:20px;
 border-radius:16px;
-box-shadow:0 -5px 20px rgba(0,0,0,0.08);
+box-shadow:0 0 20px rgba(0,0,0,0.05);
 display:flex;
 justify-content:space-between;
 align-items:flex-start;
@@ -74,14 +68,12 @@ font-size:24px;
 font-weight:bold;
 }
 
-/* BREAKDOWN */
 .breakdown{
 font-size:14px;
 margin-top:8px;
 color:#333;
 }
 
-/* BUTTONS */
 .btn-whatsapp{
 background:#25D366;
 color:white;
@@ -100,12 +92,13 @@ border-radius:12px;
 cursor:pointer;
 }
 
-/* MOBILE */
 @media(max-width:768px){
 .calc-grid{
 grid-template-columns:1fr;
 }
 .total-bar{
+position:sticky;
+bottom:0;
 flex-direction:column;
 align-items:flex-start;
 }
@@ -143,16 +136,17 @@ align-items:flex-start;
 </div>
 
 <div class="calc-block">
-<h3>Select Guide</h3>
-<select id="guide"></select>
+<h3>Select Guide(s)</h3>
+<select id="guide" multiple></select>
+<small>Choose one or more guides. Minimum calculated automatically</small>
 </div>
 
-<div class="calc-block calc-full">
+<div class="calc-block">
 <h3>Additional Places</h3>
 <div id="places" class="checkbox-list"></div>
 </div>
 
-<div class="calc-block calc-full">
+<div class="calc-block">
 <h3>Additional Activities</h3>
 <div id="activities" class="checkbox-list"></div>
 </div>
@@ -174,8 +168,6 @@ align-items:flex-start;
 
 </div>
 </section>
-
-<div class="footer-spacer"></div>
 
 <footer>
 <div class="container">
@@ -234,7 +226,17 @@ const peopleCount=parseInt(document.getElementById('people').value);
 const date=document.getElementById('tripDate').value;
 
 const tourObj=tours.find(t=>t.id===tour.value);
-const guideObj=guides.find(g=>g.id===guide.value);
+
+let selectedGuides=[...document.querySelectorAll('#guide option:checked')]
+.map(i=>guides.find(g=>g.id===i.value));
+
+// auto add guides if selected less than needed
+const minGuides=Math.ceil(peopleCount/4);
+if(selectedGuides.length<minGuides){
+for(let i=selectedGuides.length;i<minGuides;i++){
+selectedGuides.push(guides[0]); // добавляем первого гида по умолчанию
+}
+}
 
 const selectedPlaces=[...document.querySelectorAll('#places input:checked')]
 .map(i=>places.find(p=>p.id===i.value));
@@ -244,9 +246,7 @@ const selectedActivities=[...document.querySelectorAll('#activities input:checke
 
 const totalDays=tourObj.days+selectedPlaces.reduce((s,p)=>s+p.days,0);
 
-// automatic guides
-const guidesCount=Math.ceil(peopleCount/4);
-
+// CALC PRICES
 const placesPrice=selectedPlaces.reduce((s,p)=>s+p.price,0);
 const activitiesPrice=selectedActivities.reduce((s,a)=>{
     if(a.personPrice)return s+a.personPrice*peopleCount;
@@ -254,7 +254,7 @@ const activitiesPrice=selectedActivities.reduce((s,a)=>{
     return s;
 },0);
 
-const guidesPrice=guidesCount*guideObj.price*totalDays;
+const guidesPrice=selectedGuides.reduce((s,g)=>s+g.price*totalDays,0);
 
 const seasonMultiplier = getSeasonMultiplier(date);
 const total=(tourObj.price+placesPrice+activitiesPrice+guidesPrice)*seasonMultiplier;
@@ -265,7 +265,7 @@ document.getElementById('total').textContent="$"+Math.round(total);
 let breakdown=`Tour: $${tourObj.price}<br>
 Places: $${placesPrice}<br>
 Activities: $${activitiesPrice}<br>
-Guides (${guidesCount} x ${totalDays} days): $${guidesPrice}<br>
+Guides (${selectedGuides.length} x ${totalDays} days): $${guidesPrice}<br>
 Season multiplier: x${seasonMultiplier}`;
 
 document.getElementById('breakdown').innerHTML=breakdown;
@@ -275,7 +275,7 @@ const text = `Hello, I have selected the following parameters for the tour:
 - People: ${peopleCount}
 - Trip Date: ${date}
 - Tour: ${tourObj.title}
-- Guide: ${guideObj.title} (x${guidesCount} guides)
+- Guides: ${selectedGuides.map(g=>g.title).join(', ')}
 - Additional Places: ${selectedPlaces.map(p=>p.title).join(', ') || 'None'}
 - Additional Activities: ${selectedActivities.map(a=>a.title).join(', ') || 'None'}
 - Total Price: $${Math.round(total)}
@@ -283,6 +283,7 @@ I would like to discuss booking this tour (-:`;
 
 document.getElementById('whatsapp').onclick=()=>window.open("https://wa.me/996555900855?text="+encodeURIComponent(text));
 document.getElementById('telegram').onclick=()=>window.open("https://t.me/ErkinMms?text="+encodeURIComponent(text));
+
 }
 
 document.addEventListener('DOMContentLoaded',init);
