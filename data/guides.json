@@ -1,10 +1,10 @@
 [
-  { "id": "erkin", "name": "Erkin", "shortDescription": "Mountain and lake guide", "price": 50, "images": [{ "file": "erkin_main.jpg", "main": true }] },
-  { "id": "gulnara", "name": "Gulnara", "shortDescription": "Culture and history expert", "price": 45, "images": [{ "file": "gulnara_main.jpg", "main": true }] },
-  { "id": "asylbek", "name": "Asylbek", "shortDescription": "Horse trekking guide", "price": 40, "images": [{ "file": "asylbek_main.jpg", "main": true }] },
-  { "id": "aidana", "name": "Aidana", "shortDescription": "Photography tours", "price": 55, "images": [{ "file": "aidana_main.jpg", "main": true }] },
-  { "id": "bekzat", "name": "Bekzat", "shortDescription": "Local cuisine guide", "price": 35, "images": [{ "file": "bekzat_main.jpg", "main": true }] },
-  { "id": "dinara", "name": "Dinara", "shortDescription": "Birdwatching and nature expert", "price": 40, "images": [{ "file": "dinara_main.jpg", "main": true }] },
-  { "id": "kamila", "name": "Kamila", "shortDescription": "Cultural and history tours", "price": 45, "images": [{ "file": "kamila_main.jpg", "main": true }] },
-  { "id": "murad", "name": "Murad", "shortDescription": "Adventure and rafting guide", "price": 50, "images": [{ "file": "murad_main.jpg", "main": true }] }
+{"id":"erkin","title":"Erkin","short":"English speaking","description":"Experienced guide.","price":120,"mainImage":"images/guides/erkin/main.jpg","images":["images/guides/erkin/main.jpg"]},
+{"id":"azamat","title":"Azamat","short":"Mountain expert","description":"Local guide.","price":110,"mainImage":"images/guides/azamat/main.jpg","images":["images/guides/azamat/main.jpg"]},
+{"id":"bakyt","title":"Bakyt","short":"Photographer","description":"Photo guide.","price":130,"mainImage":"images/guides/bakyt/main.jpg","images":["images/guides/bakyt/main.jpg"]},
+{"id":"ulan","title":"Ulan","short":"Driver guide","description":"Safe driver.","price":100,"mainImage":"images/guides/ulan/main.jpg","images":["images/guides/ulan/main.jpg"]},
+{"id":"tilek","title":"Tilek","short":"Cultural guide","description":"Culture expert.","price":115,"mainImage":"images/guides/tilek/main.jpg","images":["images/guides/tilek/main.jpg"]},
+{"id":"mars","title":"Mars","short":"Adventure guide","description":"Extreme tours.","price":125,"mainImage":"images/guides/mars/main.jpg","images":["images/guides/mars/main.jpg"]},
+{"id":"amir","title":"Amir","short":"English/Russian","description":"Bilingual guide.","price":120,"mainImage":"images/guides/amir/main.jpg","images":["images/guides/amir/main.jpg"]},
+{"id":"bek","title":"Bek","short":"Local expert","description":"Friendly guide.","price":105,"mainImage":"images/guides/bek/main.jpg","images":["images/guides/bek/main.jpg"]}
 ]
