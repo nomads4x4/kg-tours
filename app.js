@@ -1,116 +1,78 @@
-/* =================== Общий JS для kg-tours =================== */
+// app.js
 
-/* ======= Функция рендера карточек ======= */
-async function renderSection(sectionId, jsonPath, carouselId) {
-    try {
-        const res = await fetch(jsonPath);
-        const data = await res.json();
-        const carousel = document.getElementById(carouselId);
-        carousel.innerHTML = ''; // очистка перед рендером
-
-        data.forEach(item => {
-            // выберем главное фото для карточки
-            const mainPhoto = item.photos.find(p => p.main) || item.photos[0];
-
-            const card = document.createElement('div');
-            card.className = 'card';
-            card.addEventListener('click', () => {
-                window.location.href = `item.html?type=${sectionId}&id=${item.id}`;
-            });
-
-            card.innerHTML = `
-                <img src="images/${sectionId}/${mainPhoto.filename}" alt="${item.name}">
-                <div class="card-content">
-                    <h3>${item.name}</h3>
-                    <p>${item.shortDescription}</p>
-                </div>
-            `;
-            carousel.appendChild(card);
-        });
-    } catch (err) {
-        console.error(`Ошибка загрузки ${jsonPath}:`, err);
-    }
+// Функция для подгрузки JSON
+async function fetchData(path) {
+  const response = await fetch(path);
+  if (!response.ok) throw new Error(`Cannot fetch ${path}`);
+  return response.json();
 }
 
-/* ======= Рендер всех секций ======= */
-renderSection('tours', 'data/tours.json', 'tours-carousel');
-renderSection('places', 'data/places.json', 'places-carousel');
-renderSection('activities', 'data/activities.json', 'activities-carousel');
-renderSection('guides', 'data/guides.json', 'guides-carousel');
+// Рендер hero
+async function renderHero() {
+  try {
+    const heroData = await fetchData('data/hero.json');
+    const heroSection = document.querySelector('.hero');
+    const titleEl = document.getElementById('hero-title');
+    const descEl = document.getElementById('hero-description');
 
-/* ======= Sticky nav — плавный scroll + позиционирование ======= */
-document.querySelectorAll('nav a').forEach(link => {
-    link.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        const navHeight = document.querySelector('nav').offsetHeight;
-        const targetPosition = target.getBoundingClientRect().top + window.scrollY - navHeight;
-        window.scrollTo({
-            top: targetPosition,
-            behavior: 'smooth'
-        });
-    });
-});
-
-/* ======= Hero — фон из JSON ======= */
-async function loadHero() {
-    try {
-        const res = await fetch('data/hero.json');
-        const heroData = await res.json();
-        const heroSection = document.querySelector('.hero');
-        heroSection.style.backgroundImage = `url('images/hero/${heroData.background}')`;
-        document.getElementById('hero-title').textContent = heroData.title;
-        document.getElementById('hero-description').textContent = heroData.description;
-    } catch (err) {
-        console.error('Ошибка загрузки hero.json:', err);
-    }
-}
-loadHero();
-
-/* ======= Carousel свайп на мобилке (touch) ======= */
-function enableSwipe(carouselId) {
-    const carousel = document.getElementById(carouselId);
-    let isDown = false;
-    let startX;
-    let scrollLeft;
-
-    carousel.addEventListener('mousedown', (e) => {
-        isDown = true;
-        carousel.classList.add('active');
-        startX = e.pageX - carousel.offsetLeft;
-        scrollLeft = carousel.scrollLeft;
-    });
-
-    carousel.addEventListener('mouseleave', () => {
-        isDown = false;
-        carousel.classList.remove('active');
-    });
-
-    carousel.addEventListener('mouseup', () => {
-        isDown = false;
-        carousel.classList.remove('active');
-    });
-
-    carousel.addEventListener('mousemove', (e) => {
-        if(!isDown) return;
-        e.preventDefault();
-        const x = e.pageX - carousel.offsetLeft;
-        const walk = (x - startX) * 2; // скорость скролла
-        carousel.scrollLeft = scrollLeft - walk;
-    });
-
-    // touch events
-    let startTouchX = 0;
-    let scrollStart = 0;
-    carousel.addEventListener('touchstart', (e) => {
-        startTouchX = e.touches[0].pageX;
-        scrollStart = carousel.scrollLeft;
-    });
-    carousel.addEventListener('touchmove', (e) => {
-        const touchX = e.touches[0].pageX;
-        const walk = (touchX - startTouchX) * 2;
-        carousel.scrollLeft = scrollStart - walk;
-    });
+    // Используем фон, указанный в JSON
+    heroSection.style.backgroundImage = `url('images/hero/${heroData.background}')`;
+    titleEl.textContent = heroData.title;
+    descEl.textContent = heroData.description;
+  } catch (e) {
+    console.error('Error loading hero:', e);
+  }
 }
 
-['tours-carousel','places-carousel','activities-carousel','guides-carousel'].forEach(enableSwipe);
+// Функция для рендера карточек
+function renderCards(containerId, items, type) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = ''; // очищаем контейнер
+
+  items.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'card';
+
+    // На главной странице берем специально отмеченное фото
+    const mainImage = item.mainImage || item.images[0];
+
+    card.innerHTML = `
+      <img src="images/${type}/${mainImage}" alt="${item.name}">
+      <div class="card-content">
+        <h3>${item.name}</h3>
+        <p>${item.shortDescription}</p>
+      </div>
+    `;
+
+    // По клику переходим на item.html с параметрами type и id
+    card.addEventListener('click', () => {
+      window.location.href = `item.html?type=${type}&id=${item.id}`;
+    });
+
+    container.appendChild(card);
+  });
+}
+
+// Главная функция для рендера всех секций
+async function renderAll() {
+  await renderHero();
+
+  try {
+    const [tours, places, activities, guides] = await Promise.all([
+      fetchData('data/tours.json'),
+      fetchData('data/places.json'),
+      fetchData('data/activities.json'),
+      fetchData('data/guides.json')
+    ]);
+
+    renderCards('tours-container', tours, 'tours');
+    renderCards('places-container', places, 'places');
+    renderCards('activities-container', activities, 'activities');
+    renderCards('guides-container', guides, 'guides');
+  } catch (e) {
+    console.error('Error loading sections:', e);
+  }
+}
+
+// Запуск рендера после загрузки страницы
+document.addEventListener('DOMContentLoaded', renderAll);
