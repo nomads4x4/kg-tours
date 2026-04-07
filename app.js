@@ -1,144 +1,167 @@
-// ================================
-// CONFIG
-// ================================
-
 const DATA_PATH = "data/";
 const IMAGE_PATH = "images/";
 
-// ================================
-// LOAD JSON
-// ================================
-
-async function loadJSON(file) {
-    const response = await fetch(DATA_PATH + file);
-    return await response.json();
+async function loadJSON(file){
+const res = await fetch(DATA_PATH + file);
+return await res.json();
 }
 
-// ================================
-// HERO
-// ================================
+/* HERO */
 
-async function renderHero() {
-    const hero = await loadJSON("hero.json");
+async function renderHero(){
+const hero = await loadJSON("hero.json");
 
-    const title = document.getElementById("hero-title");
-    const subtitle = document.getElementById("hero-subtitle");
-    const image = document.getElementById("hero-image");
-
-    if (!title) return;
-
-    title.textContent = hero.title;
-    subtitle.textContent = hero.subtitle;
-    image.src = IMAGE_PATH + "hero/" + hero.image;
+document.getElementById("hero-title").textContent = hero.title;
+document.getElementById("hero-subtitle").textContent = hero.subtitle;
+document.getElementById("hero-image").src =
+IMAGE_PATH + "hero/" + hero.image;
 }
 
-// ================================
-// CARD TEMPLATE
-// ================================
+/* CARD */
 
-function createCard(item, type) {
-    const card = document.createElement("a");
-    card.className = "card";
-    card.href = `item.html?type=${type}&id=${item.id}`;
+function createCard(item,type){
 
-    card.innerHTML = `
-        <img src="${IMAGE_PATH}${type}/${item.cover}" alt="">
-        <div class="card-content">
-            <div class="card-title">${item.title}</div>
-            <div class="card-desc">${item.short}</div>
-        </div>
-    `;
+const card = document.createElement("a");
+card.className="card";
+card.href=`item.html?type=${type}&id=${item.id}`;
 
-    return card;
+card.innerHTML=`
+<img src="${IMAGE_PATH}${type}/${item.cover}">
+<div class="card-content">
+<h3>${item.title}</h3>
+<p>${item.short}</p>
+</div>
+`;
+
+return card;
 }
 
-// ================================
-// CAROUSEL RENDER
-// ================================
+/* CAROUSEL */
 
-async function renderCarousel(type, file, containerId) {
-    const data = await loadJSON(file);
-    const container = document.getElementById(containerId);
+function createCarousel(container){
 
-    if (!container) return;
+const wrapper = document.createElement("div");
+wrapper.className="carousel-wrapper";
 
-    data.forEach(item => {
-        const card = createCard(item, type);
-        container.appendChild(card);
-    });
+const left = document.createElement("button");
+left.className="carousel-btn left";
+left.innerHTML="‹";
+
+const right = document.createElement("button");
+right.className="carousel-btn right";
+right.innerHTML="›";
+
+container.parentNode.insertBefore(wrapper,container);
+wrapper.appendChild(left);
+wrapper.appendChild(container);
+wrapper.appendChild(right);
+
+left.onclick = ()=>{
+container.scrollBy({left:-300,behavior:"smooth"});
+};
+
+right.onclick = ()=>{
+container.scrollBy({left:300,behavior:"smooth"});
+};
+
+/* drag mouse */
+
+let isDown=false;
+let startX;
+let scrollLeft;
+
+container.addEventListener("mousedown",(e)=>{
+isDown=true;
+startX=e.pageX-container.offsetLeft;
+scrollLeft=container.scrollLeft;
+});
+
+container.addEventListener("mouseleave",()=>isDown=false);
+container.addEventListener("mouseup",()=>isDown=false);
+
+container.addEventListener("mousemove",(e)=>{
+if(!isDown)return;
+e.preventDefault();
+const x=e.pageX-container.offsetLeft;
+const walk=(x-startX)*2;
+container.scrollLeft=scrollLeft-walk;
+});
+
 }
 
-// ================================
-// INDEX PAGE INIT
-// ================================
+/* RENDER */
 
-async function initIndex() {
-    await renderHero();
+async function renderCarousel(type,file,id){
 
-    await renderCarousel("tours", "tours.json", "tours-carousel");
-    await renderCarousel("places", "places.json", "places-carousel");
-    await renderCarousel("activities", "activities.json", "activities-carousel");
-    await renderCarousel("guides", "guides.json", "guides-carousel");
+const data = await loadJSON(file);
+const container = document.getElementById(id);
+
+data.forEach(item=>{
+container.appendChild(createCard(item,type));
+});
+
+createCarousel(container);
 }
 
-// ================================
-// ITEM PAGE
-// ================================
+/* INIT INDEX */
 
-function getParams() {
-    const params = new URLSearchParams(window.location.search);
-    return {
-        type: params.get("type"),
-        id: params.get("id")
-    };
+async function initIndex(){
+
+await renderHero();
+
+await renderCarousel("tours","tours.json","tours-carousel");
+await renderCarousel("places","places.json","places-carousel");
+await renderCarousel("activities","activities.json","activities-carousel");
+await renderCarousel("guides","guides.json","guides-carousel");
+
 }
 
-async function renderItemPage() {
-    const { type, id } = getParams();
-    if (!type || !id) return;
+/* ITEM PAGE */
 
-    const data = await loadJSON(type + ".json");
-    const item = data.find(i => i.id == id);
-    if (!item) return;
-
-    const title = document.getElementById("item-title");
-    const desc = document.getElementById("item-desc");
-    const info = document.getElementById("item-info");
-    const carousel = document.getElementById("item-carousel");
-
-    if (!title) return;
-
-    title.textContent = `${type} / ${item.title}`;
-    desc.textContent = item.description;
-
-    if (info) {
-        info.innerHTML = `
-            <div>Duration: ${item.days || "-"}</div>
-            <div>Price: ${item.price || "-"}</div>
-        `;
-    }
-
-    if (carousel && item.images) {
-        item.images.forEach(img => {
-            const image = document.createElement("img");
-            image.src = `${IMAGE_PATH}${type}/${img}`;
-            carousel.appendChild(image);
-        });
-    }
+function getParams(){
+const p=new URLSearchParams(location.search);
+return{
+type:p.get("type"),
+id:p.get("id")
+};
 }
 
-// ================================
-// INIT
-// ================================
+async function renderItemPage(){
 
-document.addEventListener("DOMContentLoaded", () => {
+const {type,id}=getParams();
+if(!type)return;
 
-    if (document.getElementById("tours-carousel")) {
-        initIndex();
-    }
+const data = await loadJSON(type+".json");
+const item = data.find(i=>i.id==id);
 
-    if (document.getElementById("item-title")) {
-        renderItemPage();
-    }
+document.getElementById("item-title").textContent=
+`${type} / ${item.title}`;
+
+document.getElementById("item-desc").textContent=
+item.description;
+
+const carousel = document.getElementById("item-carousel");
+
+item.images.forEach(img=>{
+const image=document.createElement("img");
+image.src=`${IMAGE_PATH}${type}/${img}`;
+carousel.appendChild(image);
+});
+
+createCarousel(carousel);
+
+}
+
+/* INIT */
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+if(document.getElementById("tours-carousel")){
+initIndex();
+}
+
+if(document.getElementById("item-carousel")){
+renderItemPage();
+}
 
 });
