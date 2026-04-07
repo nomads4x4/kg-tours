@@ -1,102 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tours in Kyrgyzstan</title>
-  <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kyrgyzstan Tours</title>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <!-- Sticky Navigation -->
-  <nav>
-    <a href="#tours">Tours</a>
-    <a href="#places">Places</a>
-    <a href="#activities">Activities</a>
-    <a href="#guides">Guides</a>
-  </nav>
+<!-- --- Sticky Nav --- -->
+<nav class="navbar">
+  <a href="#tours" class="nav-link">Tours</a>
+  <a href="#places" class="nav-link">Places</a>
+  <a href="#activities" class="nav-link">Activities</a>
+  <a href="#guides" class="nav-link">Guides</a>
+</nav>
 
-  <!-- Hero Section -->
-  <section class="hero" id="hero">
-    <h1 id="hero-title">Tours in Kyrgyzstan with Professional Guides</h1>
-    <p id="hero-description">Discover the breathtaking landscapes of Kyrgyzstan with experienced guides. Explore scenic routes, cultural activities, and unforgettable adventures.</p>
-    <a href="calculator.html" class="btn">Calculate Your Tour</a>
-  </section>
+<!-- --- Hero Section --- -->
+<section class="hero" id="hero" style="background-image: url('images/hero/hero1.jpeg');">
+  <h1>Kyrgyzstan Tours with Professional Guides</h1>
+  <p>Explore the beauty of Kyrgyzstan with experienced local guides. Discover unique routes, activities, and places.</p>
+  <a href="calculator.html" class="btn">Calculate Your Tour</a>
+</section>
 
-  <!-- Tours Section -->
-  <section id="tours">
-    <h2>Tours</h2>
-    <div class="carousel" id="tours-carousel">
-      <!-- JS will populate cards from data/tours.json -->
-    </div>
-  </section>
+<!-- --- Tours Section --- -->
+<section id="tours">
+  <h2>Tours</h2>
+  <div class="carousel" id="tours-carousel">
+    <!-- JS will render tour cards here -->
+  </div>
+</section>
 
-  <!-- Places Section -->
-  <section id="places">
-    <h2>Places</h2>
-    <div class="carousel" id="places-carousel">
-      <!-- JS will populate cards from data/places.json -->
-    </div>
-  </section>
+<!-- --- Places Section --- -->
+<section id="places">
+  <h2>Places</h2>
+  <div class="carousel" id="places-carousel">
+    <!-- JS will render place cards here -->
+  </div>
+</section>
 
-  <!-- Activities Section -->
-  <section id="activities">
-    <h2>Activities</h2>
-    <div class="carousel" id="activities-carousel">
-      <!-- JS will populate cards from data/activities.json -->
-    </div>
-  </section>
+<!-- --- Activities Section --- -->
+<section id="activities">
+  <h2>Activities</h2>
+  <div class="carousel" id="activities-carousel">
+    <!-- JS will render activity cards here -->
+  </div>
+</section>
 
-  <!-- Guides Section -->
-  <section id="guides">
-    <h2>Guides</h2>
-    <div class="carousel" id="guides-carousel">
-      <!-- JS will populate cards from data/guides.json -->
-    </div>
-  </section>
+<!-- --- Guides Section --- -->
+<section id="guides">
+  <h2>Guides</h2>
+  <div class="carousel" id="guides-carousel">
+    <!-- JS will render guide cards here -->
+  </div>
+</section>
 
-  <!-- JS -->
-  <script src="app.js"></script>
-  <script>
-    // Example: load hero from JSON
-    fetch('data/hero.json')
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById('hero-title').textContent = data.title;
-        document.getElementById('hero-description').textContent = data.description;
-        document.querySelector('.hero').style.backgroundImage = `url('images/hero/${data.image}')`;
-      });
+<script src="app.js"></script>
+<script>
+// --- Smooth Scroll и секция всегда сверху ---
+document.querySelectorAll('.nav-link').forEach(link => {
+  link.addEventListener('click', function(e){
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    target.scrollIntoView({behavior: 'smooth', block: 'start'});
+  });
+});
 
-    // Example: populate carousel from JSON
-    function populateCarousel(jsonFile, carouselId) {
-      fetch(jsonFile)
-        .then(res => res.json())
-        .then(items => {
-          const carousel = document.getElementById(carouselId);
-          items.forEach(item => {
-            // only include main photo for homepage
-            const mainPhoto = item.photos.find(p => p.main);
-            const card = document.createElement('div');
-            card.className = 'card';
-            card.innerHTML = `
-              <img src="images/${carouselId.split('-')[0]}/${mainPhoto.filename}" alt="${item.name}">
-              <div class="card-content">
-                <h3>${item.name}</h3>
-                <p>${item.shortDescription}</p>
-              </div>
-            `;
-            card.addEventListener('click', () => {
-              window.location.href = `item.html?type=${carouselId.split('-')[0]}&id=${item.id}`;
-            });
-            carousel.appendChild(card);
-          });
-        });
-    }
+// --- CSS для offset, чтобы секция не скрывалась под sticky nav ---
+document.querySelectorAll('section').forEach(sec => {
+  sec.style.scrollMarginTop = document.querySelector('.navbar').offsetHeight + 'px';
+});
+</script>
 
-    populateCarousel('data/tours.json', 'tours-carousel');
-    populateCarousel('data/places.json', 'places-carousel');
-    populateCarousel('data/activities.json', 'activities-carousel');
-    populateCarousel('data/guides.json', 'guides-carousel');
-  </script>
 </body>
 </html>
