@@ -1,62 +1,24 @@
 [
   {
-    "id": "shyrdak",
-    "name": "Shyrdak Carpet Workshop",
+    "id": "shyrdak_workshop",
+    "name": "Shyrdak Workshop",
     "shortDescription": "Learn to make traditional Kyrgyz felt carpets.",
-    "images": [
-      "images/activities/shyrdak_main.jpg",
-      "images/activities/shyrdak_1.jpg"
-    ],
-    "price": 15
+    "pricePerPerson": 20,
+    "photos": [
+      {"filename": "shyrdak_main.jpg", "main": true},
+      {"filename": "shyrdak_1.jpg", "main": false},
+      {"filename": "shyrdak_2.jpg", "main": false}
+    ]
   },
   {
-    "id": "berkut",
-    "name": "Eagle Hunting Show",
-    "shortDescription": "Watch trained eagles demonstrate hunting skills.",
-    "images": [
-      "images/activities/berkut_main.jpg",
-      "images/activities/berkut_1.jpg"
-    ],
-    "price": 25
-  },
-  {
-    "id": "horseback",
-    "name": "Horseback Riding",
-    "shortDescription": "Ride through valleys and mountains like a local.",
-    "images": [
-      "images/activities/horseback_main.jpg",
-      "images/activities/horseback_1.jpg"
-    ],
-    "price": 30
-  },
-  {
-    "id": "cooking",
-    "name": "Kyrgyz Cooking Class",
-    "shortDescription": "Prepare traditional dishes like Beshbarmak.",
-    "images": [
-      "images/activities/cooking_main.jpg",
-      "images/activities/cooking_1.jpg"
-    ],
-    "price": 20
-  },
-  {
-    "id": "falconry",
-    "name": "Falconry Experience",
-    "shortDescription": "Hands-on with trained birds of prey.",
-    "images": [
-      "images/activities/falconry_main.jpg",
-      "images/activities/falconry_1.jpg"
-    ],
-    "price": 35
-  },
-  {
-    "id": "fishing",
-    "name": "Mountain Lake Fishing",
-    "shortDescription": "Catch fish in pristine alpine lakes.",
-    "images": [
-      "images/activities/fishing_main.jpg",
-      "images/activities/fishing_1.jpg"
-    ],
-    "price": 15
+    "id": "berkut_show",
+    "name": "Berkut Show",
+    "shortDescription": "Watch an amazing eagle hunting demonstration.",
+    "pricePerPerson": 25,
+    "photos": [
+      {"filename": "berkut_main.jpg", "main": true},
+      {"filename": "berkut_1.jpg", "main": false},
+      {"filename": "berkut_2.jpg", "main": false}
+    ]
   }
 ]
