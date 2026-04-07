@@ -1,103 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kyrgyzstan Tours</title>
-  <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kyrgyzstan Tours</title>
+
+<link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
-  <!-- =========================
-       Hero Section
-       ========================= -->
-  <section class="hero" id="hero">
-    <h1 id="hero-title">Loading...</h1>
-    <p id="hero-description">Loading description...</p>
-    <button class="btn" id="hero-button">Calculate Your Tour</button>
-  </section>
-
-  <!-- =========================
-       Sticky Navigation
-       ========================= -->
-  <nav>
-    <a href="#tours" class="nav-link">Tours</a>
-    <a href="#places" class="nav-link">Places</a>
-    <a href="#activities" class="nav-link">Activities</a>
-    <a href="#guides" class="nav-link">Guides</a>
-  </nav>
-
-  <!-- =========================
-       Tours Section
-       ========================= -->
-  <section class="section" id="tours">
-    <h2>Tours</h2>
-    <div class="carousel" id="tours-carousel">
-      <!-- Cards will be rendered here by JS -->
+<!-- HERO -->
+<header class="hero" id="hero">
+    <div class="hero-content container">
+        <h1 id="hero-title"></h1>
+        <p id="hero-subtitle"></p>
+        <br>
+        <a href="calculator.html" class="btn">Calculate Tour</a>
     </div>
-  </section>
+</header>
 
-  <!-- =========================
-       Places Section
-       ========================= -->
-  <section class="section" id="places">
-    <h2>Places</h2>
-    <div class="carousel" id="places-carousel">
-      <!-- Cards will be rendered here by JS -->
+<!-- STICKY NAV -->
+<nav class="sticky-nav">
+    <ul>
+        <li><a href="#tours">Tours</a></li>
+        <li><a href="#places">Places</a></li>
+        <li><a href="#activities">Activities</a></li>
+        <li><a href="#guides">Guides</a></li>
+    </ul>
+</nav>
+
+<!-- TOURS -->
+<section id="tours" class="section">
+    <div class="container">
+        <h2 class="section-title">Tours</h2>
+        <div class="carousel" id="tours-carousel"></div>
     </div>
-  </section>
+</section>
 
-  <!-- =========================
-       Activities Section
-       ========================= -->
-  <section class="section" id="activities">
-    <h2>Activities</h2>
-    <div class="carousel" id="activities-carousel">
-      <!-- Cards will be rendered here by JS -->
+<!-- PLACES -->
+<section id="places" class="section">
+    <div class="container">
+        <h2 class="section-title">Places</h2>
+        <div class="carousel" id="places-carousel"></div>
     </div>
-  </section>
+</section>
 
-  <!-- =========================
-       Guides Section
-       ========================= -->
-  <section class="section" id="guides">
-    <h2>Guides</h2>
-    <div class="carousel" id="guides-carousel">
-      <!-- Cards will be rendered here by JS -->
+<!-- ACTIVITIES -->
+<section id="activities" class="section">
+    <div class="container">
+        <h2 class="section-title">Activities</h2>
+        <div class="carousel" id="activities-carousel"></div>
     </div>
-  </section>
+</section>
 
-  <!-- =========================
-       Footer
-       ========================= -->
-  <footer>
-    <a href="https://instagram.com" target="_blank">Instagram</a>
-    <a href="https://t.me" target="_blank">Telegram</a>
-    <a href="https://tiktok.com" target="_blank">TikTok</a>
-  </footer>
+<!-- GUIDES -->
+<section id="guides" class="section">
+    <div class="container">
+        <h2 class="section-title">Guides</h2>
+        <div class="carousel" id="guides-carousel"></div>
+    </div>
+</section>
 
-  <!-- =========================
-       JS
-       ========================= -->
-  <script src="app.js"></script>
-  <script>
-    /* ========== Smooth Scroll with offset (1/4 screen) ========== */
-    document.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href').substring(1);
-        const target = document.getElementById(targetId);
-        const offset = window.innerHeight / 4;
-        const topPos = target.getBoundingClientRect().top + window.scrollY - offset;
-        window.scrollTo({ top: topPos, behavior: 'smooth' });
-      });
-    });
+<div class="footer-spacer"></div>
 
-    /* ========== Hero Button Navigation ========== */
-    document.getElementById('hero-button').addEventListener('click', () => {
-      window.location.href = 'calculator.html';
-    });
-  </script>
+<footer>
+    <div class="socials">
+        <a href="#">Instagram</a>
+        <a href="#">TikTok</a>
+        <a href="#">Telegram</a>
+    </div>
+</footer>
+
+<script src="app.js"></script>
 
 </body>
 </html>
