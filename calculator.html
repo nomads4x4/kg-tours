@@ -25,10 +25,6 @@ box-shadow:0 10px 25px rgba(0,0,0,0.05);
 margin-bottom:12px;
 }
 
-.calc-full{
-grid-column:1/-1;
-}
-
 select,input[type="date"]{
 width:100%;
 padding:14px;
@@ -137,8 +133,8 @@ align-items:flex-start;
 
 <div class="calc-block">
 <h3>Select Guide(s)</h3>
-<select id="guide" multiple></select>
-<small>Choose one or more guides. Minimum calculated automatically</small>
+<div id="guides" class="checkbox-list"></div>
+<small>Minimum number of guides is automatically calculated based on group size (1 guide per 4 tourists)</small>
 </div>
 
 <div class="calc-block">
@@ -175,120 +171,7 @@ align-items:flex-start;
 </div>
 </footer>
 
-<script>
-async function loadJSON(p){const r=await fetch(p);return await r.json();}
-
-let tours,places,activities,guides,season;
-
-async function init(){
-
-tours=await loadJSON('data/tours.json');
-places=await loadJSON('data/places.json');
-activities=await loadJSON('data/activities.json');
-guides=await loadJSON('data/guides.json');
-season=await loadJSON('data/season.json');
-
-for(let i=1;i<=32;i++)
-people.innerHTML+=`<option>${i}</option>`;
-
-tours.forEach(t=>tour.innerHTML+=`<option value="${t.id}">${t.title}</option>`);
-guides.forEach(g=>guide.innerHTML+=`<option value="${g.id}">${g.title}</option>`);
-
-places.forEach(p=>{
-document.getElementById('places').innerHTML+=`
-<label><input type="checkbox" value="${p.id}"> ${p.title}</label>`;
-});
-
-activities.forEach(a=>{
-document.getElementById('activities').innerHTML+=`
-<label><input type="checkbox" value="${a.id}"> ${a.title}</label>`;
-});
-
-// Live recalculation
-document.querySelectorAll('select,input,#places input,#activities input').forEach(el=>{
-    el.addEventListener('input',calculate);
-});
-
-calculate(); // initial
-}
-
-function getSeasonMultiplier(date){
-if(!date) return 1;
-const d=new Date(date);
-const start=new Date(season.start);
-const end=new Date(season.end);
-return (d>=start&&d<=end)?season.high:season.low;
-}
-
-function calculate(){
-
-const peopleCount=parseInt(document.getElementById('people').value);
-const date=document.getElementById('tripDate').value;
-
-const tourObj=tours.find(t=>t.id===tour.value);
-
-let selectedGuides=[...document.querySelectorAll('#guide option:checked')]
-.map(i=>guides.find(g=>g.id===i.value));
-
-// auto add guides if selected less than needed
-const minGuides=Math.ceil(peopleCount/4);
-if(selectedGuides.length<minGuides){
-for(let i=selectedGuides.length;i<minGuides;i++){
-selectedGuides.push(guides[0]); // добавляем первого гида по умолчанию
-}
-}
-
-const selectedPlaces=[...document.querySelectorAll('#places input:checked')]
-.map(i=>places.find(p=>p.id===i.value));
-
-const selectedActivities=[...document.querySelectorAll('#activities input:checked')]
-.map(i=>activities.find(a=>a.id===i.value));
-
-const totalDays=tourObj.days+selectedPlaces.reduce((s,p)=>s+p.days,0);
-
-// CALC PRICES
-const placesPrice=selectedPlaces.reduce((s,p)=>s+p.price,0);
-const activitiesPrice=selectedActivities.reduce((s,a)=>{
-    if(a.personPrice)return s+a.personPrice*peopleCount;
-    if(a.groupPrice)return s+a.groupPrice;
-    return s;
-},0);
-
-const guidesPrice=selectedGuides.reduce((s,g)=>s+g.price*totalDays,0);
-
-const seasonMultiplier = getSeasonMultiplier(date);
-const total=(tourObj.price+placesPrice+activitiesPrice+guidesPrice)*seasonMultiplier;
-
-document.getElementById('total').textContent="$"+Math.round(total);
-
-// BREAKDOWN
-let breakdown=`Tour: $${tourObj.price}<br>
-Places: $${placesPrice}<br>
-Activities: $${activitiesPrice}<br>
-Guides (${selectedGuides.length} x ${totalDays} days): $${guidesPrice}<br>
-Season multiplier: x${seasonMultiplier}`;
-
-document.getElementById('breakdown').innerHTML=breakdown;
-
-// TEXT FOR MESSENGERS
-const text = `Hello, I have selected the following parameters for the tour:
-- People: ${peopleCount}
-- Trip Date: ${date}
-- Tour: ${tourObj.title}
-- Guides: ${selectedGuides.map(g=>g.title).join(', ')}
-- Additional Places: ${selectedPlaces.map(p=>p.title).join(', ') || 'None'}
-- Additional Activities: ${selectedActivities.map(a=>a.title).join(', ') || 'None'}
-- Total Price: $${Math.round(total)}
-I would like to discuss booking this tour (-:`;
-
-document.getElementById('whatsapp').onclick=()=>window.open("https://wa.me/996555900855?text="+encodeURIComponent(text));
-document.getElementById('telegram').onclick=()=>window.open("https://t.me/ErkinMms?text="+encodeURIComponent(text));
-
-}
-
-document.addEventListener('DOMContentLoaded',init);
-
-</script>
+<script src="app.js"></script>
 
 </body>
 </html>
