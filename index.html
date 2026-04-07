@@ -1,76 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kyrgyzstan Tours</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kyrgyzstan Tours</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <!-- HERO -->
-  <section class="hero" id="hero">
-    <div class="hero-content container">
-      <h1 id="hero-title">Tours in Kyrgyzstan with Professional Guides</h1>
-      <p id="hero-description">Discover the best routes, activities, and places in Kyrgyzstan</p>
-      <a href="calculator.html" class="button">Calculate Your Tour</a>
+<!-- Hero Section -->
+<section class="hero" id="hero">
+    <h1 id="hero-title">Tours in Kyrgyzstan</h1>
+    <p id="hero-desc">Professional guides, unforgettable experiences!</p>
+    <a href="calculator.html" class="btn">Calculate Your Tour</a>
+</section>
+
+<!-- Sticky Navigation -->
+<nav class="sticky-nav">
+    <a href="#tours-section">Tours</a>
+    <a href="#places-section">Places</a>
+    <a href="#activities-section">Activities</a>
+    <a href="#guides-section">Guides</a>
+</nav>
+
+<!-- Tours Section -->
+<section id="tours-section">
+    <h2>Tours</h2>
+    <div class="card-container" id="tours-container">
+        <!-- JS will render tour cards here -->
     </div>
-  </section>
+</section>
 
-  <!-- STICKY NAV -->
-  <nav class="sticky-nav">
-    <div class="container nav-list">
-      <a href="#tours">Tours</a>
-      <a href="#places">Places</a>
-      <a href="#activities">Activities</a>
-      <a href="#guides">Guides</a>
+<!-- Places Section -->
+<section id="places-section">
+    <h2>Additional Places</h2>
+    <div class="card-container" id="places-container">
+        <!-- JS will render place cards here -->
     </div>
-  </nav>
+</section>
 
-  <!-- TOURS SECTION -->
-  <section id="tours">
-    <h2 class="section-title container">Main Tours</h2>
-    <div class="container carousel" id="tours-carousel">
-      <!-- JS will render tour cards here -->
+<!-- Activities Section -->
+<section id="activities-section">
+    <h2>Activities</h2>
+    <div class="card-container" id="activities-container">
+        <!-- JS will render activity cards here -->
     </div>
-  </section>
+</section>
 
-  <!-- PLACES SECTION -->
-  <section id="places">
-    <h2 class="section-title container">Additional Places</h2>
-    <div class="container carousel" id="places-carousel">
-      <!-- JS will render place cards here -->
+<!-- Guides Section -->
+<section id="guides-section">
+    <h2>Guides</h2>
+    <div class="card-container" id="guides-container">
+        <!-- JS will render guide cards here -->
     </div>
-  </section>
+</section>
 
-  <!-- ACTIVITIES SECTION -->
-  <section id="activities">
-    <h2 class="section-title container">Activities</h2>
-    <div class="container carousel" id="activities-carousel">
-      <!-- JS will render activity cards here -->
-    </div>
-  </section>
+<!-- Footer -->
+<footer>
+    <p>Follow us:</p>
+    <a href="https://instagram.com" target="_blank">Instagram</a>
+    <a href="https://t.me" target="_blank">Telegram</a>
+    <a href="https://tiktok.com" target="_blank">TikTok</a>
+</footer>
 
-  <!-- GUIDES SECTION -->
-  <section id="guides">
-    <h2 class="section-title container">Professional Guides</h2>
-    <div class="container carousel" id="guides-carousel">
-      <!-- JS will render guide cards here -->
-    </div>
-  </section>
+<!-- JS -->
+<script src="app.js"></script>
+<script>
+    // Scroll offset for sticky nav links
+    document.querySelectorAll('.sticky-nav a').forEach(link => {
+        link.addEventListener('click', e => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href').substring(1);
+            const targetEl = document.getElementById(targetId);
+            const offset = window.innerHeight / 3; // 1/3 от экрана
+            window.scrollTo({
+                top: targetEl.offsetTop - offset,
+                behavior: 'smooth'
+            });
+        });
+    });
+</script>
 
-  <!-- FOOTER SPACER -->
-  <div class="footer-spacer"></div>
-
-  <!-- FOOTER -->
-  <footer>
-    <p>Follow us on:</p>
-    <a href="#" target="_blank">Instagram</a> |
-    <a href="#" target="_blank">TikTok</a> |
-    <a href="#" target="_blank">Telegram</a>
-  </footer>
-
-  <!-- JS -->
-  <script src="app.js"></script>
 </body>
 </html>
