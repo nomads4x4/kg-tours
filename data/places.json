@@ -1,26 +1,38 @@
 [
   {
-    "id": "jyrgalan_valley",
-    "name": "Jyrgalan Valley",
-    "shortDescription": "Hidden valley with stunning mountain views.",
-    "days": 1,
-    "price": 50,
-    "photos": [
-      {"filename": "jyrgalan_main.jpg", "main": true},
-      {"filename": "jyrgalan_1.jpg", "main": false},
-      {"filename": "jyrgalan_2.jpg", "main": false}
-    ]
+    "id": "son-kul-island",
+    "name": "Son-Kul Island",
+    "shortDescription": "Peaceful island in the middle of Son-Kul lake.",
+    "mainImage": "son-island-main.jpg",
+    "images": ["son-island-1.jpg","son-island-2.jpg"],
+    "days": 0,
+    "price": 10
   },
   {
-    "id": "sary_chelek",
-    "name": "Sary-Chelek Lake",
-    "shortDescription": "Pristine natural lake in western Kyrgyzstan.",
-    "days": 1,
-    "price": 60,
-    "photos": [
-      {"filename": "sary_main.jpg", "main": true},
-      {"filename": "sary_1.jpg", "main": false},
-      {"filename": "sary_2.jpg", "main": false}
-    ]
+    "id": "ala-archa-waterfall",
+    "name": "Ala-Archa Waterfall",
+    "shortDescription": "Hidden waterfall on the hiking route.",
+    "mainImage": "ala-water-main.jpg",
+    "images": ["ala-water-1.jpg","ala-water-2.jpg"],
+    "days": 0,
+    "price": 5
+  },
+  {
+    "id": "burana-tower",
+    "name": "Burana Tower",
+    "shortDescription": "Historic minaret near Tokmok city.",
+    "mainImage": "burana-main.jpg",
+    "images": ["burana-1.jpg","burana-2.jpg"],
+    "days": 0,
+    "price": 8
+  },
+  {
+    "id": "issyk-beach",
+    "name": "Issyk-Kul Beach",
+    "shortDescription": "Relaxing beach with crystal clear water.",
+    "mainImage": "issyk-beach-main.jpg",
+    "images": ["issyk-beach-1.jpg","issyk-beach-2.jpg"],
+    "days": 0,
+    "price": 0
   }
 ]
