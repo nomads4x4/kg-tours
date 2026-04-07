@@ -1,303 +1,207 @@
-/* =========================
-   RESET
-========================= */
-
+/* ==========================
+   Общие настройки
+========================== */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
 }
 
 html, body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-  background: #f5f7f8;
-  color: #1f2d3d;
-  line-height: 1.5;
+    width: 100%;
+    height: 100%;
+    background-color: #f5f6f7; /* светло-серый фон */
+    color: #333; /* основной текст */
+    scroll-behavior: smooth;
 }
 
-/* =========================
-   VARIABLES
-========================= */
-
-:root {
-  --primary: #2c7a7b;
-  --primary-light: #4fa3a5;
-  --secondary: #6b8fa3;
-  --bg: #f5f7f8;
-  --card-bg: #ffffff;
-  --text: #1f2d3d;
-  --radius: 18px;
-  --shadow: 0 8px 24px rgba(0,0,0,0.08);
-}
-
-/* =========================
-   LAYOUT
-========================= */
-
-.container {
-  width: 92%;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-section {
-  padding: 40px 0;
-}
-
-/* =========================
-   HERO
-========================= */
-
+/* ==========================
+   Hero Section
+========================== */
 .hero {
-  position: relative;
-  height: 25vh;
-  min-height: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: white;
-}
-
-.hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.35);
-}
-
-.hero-content {
-  position: relative;
-  z-index: 2;
-  width: 90%;
+    width: 100%;
+    height: 25vh; /* 1/4 экрана на мобилке и десктопе */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    padding: 1rem;
 }
 
 .hero h1 {
-  font-size: 28px;
-  margin-bottom: 10px;
+    font-size: 2rem;
+    color: #ffffff;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.5);
 }
 
 .hero p {
-  font-size: 14px;
-  margin-bottom: 15px;
+    font-size: 1rem;
+    color: #e0f7fa; /* мягкий цвет морской волны */
+    margin: 0.5rem 0;
 }
 
-/* =========================
-   BUTTONS
-========================= */
-
-.button {
-  display: inline-block;
-  padding: 14px 22px;
-  background: var(--primary);
-  color: white;
-  text-decoration: none;
-  border-radius: var(--radius);
-  font-weight: 600;
-  transition: 0.2s;
-  border: none;
+.hero .btn {
+    margin-top: 1rem;
 }
 
-.button:hover {
-  background: var(--primary-light);
-  transform: translateY(-1px);
+/* ==========================
+   Sticky Nav
+========================== */
+nav.sticky-nav {
+    position: sticky;
+    top: 0;
+    background-color: rgba(255,255,255,0.95);
+    display: flex;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+    z-index: 1000;
+    border-bottom: 1px solid #ccc;
 }
 
-.button-outline {
-  background: white;
-  color: var(--primary);
-  border: 2px solid var(--primary);
+nav.sticky-nav a {
+    margin: 0 1rem;
+    text-decoration: none;
+    color: #00796b; /* цвет морской волны */
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    transition: background 0.3s, color 0.3s;
 }
 
-/* =========================
-   STICKY NAV
-========================= */
-
-.sticky-nav {
-  position: sticky;
-  top: 0;
-  background: rgba(255,255,255,0.9);
-  backdrop-filter: blur(8px);
-  z-index: 100;
-  border-bottom: 1px solid #eee;
+nav.sticky-nav a:hover {
+    background-color: #00796b;
+    color: #fff;
 }
 
-.nav-list {
-  display: flex;
-  overflow-x: auto;
-  gap: 10px;
-  padding: 10px;
+/* ==========================
+   Sections
+========================== */
+section {
+    padding: 3rem 1rem;
 }
 
-.nav-list a {
-  text-decoration: none;
-  color: var(--text);
-  padding: 10px 14px;
-  background: #fff;
-  border-radius: 999px;
-  white-space: nowrap;
-  box-shadow: var(--shadow);
+section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: #004d40;
+    text-align: center;
 }
 
-/* =========================
-   SECTION TITLES
-========================= */
-
-.section-title {
-  font-size: 22px;
-  margin-bottom: 20px;
-  padding-left: 5px;
+/* Карточки */
+.card-container {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-behavior: smooth;
 }
-
-/* =========================
-   CAROUSEL
-========================= */
-
-.carousel {
-  display: flex;
-  overflow-x: auto;
-  gap: 16px;
-  padding-bottom: 10px;
-}
-
-.carousel::-webkit-scrollbar {
-  display: none;
-}
-
-/* =========================
-   CARD
-========================= */
 
 .card {
-  min-width: 260px;
-  background: var(--card-bg);
-  border-radius: var(--radius);
-  overflow: hidden;
-  box-shadow: var(--shadow);
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.card:hover {
-  transform: translateY(-3px);
+    min-width: 250px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: transform 0.3s;
 }
 
 .card img {
-  width: 100%;
-  height: 160px;
-  object-fit: cover;
+    width: 100%;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    object-fit: cover;
+    height: 150px;
 }
 
-.card-body {
-  padding: 15px;
+.card-content {
+    padding: 1rem;
 }
 
-.card-title {
-  font-weight: 600;
-  margin-bottom: 6px;
+.card-content h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: #00796b;
 }
 
-.card-text {
-  font-size: 14px;
-  color: #555;
+.card-content p {
+    font-size: 0.9rem;
+    color: #555;
 }
 
-/* =========================
-   ITEM HEADER
-========================= */
-
-.item-hero {
-  height: 25vh;
-  min-height: 180px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--secondary);
-  color: white;
-  text-align: center;
+.card:hover {
+    transform: translateY(-5px);
 }
 
-/* =========================
-   IMAGE CAROUSEL
-========================= */
-
-.image-carousel {
-  display: flex;
-  overflow-x: auto;
-  gap: 10px;
-  padding: 20px 0;
+/* ==========================
+   Buttons
+========================== */
+.btn {
+    display: inline-block;
+    background-color: #00796b;
+    color: #fff;
+    text-decoration: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 20px;
+    font-weight: bold;
+    transition: background 0.3s;
 }
 
-.image-carousel img {
-  height: 220px;
-  border-radius: var(--radius);
+.btn:hover {
+    background-color: #004d40;
 }
 
-/* =========================
-   CALCULATOR
-========================= */
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-input, select {
-  width: 100%;
-  padding: 14px;
-  border-radius: var(--radius);
-  border: 1px solid #ddd;
-  font-size: 16px;
-}
-
-/* =========================
-   FOOTER
-========================= */
-
-.footer-spacer {
-  height: 75vh;
-}
-
+/* ==========================
+   Footer
+========================== */
 footer {
-  text-align: center;
-  padding: 30px 0;
-  background: #fff;
-  border-top: 1px solid #eee;
+    padding: 2rem 1rem;
+    text-align: center;
+    background-color: #e0f7fa; /* мягкий морской фон */
+    margin-top: 3vh; /* от нижней секции до футера ~3/4 экрана */
 }
 
-/* =========================
-   BACK BUTTON
-========================= */
-
-.back-button {
-  position: fixed;
-  left: 20px;
-  bottom: 20px;
+footer a {
+    margin: 0 0.5rem;
+    color: #00796b;
+    text-decoration: none;
+    font-weight: bold;
 }
 
-/* =========================
-   DESKTOP
-========================= */
-
-@media (min-width: 768px) {
-
-.hero {
-  height: 25vh;
+footer a:hover {
+    color: #004d40;
 }
 
-.hero h1 {
-  font-size: 36px;
+/* ==========================
+   Адаптивность
+========================== */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 1.5rem;
+    }
+    .hero p {
+        font-size: 0.9rem;
+    }
+    section {
+        padding: 2rem 0.5rem;
+    }
+    .card-container {
+        gap: 0.5rem;
+    }
+    .card {
+        min-width: 200px;
+    }
 }
 
-.hero p {
-  font-size: 16px;
-}
-
-.card {
-  min-width: 320px;
-}
-
-.image-carousel img {
-  height: 300px;
-}
-
+@media (min-width: 1200px) {
+    .hero h1 {
+        font-size: 3rem;
+    }
+    .hero p {
+        font-size: 1.2rem;
+    }
 }
