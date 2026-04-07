@@ -3,35 +3,35 @@
         "id": "berkut",
         "name": "Berkut Falcon Show",
         "shortDescription": "Traditional eagle hunting demonstration.",
-        "mainImage": "berkut_main.jpeg",
+        "mainImage": "berkut_main.jpg",
         "price": 50
     },
     {
         "id": "shyrdak",
         "name": "Shyrdak Workshop",
         "shortDescription": "Make your own Kyrgyz felt carpet.",
-        "mainImage": "shyrdak_main.jpeg",
+        "mainImage": "shyrdak_main.jpg",
         "price": 40
     },
     {
         "id": "horseback",
         "name": "Horseback Riding",
         "shortDescription": "Ride through scenic pastures and valleys.",
-        "mainImage": "horseback_main.jpeg",
+        "mainImage": "horseback_main.jpg",
         "price": 30
     },
     {
         "id": "canoeing",
         "name": "Canoeing on Issyk-Kul",
         "shortDescription": "Enjoy water adventures on the lake.",
-        "mainImage": "canoeing_main.jpeg",
+        "mainImage": "canoeing_main.jpg",
         "price": 35
     },
     {
         "id": "cooking",
         "name": "Kyrgyz Cooking Class",
         "shortDescription": "Learn to cook traditional dishes.",
-        "mainImage": "cooking_main.jpeg",
+        "mainImage": "cooking_main.jpg",
         "price": 25
     }
 ]
