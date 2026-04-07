@@ -3,7 +3,7 @@
         "id": "jyrgalan",
         "name": "Jyrgalan Valley",
         "shortDescription": "A beautiful valley for hiking and horse riding.",
-        "mainImage": "jyrgalan_main.jpeg",
+        "mainImage": "jyrgalan_main.jpg",
         "days": 1,
         "price": 30
     },
@@ -11,7 +11,7 @@
         "id": "karakolvillage",
         "name": "Kara-Kol Village",
         "shortDescription": "Cultural stop with local crafts.",
-        "mainImage": "karakol_main.jpeg",
+        "mainImage": "karakol_main.jpg",
         "days": 1,
         "price": 25
     },
@@ -19,7 +19,7 @@
         "id": "alamedin",
         "name": "Alamedin Gorge",
         "shortDescription": "Scenic gorge ideal for trekking.",
-        "mainImage": "alamedin_main.jpeg",
+        "mainImage": "alamedin_main.jpg",
         "days": 1,
         "price": 35
     },
@@ -27,7 +27,7 @@
         "id": "sary-chelek",
         "name": "Sary-Chelek Lake",
         "shortDescription": "Stunning alpine lake surrounded by mountains.",
-        "mainImage": "sarychelek_main.jpeg",
+        "mainImage": "sarychelek_main.jpg",
         "days": 2,
         "price": 60
     },
@@ -35,7 +35,7 @@
         "id": "song-kol-pasture",
         "name": "Son-Kul Pastures",
         "shortDescription": "Traditional yurt stay and horseback riding.",
-        "mainImage": "sonkul_pasture_main.jpeg",
+        "mainImage": "sonkul_pasture_main.jpg",
         "days": 1,
         "price": 50
     }
