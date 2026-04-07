@@ -1,37 +1,10 @@
 [
-    {
-        "id": "berkut",
-        "name": "Berkut Falcon Show",
-        "shortDescription": "Traditional eagle hunting demonstration.",
-        "mainImage": "berkut_main.jpg",
-        "price": 50
-    },
-    {
-        "id": "shyrdak",
-        "name": "Shyrdak Workshop",
-        "shortDescription": "Make your own Kyrgyz felt carpet.",
-        "mainImage": "shyrdak_main.jpg",
-        "price": 40
-    },
-    {
-        "id": "horseback",
-        "name": "Horseback Riding",
-        "shortDescription": "Ride through scenic pastures and valleys.",
-        "mainImage": "horseback_main.jpg",
-        "price": 30
-    },
-    {
-        "id": "canoeing",
-        "name": "Canoeing on Issyk-Kul",
-        "shortDescription": "Enjoy water adventures on the lake.",
-        "mainImage": "canoeing_main.jpg",
-        "price": 35
-    },
-    {
-        "id": "cooking",
-        "name": "Kyrgyz Cooking Class",
-        "shortDescription": "Learn to cook traditional dishes.",
-        "mainImage": "cooking_main.jpg",
-        "price": 25
-    }
+  { "id": "shyrdak", "name": "Shyrdak Carpet Workshop", "shortDescription": "Learn traditional carpet weaving", "price": 15, "images": [{ "file": "shyrdak_main.jpg", "main": true }] },
+  { "id": "berkut-show", "name": "Berkut Eagle Show", "shortDescription": "Watch golden eagles in action", "price": 25, "images": [{ "file": "berkut_main.jpg", "main": true }] },
+  { "id": "horse-riding", "name": "Horse Riding Experience", "shortDescription": "Ride in the mountains", "price": 20, "images": [{ "file": "horseriding_main.jpg", "main": true }] },
+  { "id": "yurt-stay", "name": "Stay in a Yurt", "shortDescription": "Experience nomadic life", "price": 30, "images": [{ "file": "yurt_main.jpg", "main": true }] },
+  { "id": "fishing", "name": "Fishing Trip", "shortDescription": "Relax by the lake", "price": 15, "images": [{ "file": "fishing_main.jpg", "main": true }] },
+  { "id": "hiking", "name": "Mountain Hiking", "shortDescription": "Guided hike through peaks", "price": 20, "images": [{ "file": "hiking_main.jpg", "main": true }] },
+  { "id": "rafting", "name": "Rafting Adventure", "shortDescription": "Exciting river rapids", "price": 35, "images": [{ "file": "rafting_main.jpg", "main": true }] },
+  { "id": "birdwatching", "name": "Birdwatching Tour", "shortDescription": "Spot rare birds", "price": 10, "images": [{ "file": "birdwatching_main.jpg", "main": true }] }
 ]
