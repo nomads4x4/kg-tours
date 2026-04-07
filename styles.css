@@ -1,36 +1,26 @@
-/* ======================
-   RESET
-====================== */
+/* RESET */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* ======================
-   VARIABLES
-====================== */
+/* VARIABLES */
 :root {
   --color-primary: #5f7f8c;
   --color-accent: #2f9ea8;
   --color-bg: #f5f7f8;
   --color-text: #1f2a30;
-  --color-text-light: #5a6b73;
-
   --radius: 16px;
   --shadow: 0 10px 25px rgba(0,0,0,0.08);
-
   --container-width: 1200px;
 }
 
-/* ======================
-   BASE
-====================== */
+/* BASE */
 body {
   font-family: Arial, Helvetica, sans-serif;
   background: var(--color-bg);
   color: var(--color-text);
-  line-height: 1.5;
 }
 
 .container {
@@ -39,9 +29,7 @@ body {
   padding: 0 16px;
 }
 
-/* ======================
-   HERO
-====================== */
+/* HERO */
 .hero {
   height: 25vh;
   min-height: 200px;
@@ -67,9 +55,7 @@ body {
   z-index: 2;
 }
 
-/* ======================
-   NAV
-====================== */
+/* NAV */
 .sticky-nav {
   position: sticky;
   top: 0;
@@ -88,25 +74,20 @@ body {
 
 .sticky-nav a {
   text-decoration: none;
-  color: var(--color-text);
   font-weight: bold;
+  color: var(--color-text);
 }
 
-/* ======================
-   SECTIONS
-====================== */
+/* SECTIONS */
 .section {
   padding: 40px 0;
 }
 
 .section-title {
-  font-size: 24px;
   margin-bottom: 20px;
 }
 
-/* ======================
-   CARDS
-====================== */
+/* CARDS */
 .card {
   background: white;
   border-radius: var(--radius);
@@ -127,18 +108,18 @@ body {
   object-fit: cover;
 }
 
-.card-body {
-  padding: 16px;
+/* CAROUSEL */
+.carousel-wrapper {
+  position: relative;
 }
 
-/* ======================
-   CAROUSEL
-====================== */
 .carousel {
   display: flex;
   gap: 16px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding-bottom: 10px;
 }
 
 .carousel::-webkit-scrollbar {
@@ -149,56 +130,46 @@ body {
   scroll-snap-align: start;
 }
 
-/* ======================
-   BUTTONS
-====================== */
+/* ARROWS */
+.carousel-btn {
+  position: absolute;
+  top: 40%;
+  transform: translateY(-50%);
+  background: white;
+  border: none;
+  box-shadow: var(--shadow);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.carousel-btn.left {
+  left: -10px;
+}
+
+.carousel-btn.right {
+  right: -10px;
+}
+
+/* BUTTON */
 .btn {
-  display: inline-block;
   padding: 14px 22px;
   border-radius: 12px;
-  text-decoration: none;
-  font-weight: bold;
   background: var(--color-accent);
   color: white;
-  transition: 0.3s;
+  text-decoration: none;
+  display: inline-block;
 }
 
-.btn:hover {
-  background: #257e87;
-}
-
-/* ======================
-   FOOTER
-====================== */
+/* FOOTER */
 .footer-spacer {
   height: 75vh;
 }
 
-footer {
-  padding: 30px 0;
-  text-align: center;
-}
-
-.socials a {
-  margin: 0 10px;
-  text-decoration: none;
-  font-weight: bold;
-  color: var(--color-accent);
-}
-
-/* ======================
-   MOBILE
-====================== */
-@media (max-width: 768px) {
-
-  .sticky-nav ul {
-    overflow-x: auto;
-    justify-content: flex-start;
-    padding-left: 16px;
+/* MOBILE */
+@media (max-width:768px){
+  .carousel-btn{
+    display:none;
   }
-
-  .card {
-    min-width: 220px;
-  }
-
 }
