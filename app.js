@@ -15,7 +15,7 @@ function createCard(item, type) {
     });
 
     const img = document.createElement('img');
-    img.src = item.mainImage; // mainImage — отмеченное для главной
+    img.src = item.mainImage;
     img.alt = item.name;
 
     const content = document.createElement('div');
@@ -29,7 +29,6 @@ function createCard(item, type) {
 
     content.appendChild(title);
     content.appendChild(desc);
-
     card.appendChild(img);
     card.appendChild(content);
 
@@ -52,7 +51,7 @@ async function renderHero() {
 }
 
 // ==========================
-// CARDS
+// RENDER SECTIONS
 // ==========================
 async function renderSection(sectionId, jsonPath, type) {
     try {
@@ -68,12 +67,27 @@ async function renderSection(sectionId, jsonPath, type) {
 }
 
 // ==========================
+// FOOTER SPACING
+// ==========================
+function adjustFooter() {
+    const guidesSection = document.getElementById('guides-section');
+    const footer = document.getElementById('main-footer');
+    // Нижняя граница guides
+    const guidesBottom = guidesSection.getBoundingClientRect().bottom + window.scrollY;
+    footer.style.marginTop = `${window.innerHeight * 0.75}px`; // 3/4 экрана
+}
+
+// ==========================
 // INIT
 // ==========================
-document.addEventListener('DOMContentLoaded', () => {
-    renderHero();
-    renderSection('tours-container', 'data/tours.json', 'tours');
-    renderSection('places-container', 'data/places.json', 'places');
-    renderSection('activities-container', 'data/activities.json', 'activities');
-    renderSection('guides-container', 'data/guides.json', 'guides');
+document.addEventListener('DOMContentLoaded', async () => {
+    await renderHero();
+    await renderSection('tours-container', 'data/tours.json', 'tours');
+    await renderSection('places-container', 'data/places.json', 'places');
+    await renderSection('activities-container', 'data/activities.json', 'activities');
+    await renderSection('guides-container', 'data/guides.json', 'guides');
+    adjustFooter();
 });
+
+// Пересчёт при ресайзе окна
+window.addEventListener('resize', adjustFooter);
