@@ -1,213 +1,258 @@
 /* ================================
-RESET
+   RESET
 ================================ */
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 html {
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  background: #f5f7f8;
-  color: #2b2b2b;
-  line-height: 1.5;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    background: #f5f7f8;
+    color: #2b2b2b;
+    line-height: 1.5;
 }
 
 /* ================================
-VARIABLES
+   VARIABLES
 ================================ */
 
 :root {
-  --primary: #5f7d8a;
-  --accent: #2fa4a9;
-  --accent-light: #e0f3f4;
-  --text: #2b2b2b;
-  --bg: #f5f7f8;
-  --card-bg: #ffffff;
-  --shadow: 0 8px 24px rgba(0,0,0,0.08);
-  --radius: 16px;
+    --primary: #5f8f9b;
+    --accent: #3aa6a0;
+    --bg: #f5f7f8;
+    --card-bg: #ffffff;
+    --text: #2b2b2b;
+    --muted: #6c7a80;
+
+    --radius: 14px;
+    --shadow: 0 6px 20px rgba(0,0,0,0.08);
+    --transition: 0.2s ease;
 }
 
 /* ================================
-HERO
+   TYPOGRAPHY
+================================ */
+
+h1 {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+h2 {
+    font-size: 1.6rem;
+    margin-bottom: 16px;
+}
+
+p {
+    color: var(--muted);
+}
+
+/* ================================
+   LAYOUT
+================================ */
+
+.container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section {
+    margin-top: 40px;
+}
+
+/* ================================
+   HERO
 ================================ */
 
 .hero {
-  position: relative;
-  height: 25vh;
-  min-height: 220px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: white;
+    position: relative;
+    height: 25vh;
+    min-height: 180px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
 }
 
-.hero img {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -2;
+.hero-overlay {
+    background: rgba(0,0,0,0.35);
+    padding: 20px;
+    width: 100%;
+    color: white;
 }
 
-.hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.35);
-  z-index: -1;
+.hero h1 {
+    margin-bottom: 8px;
 }
 
-.hero-content {
-  max-width: 900px;
-  padding: 20px;
+.hero button {
+    margin-top: 12px;
 }
 
 /* ================================
-BUTTON
+   STICKY NAV
 ================================ */
 
-.button {
-  background: linear-gradient(135deg, var(--accent), #4cc6c9);
-  color: white;
-  padding: 14px 24px;
-  border-radius: 999px;
-  text-decoration: none;
-  font-weight: 600;
-  display: inline-block;
+.nav {
+    position: sticky;
+    top: 0;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(8px);
+    z-index: 100;
+    border-bottom: 1px solid #eee;
+}
+
+.nav-inner {
+    display: flex;
+    overflow-x: auto;
+    gap: 16px;
+    padding: 12px 20px;
+}
+
+.nav a {
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 500;
+    white-space: nowrap;
 }
 
 /* ================================
-STICKY NAV
-================================ */
-
-.sticky-nav {
-  position: sticky;
-  top: 0;
-  background: white;
-  padding: 12px;
-  z-index: 100;
-  box-shadow: var(--shadow);
-}
-
-.nav-container {
-  display: flex;
-  gap: 12px;
-  overflow-x: auto;
-}
-
-.nav-link {
-  white-space: nowrap;
-  padding: 10px 16px;
-  border-radius: 999px;
-  background: var(--accent-light);
-  text-decoration: none;
-  color: var(--text);
-}
-
-/* ================================
-SECTIONS
-================================ */
-
-.section {
-  padding: 40px 20px;
-}
-
-.section h2 {
-  margin-bottom: 20px;
-}
-
-/* ================================
-CAROUSEL WRAPPER
-================================ */
-
-.carousel-wrapper {
-  position: relative;
-}
-
-/* ================================
-CAROUSEL
-================================ */
-
-.carousel {
-  display: flex;
-  gap: 16px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  padding-bottom: 10px;
-}
-
-.carousel::-webkit-scrollbar {
-  display: none;
-}
-
-/* ================================
-CARD
+   CARDS
 ================================ */
 
 .card {
-  min-width: 85%;
-  scroll-snap-align: start;
-  background: white;
-  border-radius: var(--radius);
-  overflow: hidden;
-  box-shadow: var(--shadow);
-  text-decoration: none;
-  color: inherit;
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    min-width: 240px;
+    transition: var(--transition);
+}
+
+.card:hover {
+    transform: translateY(-4px);
 }
 
 .card img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
 }
 
 .card-content {
-  padding: 14px;
+    padding: 12px;
+}
+
+.card-title {
+    font-weight: 600;
+    margin-bottom: 6px;
 }
 
 /* ================================
-ARROWS
+   CAROUSEL
 ================================ */
 
-.carousel-btn {
-  position: absolute;
-  top: 40%;
-  transform: translateY(-50%);
-  background: white;
-  border: none;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  box-shadow: var(--shadow);
-  cursor: pointer;
-  z-index: 10;
+.carousel {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding-bottom: 8px;
 }
 
-.carousel-btn.left {
-  left: -10px;
-}
-
-.carousel-btn.right {
-  right: -10px;
+.carousel::-webkit-scrollbar {
+    display: none;
 }
 
 /* ================================
-DESKTOP
+   BUTTONS
 ================================ */
 
-@media(min-width:768px){
-
-.card{
-min-width:300px;
+.button {
+    background: var(--accent);
+    border: none;
+    padding: 12px 18px;
+    border-radius: var(--radius);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
 }
+
+.button:hover {
+    opacity: 0.9;
+}
+
+.button-outline {
+    background: transparent;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+}
+
+/* ================================
+   FOOTER
+================================ */
+
+.footer {
+    margin-top: 80px;
+    padding: 40px 20px;
+    text-align: center;
+    color: var(--muted);
+}
+
+/* ================================
+   BACK BUTTON
+================================ */
+
+.back-button {
+    margin: 40px 0;
+}
+
+/* ================================
+   CALCULATOR
+================================ */
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 12px;
+    border-radius: var(--radius);
+    border: 1px solid #ddd;
+}
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (min-width: 768px) {
+
+    .hero {
+        height: 25vh;
+    }
+
+    h1 {
+        font-size: 2.4rem;
+    }
+
+    .card img {
+        height: 180px;
+    }
 
 }
