@@ -1,78 +1,90 @@
-// app.js
+/* Общая логика для index.html */
 
-// Функция для подгрузки JSON
-async function fetchData(path) {
-  const response = await fetch(path);
-  if (!response.ok) throw new Error(`Cannot fetch ${path}`);
-  return response.json();
+/* --- Функция для загрузки JSON --- */
+async function loadJSON(path) {
+    const response = await fetch(path);
+    return await response.json();
 }
 
-// Рендер hero
+/* --- Рендер Hero --- */
 async function renderHero() {
-  try {
-    const heroData = await fetchData('data/hero.json');
-    const heroSection = document.querySelector('.hero');
-    const titleEl = document.getElementById('hero-title');
-    const descEl = document.getElementById('hero-description');
+    const heroData = await loadJSON('data/hero.json');
+    const hero = document.getElementById('hero');
+    const title = document.getElementById('hero-title');
+    const description = document.getElementById('hero-description');
 
-    // Используем фон, указанный в JSON
-    heroSection.style.backgroundImage = `url('images/hero/${heroData.background}')`;
-    titleEl.textContent = heroData.title;
-    descEl.textContent = heroData.description;
-  } catch (e) {
-    console.error('Error loading hero:', e);
-  }
+    if (heroData.image) {
+        hero.style.backgroundImage = `url('images/hero/${heroData.image}')`;
+    }
+    if (heroData.title) title.textContent = heroData.title;
+    if (heroData.description) description.textContent = heroData.description;
 }
 
-// Функция для рендера карточек
-function renderCards(containerId, items, type) {
-  const container = document.getElementById(containerId);
-  container.innerHTML = ''; // очищаем контейнер
-
-  items.forEach(item => {
+/* --- Создание карточки --- */
+function createCard(item, type) {
     const card = document.createElement('div');
     card.className = 'card';
+    card.onclick = () => {
+        window.location.href = `item.html?type=${type}&id=${item.id}`;
+    };
 
-    // На главной странице берем специально отмеченное фото
-    const mainImage = item.mainImage || item.images[0];
+    const img = document.createElement('img');
+    img.src = `images/${type}/${item.mainImage}`;
+    img.alt = item.name;
 
-    card.innerHTML = `
-      <img src="images/${type}/${mainImage}" alt="${item.name}">
-      <div class="card-content">
-        <h3>${item.name}</h3>
-        <p>${item.shortDescription}</p>
-      </div>
-    `;
+    const content = document.createElement('div');
+    content.className = 'card-content';
 
-    // По клику переходим на item.html с параметрами type и id
-    card.addEventListener('click', () => {
-      window.location.href = `item.html?type=${type}&id=${item.id}`;
+    const h3 = document.createElement('h3');
+    h3.textContent = item.name;
+
+    const p = document.createElement('p');
+    p.textContent = item.shortDescription;
+
+    content.appendChild(h3);
+    content.appendChild(p);
+    card.appendChild(img);
+    card.appendChild(content);
+
+    return card;
+}
+
+/* --- Рендер секций с каруселями --- */
+async function renderSection(jsonFile, carouselId, type) {
+    const data = await loadJSON(`data/${jsonFile}`);
+    const carousel = document.getElementById(carouselId);
+
+    data.forEach(item => {
+        const card = createCard(item, type);
+        carousel.appendChild(card);
     });
-
-    container.appendChild(card);
-  });
 }
 
-// Главная функция для рендера всех секций
-async function renderAll() {
-  await renderHero();
-
-  try {
-    const [tours, places, activities, guides] = await Promise.all([
-      fetchData('data/tours.json'),
-      fetchData('data/places.json'),
-      fetchData('data/activities.json'),
-      fetchData('data/guides.json')
-    ]);
-
-    renderCards('tours-container', tours, 'tours');
-    renderCards('places-container', places, 'places');
-    renderCards('activities-container', activities, 'activities');
-    renderCards('guides-container', guides, 'guides');
-  } catch (e) {
-    console.error('Error loading sections:', e);
-  }
+/* --- Плавный скролл при клике на nav --- */
+function setupNavScroll() {
+    document.querySelectorAll('nav ul li a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetSection = document.getElementById(targetId);
+            if (targetSection) {
+                window.scrollTo({
+                    top: targetSection.offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
 }
 
-// Запуск рендера после загрузки страницы
-document.addEventListener('DOMContentLoaded', renderAll);
+/* --- Инициализация --- */
+async function init() {
+    await renderHero();
+    await renderSection('tours.json', 'tours-carousel', 'tours');
+    await renderSection('places.json', 'places-carousel', 'places');
+    await renderSection('activities.json', 'activities-carousel', 'activities');
+    await renderSection('guides.json', 'guides-carousel', 'guides');
+    setupNavScroll();
+}
+
+init();
