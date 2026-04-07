@@ -1,47 +1,26 @@
 [
-  {
-    "id": "sonkul",
-    "name": "Son-Kul Tour",
-    "shortDescription": "3 days tour to the beautiful Son-Kul lake.",
-    "mainImage": "sonkul-main.jpg",
-    "images": ["sonkul-1.jpg","sonkul-2.jpg","sonkul-3.jpg"],
-    "days": 3,
-    "price": 100
-  },
-  {
-    "id": "issyk-kul",
-    "name": "Issyk-Kul Tour",
-    "shortDescription": "2 days around Issyk-Kul lake with amazing scenery.",
-    "mainImage": "issyk-main.jpg",
-    "images": ["issyk-1.jpg","issyk-2.jpg","issyk-3.jpg"],
-    "days": 2,
-    "price": 80
-  },
-  {
-    "id": "ala-archa",
-    "name": "Ala-Archa Hiking",
-    "shortDescription": "Day trip to Ala-Archa gorge with guide.",
-    "mainImage": "ala-main.jpg",
-    "images": ["ala-1.jpg","ala-2.jpg","ala-3.jpg"],
-    "days": 1,
-    "price": 50
-  },
-  {
-    "id": "tash-rabat",
-    "name": "Tash-Rabat Adventure",
-    "shortDescription": "Explore the historic caravanserai in mountains.",
-    "mainImage": "tash-main.jpg",
-    "images": ["tash-1.jpg","tash-2.jpg","tash-3.jpg"],
-    "days": 2,
-    "price": 70
-  },
-  {
-    "id": "jyrgalan",
-    "name": "Jyrgalan Valley Tour",
-    "shortDescription": "Mountain valley experience with horseback riding.",
-    "mainImage": "jyrgalan-main.jpg",
-    "images": ["jyrgalan-1.jpg","jyrgalan-2.jpg","jyrgalan-3.jpg"],
-    "days": 3,
-    "price": 120
-  }
+    {
+        "id": "sonkul",
+        "name": "Son-Kul Lake Tour",
+        "shortDescription": "3 days in the highlands of Kyrgyzstan.",
+        "mainImage": "sonkul_main.jpeg",
+        "days": 3,
+        "price": 150
+    },
+    {
+        "id": "issykul",
+        "name": "Issyk-Kul Adventure",
+        "shortDescription": "4 days around the beautiful Issyk-Kul Lake.",
+        "mainImage": "issykul_main.jpeg",
+        "days": 4,
+        "price": 200
+    },
+    {
+        "id": "alaarcha",
+        "name": "Ala-Archa Hiking",
+        "shortDescription": "2-day trekking in Ala-Archa National Park.",
+        "mainImage": "alaarcha_main.jpeg",
+        "days": 2,
+        "price": 120
+    }
 ]
