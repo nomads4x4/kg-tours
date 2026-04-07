@@ -1,3 +1,4 @@
+// -------------------- app.js --------------------
 async function loadJSON(path){const r=await fetch(path);return await r.json();}
 
 let tours, places, activities, guides, season, heroData;
@@ -13,6 +14,7 @@ async function init(){
         loadJSON('data/hero.json')
     ]);
 
+    // Инициализация по странице
     if(document.getElementById('hero-content')) renderHero();
     if(document.getElementById('index-sections')) renderIndex();
     if(document.getElementById('item-page')) renderItem();
@@ -36,6 +38,7 @@ function renderIndex(){
     const sections=['tours','places','activities','guides'];
     sections.forEach(sec=>{
         const container=document.getElementById(sec);
+        if(!container) return;
         let data;
         switch(sec){
             case 'tours': data=tours; break;
@@ -44,7 +47,7 @@ function renderIndex(){
             case 'guides': data=guides; break;
         }
         data.forEach(item=>{
-            const img=item.mainImage; // специальное фото для главной
+            const img=item.mainImage; // фото для главной
             const card=document.createElement('div');
             card.className='card';
             card.innerHTML=`
@@ -62,8 +65,10 @@ function renderIndex(){
         a.addEventListener('click',e=>{
             e.preventDefault();
             const target=document.querySelector(a.getAttribute('href'));
-            const offset=window.innerHeight/4;
-            window.scrollTo({top:target.offsetTop - offset, behavior:'smooth'});
+            if(target){
+                const offset=window.innerHeight/4;
+                window.scrollTo({top:target.offsetTop - offset, behavior:'smooth'});
+            }
         });
     });
 }
@@ -82,7 +87,6 @@ function renderItem(){
         case 'activities': data=activities; break;
         case 'guides': data=guides; break;
     }
-
     const item=data.find(i=>i.id==id);
     if(!item) return;
 
@@ -101,20 +105,26 @@ function renderItem(){
 
 // ------------------- CALCULATOR -------------------
 function renderCalculator(){
-    // заполнение людей
-    for(let i=1;i<=32;i++) people.innerHTML+=`<option>${i}</option>`;
-    tours.forEach(t=>tour.innerHTML+=`<option value="${t.id}">${t.title}</option>`);
+    const peopleEl=document.getElementById('people');
+    const tourEl=document.getElementById('tour');
+    const placesEl=document.getElementById('places');
+    const activitiesEl=document.getElementById('activities');
+
+    if(!peopleEl || !tourEl || !placesEl || !activitiesEl) return;
+
+    for(let i=1;i<=32;i++) peopleEl.innerHTML+=`<option>${i}</option>`;
+    tours.forEach(t=>tourEl.innerHTML+=`<option value="${t.id}">${t.title}</option>`);
 
     places.forEach(p=>{
         const label=document.createElement('label');
         label.innerHTML=`<input type="checkbox" value="${p.id}"> ${p.title}`;
-        document.getElementById('places').appendChild(label);
+        placesEl.appendChild(label);
     });
 
     activities.forEach(a=>{
         const label=document.createElement('label');
         label.innerHTML=`<input type="checkbox" value="${a.id}"> ${a.title}`;
-        document.getElementById('activities').appendChild(label);
+        activitiesEl.appendChild(label);
     });
 
     document.querySelectorAll('select,input,#places input,#activities input').forEach(el=>{
@@ -134,7 +144,7 @@ function getSeasonMultiplier(date){
 }
 
 function updateGuidesCheckboxes(){
-    const peopleCount=parseInt(document.getElementById('people').value);
+    const peopleCount=parseInt(document.getElementById('people')?.value || 0);
     const minGuides=Math.ceil(peopleCount/4);
     const container=document.getElementById('guides');
     if(!container) return;
@@ -164,19 +174,14 @@ function updateGuidesCheckboxes(){
 }
 
 function calculate(){
-    const peopleCount=parseInt(document.getElementById('people').value);
-    const date=document.getElementById('tripDate').value;
-    const tourObj=tours.find(t=>t.id==tour.value);
+    const peopleCount=parseInt(document.getElementById('people')?.value || 0);
+    const date=document.getElementById('tripDate')?.value;
+    const tourObj=tours.find(t=>t.id==document.getElementById('tour')?.value);
     if(!tourObj) return;
 
-    const selectedGuides=[...document.querySelectorAll('#guides input:checked')]
-        .map(i=>guides.find(g=>g.id==i.value));
-
-    const selectedPlaces=[...document.querySelectorAll('#places input:checked')]
-        .map(i=>places.find(p=>p.id==i.value));
-
-    const selectedActivities=[...document.querySelectorAll('#activities input:checked')]
-        .map(i=>activities.find(a=>a.id==i.value));
+    const selectedGuides=[...document.querySelectorAll('#guides input:checked')].map(i=>guides.find(g=>g.id==i.value));
+    const selectedPlaces=[...document.querySelectorAll('#places input:checked')].map(i=>places.find(p=>p.id==i.value));
+    const selectedActivities=[...document.querySelectorAll('#activities input:checked')].map(i=>activities.find(a=>a.id==i.value));
 
     const totalDays=tourObj.days + selectedPlaces.reduce((s,p)=>s+p.days,0);
 
