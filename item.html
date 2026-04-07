@@ -1,18 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Item</title>
-<link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item Page</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Дополнительные стили для карусели на item.html */
+        .item-hero {
+            width: 100%;
+            height: 25vh;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 1rem;
+        }
+        .item-carousel {
+            display: flex;
+            overflow-x: auto;
+            gap: 1rem;
+            padding: 1rem;
+        }
+        .item-carousel img {
+            border-radius: 12px;
+            height: 200px;
+            flex: 0 0 auto;
+        }
+        .item-description {
+            padding: 1rem;
+            max-width: 800px;
+            margin: auto;
+        }
+        .back-button {
+            display: inline-block;
+            margin: 2rem;
+            padding: 0.8rem 2rem;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+        }
+        .back-button:hover {
+            background-color: #21867a;
+        }
+    </style>
 </head>
-
 <body>
 
-<div id="item"></div>
+<!-- Hero / Заголовок страницы -->
+<div class="item-hero" id="item-hero">
+    <h1 id="item-title">Item Name</h1>
+</div>
 
-<a href="index.html" class="back">← Back</a>
+<!-- Карусель изображений -->
+<div class="item-carousel" id="item-carousel">
+    <!-- JS вставит все изображения -->
+</div>
+
+<!-- Подробное описание -->
+<div class="item-description" id="item-description">
+    <p id="item-text">Item full description goes here.</p>
+    <p id="item-info"></p>
+</div>
+
+<!-- Кнопка возврата -->
+<button class="back-button" onclick="window.location.href='index.html'">Back to Home</button>
 
 <script src="app.js"></script>
+<script>
+/* --- JS для item.html --- */
+async function loadJSON(path) {
+    const response = await fetch(path);
+    return await response.json();
+}
+
+async function renderItem() {
+    const params = new URLSearchParams(window.location.search);
+    const type = params.get('type');
+    const id = params.get('id');
+
+    if (!type || !id) return;
+
+    const data = await loadJSON(`data/${type}.json`);
+    const item = data.find(i => i.id === id);
+    if (!item) return;
+
+    // Hero
+    const hero = document.getElementById('item-hero');
+    hero.style.backgroundImage = `url('images/${type}/${item.mainImage}')`;
+    document.getElementById('item-title').textContent = item.name;
+
+    // Карусель изображений
+    const carousel = document.getElementById('item-carousel');
+
+    // На item.html показываем все изображения, кроме mainImage
+    const images = [];
+    for (let i = 1; i <= 5; i++) { // Предположим максимум 5 дополнительных фото
+        const imgPath = `images/${type}/${id}_${i}.jpeg`;
+        try {
+            const res = await fetch(imgPath);
+            if (res.ok) images.push(imgPath);
+        } catch {}
+    }
+    images.unshift(`images/${type}/${item.mainImage}`); // mainImage первый
+
+    images.forEach(src => {
+        const img = document.createElement('img');
+        img.src = src;
+        carousel.appendChild(img);
+    });
+
+    // Описание и данные
+    document.getElementById('item-text').textContent = item.fullDescription || item.shortDescription || '';
+    let info = '';
+    if (type === 'tours' || type === 'places') info = `Duration: ${item.days || '-'} day(s), Price: $${item.price || '-'}`;
+    if (type === 'activities' || type === 'guides') info = `Price: $${item.price || '-'}`;
+    document.getElementById('item-info').textContent = info;
+}
+
+renderItem();
+</script>
 </body>
 </html>
