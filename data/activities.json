@@ -1,10 +1,10 @@
 [
-  { "id": "shyrdak", "name": "Shyrdak Carpet Workshop", "shortDescription": "Learn traditional carpet weaving", "price": 15, "images": [{ "file": "shyrdak_main.jpg", "main": true }] },
-  { "id": "berkut-show", "name": "Berkut Eagle Show", "shortDescription": "Watch golden eagles in action", "price": 25, "images": [{ "file": "berkut_main.jpg", "main": true }] },
-  { "id": "horse-riding", "name": "Horse Riding Experience", "shortDescription": "Ride in the mountains", "price": 20, "images": [{ "file": "horseriding_main.jpg", "main": true }] },
-  { "id": "yurt-stay", "name": "Stay in a Yurt", "shortDescription": "Experience nomadic life", "price": 30, "images": [{ "file": "yurt_main.jpg", "main": true }] },
-  { "id": "fishing", "name": "Fishing Trip", "shortDescription": "Relax by the lake", "price": 15, "images": [{ "file": "fishing_main.jpg", "main": true }] },
-  { "id": "hiking", "name": "Mountain Hiking", "shortDescription": "Guided hike through peaks", "price": 20, "images": [{ "file": "hiking_main.jpg", "main": true }] },
-  { "id": "rafting", "name": "Rafting Adventure", "shortDescription": "Exciting river rapids", "price": 35, "images": [{ "file": "rafting_main.jpg", "main": true }] },
-  { "id": "birdwatching", "name": "Birdwatching Tour", "shortDescription": "Spot rare birds", "price": 10, "images": [{ "file": "birdwatching_main.jpg", "main": true }] }
+{"id":"eagle","title":"Eagle Hunting Show","short":"Traditional show","description":"Eagle hunting.","groupPrice":150,"mainImage":"images/activities/eagle/main.jpg","images":["images/activities/eagle/main.jpg"]},
+{"id":"yurt","title":"Yurt Stay","short":"Nomadic life","description":"Stay in yurt.","personPrice":40,"mainImage":"images/activities/yurt/main.jpg","images":["images/activities/yurt/main.jpg"]},
+{"id":"horse","title":"Horse Riding","short":"Mountain riding","description":"Horse trip.","personPrice":50,"mainImage":"images/activities/horse/main.jpg","images":["images/activities/horse/main.jpg"]},
+{"id":"felt","title":"Felt Workshop","short":"Handcraft","description":"Make felt.","groupPrice":120,"mainImage":"images/activities/felt/main.jpg","images":["images/activities/felt/main.jpg"]},
+{"id":"photo","title":"Photo Session","short":"Professional photos","description":"Photo tour.","groupPrice":200,"mainImage":"images/activities/photo/main.jpg","images":["images/activities/photo/main.jpg"]},
+{"id":"hike","title":"Guided Hike","short":"Short trekking","description":"Easy hike.","personPrice":30,"mainImage":"images/activities/hike/main.jpg","images":["images/activities/hike/main.jpg"]},
+{"id":"cook","title":"Cooking Class","short":"Local food","description":"Cook local dishes.","groupPrice":110,"mainImage":"images/activities/cook/main.jpg","images":["images/activities/cook/main.jpg"]},
+{"id":"archery","title":"Archery","short":"Traditional archery","description":"Bow shooting.","personPrice":20,"mainImage":"images/activities/archery/main.jpg","images":["images/activities/archery/main.jpg"]}
 ]
