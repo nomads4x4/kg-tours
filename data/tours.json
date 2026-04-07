@@ -1,42 +1,98 @@
 [
-    {
-        "id": "sonkul",
-        "name": "Son-Kul Lake Tour",
-        "shortDescription": "3 days in the highlands of Kyrgyzstan.",
-        "mainImage": "sonkul_main.jpg",
-        "days": 3,
-        "price": 150
-    },
-    {
-        "id": "issykul",
-        "name": "Issyk-Kul Adventure",
-        "shortDescription": "4 days around the beautiful Issyk-Kul Lake.",
-        "mainImage": "issykul_main.jpg",
-        "days": 4,
-        "price": 200
-    },
-    {
-        "id": "alaarcha",
-        "name": "Ala-Archa Hiking",
-        "shortDescription": "2-day trekking in Ala-Archa National Park.",
-        "mainImage": "alaarcha_main.jpg",
-        "days": 2,
-        "price": 120
-    },
-    {
-        "id": "jukuvalley",
-        "name": "Juku Valley Trek",
-        "shortDescription": "Experience Kyrgyz nature on this 3-day trek.",
-        "mainImage": "jukuvalley_main.jpg",
-        "days": 3,
-        "price": 160
-    },
-    {
-        "id": "kara-kol",
-        "name": "Kara-Kol Cultural Tour",
-        "shortDescription": "Explore local traditions and crafts over 2 days.",
-        "mainImage": "karakol_tour_main.jpg",
-        "days": 2,
-        "price": 130
-    }
+  {
+    "id": "sonkul",
+    "name": "Son-Kul Tour",
+    "shortDescription": "A scenic trip to Son-Kul Lake",
+    "days": 3,
+    "price": 120,
+    "images": [
+      { "file": "sonkul_main.jpg", "main": true },
+      { "file": "sonkul_1.jpg" },
+      { "file": "sonkul_2.jpg" }
+    ]
+  },
+  {
+    "id": "issykul",
+    "name": "Issyk-Kul Lake Tour",
+    "shortDescription": "Relax at the largest alpine lake",
+    "days": 2,
+    "price": 100,
+    "images": [
+      { "file": "issykul_main.jpg", "main": true },
+      { "file": "issykul_1.jpg" },
+      { "file": "issykul_2.jpg" }
+    ]
+  },
+  {
+    "id": "alaarcha",
+    "name": "Ala-Archa National Park",
+    "shortDescription": "Hike through mountains and valleys",
+    "days": 1,
+    "price": 50,
+    "images": [
+      { "file": "alaarcha_main.jpg", "main": true },
+      { "file": "alaarcha_1.jpg" },
+      { "file": "alaarcha_2.jpg" }
+    ]
+  },
+  {
+    "id": "tashrabat",
+    "name": "Tash-Rabat Adventure",
+    "shortDescription": "Explore ancient caravanserai",
+    "days": 2,
+    "price": 90,
+    "images": [
+      { "file": "tashrabat_main.jpg", "main": true },
+      { "file": "tashrabat_1.jpg" },
+      { "file": "tashrabat_2.jpg" }
+    ]
+  },
+  {
+    "id": "karakol",
+    "name": "Karakol Discovery",
+    "shortDescription": "Mountain hiking and cultural tour",
+    "days": 3,
+    "price": 150,
+    "images": [
+      { "file": "karakol_main.jpg", "main": true },
+      { "file": "karakol_1.jpg" },
+      { "file": "karakol_2.jpg" }
+    ]
+  },
+  {
+    "id": "sarychelek",
+    "name": "Sary-Chelek Lake Tour",
+    "shortDescription": "Nature reserve with beautiful lake",
+    "days": 2,
+    "price": 110,
+    "images": [
+      { "file": "sarychelek_main.jpg", "main": true },
+      { "file": "sarychelek_1.jpg" },
+      { "file": "sarychelek_2.jpg" }
+    ]
+  },
+  {
+    "id": "narynvalley",
+    "name": "Naryn Valley Trip",
+    "shortDescription": "Experience nomad culture and mountains",
+    "days": 3,
+    "price": 140,
+    "images": [
+      { "file": "narynvalley_main.jpg", "main": true },
+      { "file": "narynvalley_1.jpg" },
+      { "file": "narynvalley_2.jpg" }
+    ]
+  },
+  {
+    "id": "jalalabad",
+    "name": "Jalalabad Excursion",
+    "shortDescription": "Discover southern Kyrgyzstan",
+    "days": 2,
+    "price": 95,
+    "images": [
+      { "file": "jalalabad_main.jpg", "main": true },
+      { "file": "jalalabad_1.jpg" },
+      { "file": "jalalabad_2.jpg" }
+    ]
+  }
 ]
