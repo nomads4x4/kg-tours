@@ -1,85 +1,79 @@
-// =============================
+// ==========================
 // UTILS
-// =============================
+// ==========================
 async function fetchJSON(path) {
-  const res = await fetch(path);
-  return await res.json();
+    const res = await fetch(path);
+    if (!res.ok) throw new Error(`Failed to load ${path}`);
+    return res.json();
 }
 
 function createCard(item, type) {
-  const card = document.createElement("div");
-  card.className = "card";
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.addEventListener('click', () => {
+        window.location.href = `item.html?type=${type}&id=${item.id}`;
+    });
 
-  // фото специально для главной страницы
-  const imgSrc = item.mainImage; // mainImage в JSON
-  const img = document.createElement("img");
-  img.src = imgSrc;
-  img.alt = item.name;
-  card.appendChild(img);
+    const img = document.createElement('img');
+    img.src = item.mainImage; // mainImage — отмеченное для главной
+    img.alt = item.name;
 
-  const body = document.createElement("div");
-  body.className = "card-body";
+    const content = document.createElement('div');
+    content.className = 'card-content';
 
-  const title = document.createElement("h3");
-  title.className = "card-title";
-  title.textContent = item.name;
-  body.appendChild(title);
+    const title = document.createElement('h3');
+    title.textContent = item.name;
 
-  const desc = document.createElement("p");
-  desc.className = "card-text";
-  desc.textContent = item.shortDescription || "";
-  body.appendChild(desc);
+    const desc = document.createElement('p');
+    desc.textContent = item.shortDesc || '';
 
-  card.appendChild(body);
+    content.appendChild(title);
+    content.appendChild(desc);
 
-  card.addEventListener("click", () => {
-    window.location.href = `item.html?type=${type}&id=${item.id}`;
-  });
+    card.appendChild(img);
+    card.appendChild(content);
 
-  return card;
+    return card;
 }
 
-// =============================
+// ==========================
 // HERO
-// =============================
+// ==========================
 async function renderHero() {
-  const heroData = await fetchJSON("data/hero.json");
-  const heroTitle = document.getElementById("hero-title");
-  const heroDesc = document.getElementById("hero-description");
-  heroTitle.textContent = heroData.title || "Tours in Kyrgyzstan";
-  heroDesc.textContent = heroData.description || "";
-  const heroSection = document.getElementById("hero");
-  if(heroData.image) {
-    heroSection.style.background = `url('${heroData.image}') center/cover no-repeat`;
-  }
-}
-
-// =============================
-// CAROUSELS
-// =============================
-async function renderCarousel(jsonPath, containerId, type) {
-  const data = await fetchJSON(jsonPath);
-  const container = document.getElementById(containerId);
-  data.forEach(item => {
-    // проверяем, что mainImage есть
-    if(item.mainImage) {
-      const card = createCard(item, type);
-      container.appendChild(card);
+    try {
+        const hero = await fetchJSON('data/hero.json');
+        const heroSection = document.getElementById('hero');
+        heroSection.style.backgroundImage = `url('images/hero/${hero.image}')`;
+        document.getElementById('hero-title').textContent = hero.title;
+        document.getElementById('hero-desc').textContent = hero.description;
+    } catch (err) {
+        console.error('Error loading hero:', err);
     }
-  });
 }
 
-// =============================
+// ==========================
+// CARDS
+// ==========================
+async function renderSection(sectionId, jsonPath, type) {
+    try {
+        const items = await fetchJSON(jsonPath);
+        const container = document.getElementById(sectionId);
+        items.forEach(item => {
+            const card = createCard(item, type);
+            container.appendChild(card);
+        });
+    } catch (err) {
+        console.error(`Error loading ${type}:`, err);
+    }
+}
+
+// ==========================
 // INIT
-// =============================
-async function init() {
-  await renderHero();
-
-  await renderCarousel("data/tours.json", "tours-carousel", "tour");
-  await renderCarousel("data/places.json", "places-carousel", "place");
-  await renderCarousel("data/activities.json", "activities-carousel", "activity");
-  await renderCarousel("data/guides.json", "guides-carousel", "guide");
-}
-
-// запускаем
-init();
+// ==========================
+document.addEventListener('DOMContentLoaded', () => {
+    renderHero();
+    renderSection('tours-container', 'data/tours.json', 'tours');
+    renderSection('places-container', 'data/places.json', 'places');
+    renderSection('activities-container', 'data/activities.json', 'activities');
+    renderSection('guides-container', 'data/guides.json', 'guides');
+});
