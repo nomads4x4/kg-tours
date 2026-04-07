@@ -2,23 +2,25 @@
   {
     "id": "erkin",
     "name": "Erkin",
-    "shortDescription": "Experienced mountain guide, 5 years guiding tours.",
-    "pricePerDay": 100,
-    "photos": [
-      {"filename": "erkin_main.jpg", "main": true},
-      {"filename": "erkin_1.jpg", "main": false},
-      {"filename": "erkin_2.jpg", "main": false}
-    ]
+    "shortDescription": "Experienced guide with 10+ years of mountain tours.",
+    "mainImage": "erkin-main.jpg",
+    "images": ["erkin-1.jpg","erkin-2.jpg"],
+    "pricePerDay": 40
   },
   {
-    "id": "aijan",
-    "name": "Aijan",
-    "shortDescription": "Cultural guide and translator, expert in local traditions.",
-    "pricePerDay": 90,
-    "photos": [
-      {"filename": "aijan_main.jpg", "main": true},
-      {"filename": "aijan_1.jpg", "main": false},
-      {"filename": "aijan_2.jpg", "main": false}
-    ]
+    "id": "aida",
+    "name": "Aida",
+    "shortDescription": "Specializes in cultural and historical tours.",
+    "mainImage": "aida-main.jpg",
+    "images": ["aida-1.jpg","aida-2.jpg"],
+    "pricePerDay": 35
+  },
+  {
+    "id": "bek",
+    "name": "Bek",
+    "shortDescription": "Expert in adventure and hiking tours.",
+    "mainImage": "bek-main.jpg",
+    "images": ["bek-1.jpg","bek-2.jpg"],
+    "pricePerDay": 45
   }
 ]
