@@ -4,7 +4,6 @@ async function loadJSON(path){const r=await fetch(path);return await r.json();}
 let tours, places, activities, guides, season, heroData;
 
 async function init(){
-    // Загружаем все JSON данные
     [tours, places, activities, guides, season, heroData] = await Promise.all([
         loadJSON('data/tours.json'),
         loadJSON('data/places.json'),
@@ -14,27 +13,35 @@ async function init(){
         loadJSON('data/hero.json')
     ]);
 
-    // Инициализация по странице
-    if(document.getElementById('hero-content')) renderHero();
-    if(document.getElementById('index-sections')) renderIndex();
-    if(document.getElementById('item-page')) renderItem();
-    if(document.getElementById('people')) renderCalculator();
+    const body=document.body;
+
+    if(body.classList.contains('index-page')) indexPageInit();
+    if(body.classList.contains('item-page')) itemPageInit();
+    if(body.classList.contains('calculator-page')) calculatorInit();
 }
 
-// ------------------- HERO -------------------
+// -------------------- INDEX PAGE --------------------
+function indexPageInit(){
+    renderHero();
+    renderSections();
+    initStickyNav();
+    initCarousels();
+}
+
 function renderHero(){
     const hero=document.getElementById('hero-content');
+    if(!hero) return;
     const h=heroData;
     hero.innerHTML=`
         <h1>${h.title}</h1>
         <p>${h.description}</p>
         <a href="calculator.html" class="btn">Calculate Your Tour</a>
     `;
-    document.querySelector('.hero').style.backgroundImage=`url('images/hero/${h.image}')`;
+    const heroDiv=document.querySelector('.hero');
+    if(heroDiv) heroDiv.style.backgroundImage=`url('images/hero/${h.image}')`;
 }
 
-// ------------------- INDEX PAGE -------------------
-function renderIndex(){
+function renderSections(){
     const sections=['tours','places','activities','guides'];
     sections.forEach(sec=>{
         const container=document.getElementById(sec);
@@ -47,11 +54,10 @@ function renderIndex(){
             case 'guides': data=guides; break;
         }
         data.forEach(item=>{
-            const img=item.mainImage; // фото для главной
             const card=document.createElement('div');
             card.className='card';
             card.innerHTML=`
-                <img src="images/${sec}/${img}" alt="${item.title}">
+                <img src="images/${sec}/${item.mainImage}" alt="${item.title}">
                 <h4>${item.title}</h4>
                 <p>${item.description}</p>
             `;
@@ -59,8 +65,9 @@ function renderIndex(){
             container.appendChild(card);
         });
     });
+}
 
-    // sticky nav scroll behavior
+function initStickyNav(){
     document.querySelectorAll('.sticky-nav a').forEach(a=>{
         a.addEventListener('click',e=>{
             e.preventDefault();
@@ -73,8 +80,23 @@ function renderIndex(){
     });
 }
 
-// ------------------- ITEM PAGE -------------------
-function renderItem(){
+function initCarousels(){
+    document.querySelectorAll('.carousel').forEach(carousel=>{
+        const cards=carousel.querySelectorAll('.card');
+        let index=0;
+        const prevBtn=carousel.querySelector('.prev');
+        const nextBtn=carousel.querySelector('.next');
+        const showIndex=i=>{
+            cards.forEach((c,j)=>c.style.display=(j===i)?'block':'none');
+        };
+        showIndex(index);
+        if(prevBtn) prevBtn.addEventListener('click',()=>{ index=(index-1+cards.length)%cards.length; showIndex(index); });
+        if(nextBtn) nextBtn.addEventListener('click',()=>{ index=(index+1)%cards.length; showIndex(index); });
+    });
+}
+
+// -------------------- ITEM PAGE --------------------
+function itemPageInit(){
     const params=new URLSearchParams(window.location.search);
     const type=params.get('type');
     const id=params.get('id');
@@ -86,11 +108,15 @@ function renderItem(){
         case 'places': data=places; break;
         case 'activities': data=activities; break;
         case 'guides': data=guides; break;
+        default: return;
     }
+
     const item=data.find(i=>i.id==id);
     if(!item) return;
 
     const page=document.getElementById('item-page');
+    if(!page) return;
+
     page.innerHTML=`
         <h1>${type.slice(0,-1).toUpperCase()}/${item.title}</h1>
         <div class="item-carousel">
@@ -103,35 +129,40 @@ function renderItem(){
     `;
 }
 
-// ------------------- CALCULATOR -------------------
-function renderCalculator(){
+// -------------------- CALCULATOR PAGE --------------------
+function calculatorInit(){
     const peopleEl=document.getElementById('people');
     const tourEl=document.getElementById('tour');
     const placesEl=document.getElementById('places');
     const activitiesEl=document.getElementById('activities');
+    const guidesEl=document.getElementById('guides');
 
-    if(!peopleEl || !tourEl || !placesEl || !activitiesEl) return;
+    if(!peopleEl || !tourEl || !placesEl || !activitiesEl || !guidesEl) return;
 
     for(let i=1;i<=32;i++) peopleEl.innerHTML+=`<option>${i}</option>`;
     tours.forEach(t=>tourEl.innerHTML+=`<option value="${t.id}">${t.title}</option>`);
 
-    places.forEach(p=>{
+    // Additional Places two-column
+    places.forEach((p,i)=>{
         const label=document.createElement('label');
+        label.className = (i%2===0)?'left-col':'right-col';
         label.innerHTML=`<input type="checkbox" value="${p.id}"> ${p.title}`;
         placesEl.appendChild(label);
     });
 
-    activities.forEach(a=>{
+    // Additional Activities two-column
+    activities.forEach((a,i)=>{
         const label=document.createElement('label');
+        label.className = (i%2===0)?'left-col':'right-col';
         label.innerHTML=`<input type="checkbox" value="${a.id}"> ${a.title}`;
         activitiesEl.appendChild(label);
     });
 
     document.querySelectorAll('select,input,#places input,#activities input').forEach(el=>{
-        el.addEventListener('input',()=>{ updateGuidesCheckboxes(); calculate(); });
+        el.addEventListener('input',()=>{ updateGuides(); calculate(); });
     });
 
-    updateGuidesCheckboxes();
+    updateGuides();
     calculate();
 }
 
@@ -143,7 +174,7 @@ function getSeasonMultiplier(date){
     return (d>=start && d<=end)?season.high:season.low;
 }
 
-function updateGuidesCheckboxes(){
+function updateGuides(){
     const peopleCount=parseInt(document.getElementById('people')?.value || 0);
     const minGuides=Math.ceil(peopleCount/4);
     const container=document.getElementById('guides');
