@@ -1,61 +1,71 @@
-// Утилиты
-async function loadJSON(path) {
-  const res = await fetch(path);
-  return res.json();
+// --- Utility для загрузки JSON ---
+async function fetchData(file) {
+    const response = await fetch(`data/${file}`);
+    return await response.json();
 }
 
-// Рендер карточек
-function renderCards(containerId, items, type) {
-  const container = document.getElementById(containerId);
-  container.innerHTML = '';
-
-  items.forEach(item => {
+// --- Генерация карточки ---
+function createCard(item, type) {
     const card = document.createElement('div');
     card.className = 'card';
-    
-    // Выбираем фото для главной страницы
-    const mainPhoto = item.photos.find(p => p.main) || item.photos[0];
-
+    const imgSrc = item.mainPhoto ? `images/${type}/${item.mainPhoto}` : '';
     card.innerHTML = `
-      <img src="images/${type}/${mainPhoto.filename}" alt="${item.name}">
-      <div class="info">
-        <h3>${item.name}</h3>
-        <p>${item.shortDescription}</p>
-      </div>
+        <img src="${imgSrc}" alt="${item.name}">
+        <div class="card-body">
+            <h3>${item.name}</h3>
+            <p>${item.shortDescription || ''}</p>
+        </div>
     `;
-
-    // Переход на item.html
     card.addEventListener('click', () => {
-      window.location.href = `item.html?type=${type}&id=${item.id}`;
+        window.location.href = `item.html?type=${type}&id=${item.id}`;
+    });
+    return card;
+}
+
+// --- Render секции ---
+async function renderSection(jsonFile, carouselId, type) {
+    const data = await fetchData(jsonFile);
+    const carousel = document.getElementById(carouselId);
+    data.forEach(item => {
+        const card = createCard(item, type);
+        carousel.appendChild(card);
+    });
+}
+
+// --- Карусели и кнопки ---
+function enableCarousel(carouselId) {
+    const carousel = document.getElementById(carouselId);
+    let isDown = false, startX, scrollLeft;
+
+    // Для десктоп drag
+    carousel.addEventListener('mousedown', e => {
+        isDown = true;
+        carousel.classList.add('active');
+        startX = e.pageX - carousel.offsetLeft;
+        scrollLeft = carousel.scrollLeft;
+    });
+    carousel.addEventListener('mouseleave', () => isDown = false);
+    carousel.addEventListener('mouseup', () => isDown = false);
+    carousel.addEventListener('mousemove', e => {
+        if(!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - carousel.offsetLeft;
+        const walk = (x - startX) * 2; // скорость скролла
+        carousel.scrollLeft = scrollLeft - walk;
     });
 
-    container.appendChild(card);
-  });
+    // Optional: add prev/next buttons for desktop (можно потом)
 }
 
-// Основная функция
+// --- Инициализация ---
 async function init() {
-  try {
-    const tours = await loadJSON('data/tours.json');
-    const places = await loadJSON('data/places.json');
-    const activities = await loadJSON('data/activities.json');
-    const guides = await loadJSON('data/guides.json');
-    const hero = await loadJSON('data/hero.json');
+    await renderSection('tours.json', 'tours-carousel', 'tours');
+    await renderSection('places.json', 'places-carousel', 'places');
+    await renderSection('activities.json', 'activities-carousel', 'activities');
+    await renderSection('guides.json', 'guides-carousel', 'guides');
 
-    // Hero
-    if (hero.title) document.getElementById('hero-title').innerText = hero.title;
-    if (hero.description) document.getElementById('hero-description').innerText = hero.description;
-
-    // Рендер секций
-    renderCards('tours-carousel', tours, 'tours');
-    renderCards('places-carousel', places, 'places');
-    renderCards('activities-carousel', activities, 'activities');
-    renderCards('guides-carousel', guides, 'guides');
-
-  } catch (err) {
-    console.error('Error loading data:', err);
-  }
+    ['tours-carousel','places-carousel','activities-carousel','guides-carousel'].forEach(enableCarousel);
 }
 
-// Запуск
-document.addEventListener('DOMContentLoaded', init);
+// --- Run ---
+init();
