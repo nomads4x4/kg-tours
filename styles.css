@@ -11,8 +11,8 @@
 html, body {
     width: 100%;
     height: 100%;
-    background-color: #f5f6f7; /* светло-серый фон */
-    color: #333; /* основной текст */
+    background-color: #f5f6f7;
+    color: #333;
     scroll-behavior: smooth;
 }
 
@@ -21,7 +21,7 @@ html, body {
 ========================== */
 .hero {
     width: 100%;
-    height: 25vh; /* 1/4 экрана на мобилке и десктопе */
+    height: 25vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -41,7 +41,7 @@ html, body {
 
 .hero p {
     font-size: 1rem;
-    color: #e0f7fa; /* мягкий цвет морской волны */
+    color: #e0f7fa;
     margin: 0.5rem 0;
 }
 
@@ -66,7 +66,7 @@ nav.sticky-nav {
 nav.sticky-nav a {
     margin: 0 1rem;
     text-decoration: none;
-    color: #00796b; /* цвет морской волны */
+    color: #00796b;
     font-weight: bold;
     padding: 0.5rem 1rem;
     border-radius: 10px;
@@ -92,7 +92,9 @@ section h2 {
     text-align: center;
 }
 
-/* Карточки */
+/* ==========================
+   Cards
+========================== */
 .card-container {
     display: flex;
     gap: 1rem;
@@ -161,8 +163,7 @@ section h2 {
 footer {
     padding: 2rem 1rem;
     text-align: center;
-    background-color: #e0f7fa; /* мягкий морской фон */
-    margin-top: 3vh; /* от нижней секции до футера ~3/4 экрана */
+    background-color: #e0f7fa;
 }
 
 footer a {
@@ -180,28 +181,14 @@ footer a:hover {
    Адаптивность
 ========================== */
 @media (max-width: 768px) {
-    .hero h1 {
-        font-size: 1.5rem;
-    }
-    .hero p {
-        font-size: 0.9rem;
-    }
-    section {
-        padding: 2rem 0.5rem;
-    }
-    .card-container {
-        gap: 0.5rem;
-    }
-    .card {
-        min-width: 200px;
-    }
+    .hero h1 { font-size: 1.5rem; }
+    .hero p { font-size: 0.9rem; }
+    section { padding: 2rem 0.5rem; }
+    .card-container { gap: 0.5rem; }
+    .card { min-width: 200px; }
 }
 
 @media (min-width: 1200px) {
-    .hero h1 {
-        font-size: 3rem;
-    }
-    .hero p {
-        font-size: 1.2rem;
-    }
+    .hero h1 { font-size: 3rem; }
+    .hero p { font-size: 1.2rem; }
 }
