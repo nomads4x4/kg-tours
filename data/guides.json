@@ -1,37 +1,10 @@
 [
-    {
-        "id": "erkin",
-        "name": "Erkin",
-        "shortDescription": "Expert guide with 10 years of experience.",
-        "mainImage": "erkin_main.jpg",
-        "price": 60
-    },
-    {
-        "id": "gulmira",
-        "name": "Gulmira",
-        "shortDescription": "Friendly guide who knows every hidden path.",
-        "mainImage": "gulmira_main.jpg",
-        "price": 55
-    },
-    {
-        "id": "bek",
-        "name": "Bek",
-        "shortDescription": "Experienced trek leader and photographer.",
-        "mainImage": "bek_main.jpg",
-        "price": 50
-    },
-    {
-        "id": "aijan",
-        "name": "Aijan",
-        "shortDescription": "Local expert with passion for history.",
-        "mainImage": "aijan_main.jpg",
-        "price": 45
-    },
-    {
-        "id": "talant",
-        "name": "Talant",
-        "shortDescription": "Adventure guide specializing in mountains.",
-        "mainImage": "talant_main.jpg",
-        "price": 65
-    }
+  { "id": "erkin", "name": "Erkin", "shortDescription": "Mountain and lake guide", "price": 50, "images": [{ "file": "erkin_main.jpg", "main": true }] },
+  { "id": "gulnara", "name": "Gulnara", "shortDescription": "Culture and history expert", "price": 45, "images": [{ "file": "gulnara_main.jpg", "main": true }] },
+  { "id": "asylbek", "name": "Asylbek", "shortDescription": "Horse trekking guide", "price": 40, "images": [{ "file": "asylbek_main.jpg", "main": true }] },
+  { "id": "aidana", "name": "Aidana", "shortDescription": "Photography tours", "price": 55, "images": [{ "file": "aidana_main.jpg", "main": true }] },
+  { "id": "bekzat", "name": "Bekzat", "shortDescription": "Local cuisine guide", "price": 35, "images": [{ "file": "bekzat_main.jpg", "main": true }] },
+  { "id": "dinara", "name": "Dinara", "shortDescription": "Birdwatching and nature expert", "price": 40, "images": [{ "file": "dinara_main.jpg", "main": true }] },
+  { "id": "kamila", "name": "Kamila", "shortDescription": "Cultural and history tours", "price": 45, "images": [{ "file": "kamila_main.jpg", "main": true }] },
+  { "id": "murad", "name": "Murad", "shortDescription": "Adventure and rafting guide", "price": 50, "images": [{ "file": "murad_main.jpg", "main": true }] }
 ]
