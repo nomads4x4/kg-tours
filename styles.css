@@ -1,5 +1,5 @@
 /* ================================
-   RESET
+RESET
 ================================ */
 
 * {
@@ -20,7 +20,7 @@ body {
 }
 
 /* ================================
-   VARIABLES
+VARIABLES
 ================================ */
 
 :root {
@@ -35,7 +35,7 @@ body {
 }
 
 /* ================================
-   HERO
+HERO
 ================================ */
 
 .hero {
@@ -70,18 +70,8 @@ body {
   padding: 20px;
 }
 
-.hero h1 {
-  font-size: 28px;
-  margin-bottom: 10px;
-}
-
-.hero p {
-  font-size: 16px;
-  margin-bottom: 20px;
-}
-
 /* ================================
-   BUTTONS
+BUTTON
 ================================ */
 
 .button {
@@ -92,16 +82,10 @@ body {
   text-decoration: none;
   font-weight: 600;
   display: inline-block;
-  transition: 0.2s ease;
-}
-
-.button:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow);
 }
 
 /* ================================
-   STICKY NAV
+STICKY NAV
 ================================ */
 
 .sticky-nav {
@@ -124,18 +108,12 @@ body {
   padding: 10px 16px;
   border-radius: 999px;
   background: var(--accent-light);
-  color: var(--text);
   text-decoration: none;
-  font-weight: 500;
-}
-
-.nav-link:hover {
-  background: var(--accent);
-  color: white;
+  color: var(--text);
 }
 
 /* ================================
-   SECTIONS
+SECTIONS
 ================================ */
 
 .section {
@@ -144,17 +122,26 @@ body {
 
 .section h2 {
   margin-bottom: 20px;
-  font-size: 22px;
 }
 
 /* ================================
-   CAROUSEL
+CAROUSEL WRAPPER
+================================ */
+
+.carousel-wrapper {
+  position: relative;
+}
+
+/* ================================
+CAROUSEL
 ================================ */
 
 .carousel {
   display: flex;
-  overflow-x: auto;
   gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
   padding-bottom: 10px;
 }
 
@@ -163,12 +150,13 @@ body {
 }
 
 /* ================================
-   CARD
+CARD
 ================================ */
 
 .card {
-  min-width: 260px;
-  background: var(--card-bg);
+  min-width: 85%;
+  scroll-snap-align: start;
+  background: white;
   border-radius: var(--radius);
   overflow: hidden;
   box-shadow: var(--shadow);
@@ -186,94 +174,40 @@ body {
   padding: 14px;
 }
 
-.card-title {
-  font-weight: 600;
-  margin-bottom: 6px;
-}
-
-.card-desc {
-  font-size: 14px;
-  color: #666;
-}
-
 /* ================================
-   ITEM PAGE HEADER
+ARROWS
 ================================ */
 
-.item-header {
-  height: 25vh;
-  min-height: 200px;
-  position: relative;
-  display: flex;
-  align-items: flex-end;
-  padding: 20px;
-  color: white;
-}
-
-.item-header img {
+.carousel-btn {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -1;
+  top: 40%;
+  transform: translateY(-50%);
+  background: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  z-index: 10;
 }
 
-.item-header::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.35);
-  z-index: -1;
+.carousel-btn.left {
+  left: -10px;
 }
 
-/* ================================
-   FOOTER
-================================ */
-
-.footer {
-  padding: 60px 20px;
-  text-align: center;
-}
-
-.socials {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-}
-
-.socials a {
-  text-decoration: none;
-  color: var(--accent);
-  font-weight: 600;
+.carousel-btn.right {
+  right: -10px;
 }
 
 /* ================================
-   BACK BUTTON
+DESKTOP
 ================================ */
 
-.back-button {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
+@media(min-width:768px){
+
+.card{
+min-width:300px;
 }
-
-/* ================================
-   DESKTOP
-================================ */
-
-@media (min-width: 768px) {
-
-  .hero h1 {
-    font-size: 36px;
-  }
-
-  .hero p {
-    font-size: 18px;
-  }
-
-  .card {
-    min-width: 300px;
-  }
 
 }
