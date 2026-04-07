@@ -1,76 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Kyrgyzstan Tours</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kyrgyzstan Tours</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<!-- =================== Hero =================== -->
-<section class="hero" id="hero">
-    <h1 id="hero-title">Kyrgyzstan Tours with Professional Guides</h1>
-    <p id="hero-description">Explore the beauty of Kyrgyzstan with experienced guides. Adventure, culture, and unforgettable memories await you!</p>
-    <button id="hero-calculator-btn">Calculate Your Tour</button>
-</section>
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <h1 id="hero-title">Tours in Kyrgyzstan</h1>
+    <p id="hero-description">Explore Kyrgyzstan with professional guides and unforgettable adventures.</p>
+    <button id="calculator-btn">Calculate Your Tour</button>
+  </section>
 
-<!-- =================== Sticky Navigation =================== -->
-<nav>
-    <ul>
-        <li><a href="#tours">Tours</a></li>
-        <li><a href="#places">Places</a></li>
-        <li><a href="#activities">Activities</a></li>
-        <li><a href="#guides">Guides</a></li>
-    </ul>
-</nav>
+  <!-- Sticky Navigation -->
+  <nav class="sticky-nav">
+    <a href="#tours">Tours</a>
+    <a href="#places">Places</a>
+    <a href="#activities">Activities</a>
+    <a href="#guides">Guides</a>
+  </nav>
 
-<!-- =================== Tours Section =================== -->
-<section id="tours">
+  <!-- Tours Section -->
+  <section id="tours">
     <h2>Tours</h2>
-    <div class="carousel" id="tours-carousel">
-        <!-- JS вставит карточки из tours.json -->
+    <div class="card-container" id="tours-container">
+      <!-- Cards будут рендериться через JS -->
     </div>
-</section>
+  </section>
 
-<!-- =================== Places Section =================== -->
-<section id="places">
+  <!-- Places Section -->
+  <section id="places">
     <h2>Places</h2>
-    <div class="carousel" id="places-carousel">
-        <!-- JS вставит карточки из places.json -->
+    <div class="card-container" id="places-container">
+      <!-- Cards будут рендериться через JS -->
     </div>
-</section>
+  </section>
 
-<!-- =================== Activities Section =================== -->
-<section id="activities">
+  <!-- Activities Section -->
+  <section id="activities">
     <h2>Activities</h2>
-    <div class="carousel" id="activities-carousel">
-        <!-- JS вставит карточки из activities.json -->
+    <div class="card-container" id="activities-container">
+      <!-- Cards будут рендериться через JS -->
     </div>
-</section>
+  </section>
 
-<!-- =================== Guides Section =================== -->
-<section id="guides">
+  <!-- Guides Section -->
+  <section id="guides">
     <h2>Guides</h2>
-    <div class="carousel" id="guides-carousel">
-        <!-- JS вставит карточки из guides.json -->
+    <div class="card-container" id="guides-container">
+      <!-- Cards будут рендериться через JS -->
     </div>
-</section>
+  </section>
 
-<script src="app.js"></script>
-<script>
-/* =================== Sticky nav scroll offset =================== */
-document.querySelectorAll('nav a').forEach(link => {
-    link.addEventListener('click', function(e) {
+  <!-- App JS -->
+  <script src="app.js"></script>
+  <script>
+    // smooth scroll с корректировкой для sticky nav
+    const navLinks = document.querySelectorAll('nav.sticky-nav a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
-        target.scrollIntoView({behavior: 'smooth', block: 'start'});
-    });
-});
+        const offset = 70; // примерная высота sticky nav
+        const bodyRect = document.body.getBoundingClientRect().top;
+        const elementRect = target.getBoundingClientRect().top;
+        const elementPosition = elementRect - bodyRect;
+        const offsetPosition = elementPosition - offset;
 
-/* =================== Hero calculator button =================== */
-document.getElementById('hero-calculator-btn').addEventListener('click', () => {
-    window.location.href = 'calculator.html';
-});
-</script>
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    // Кнопка перехода к калькулятору
+    document.getElementById('calculator-btn').addEventListener('click', () => {
+      window.location.href = 'calculator.html';
+    });
+  </script>
 </body>
 </html>
