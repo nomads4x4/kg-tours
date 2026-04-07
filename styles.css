@@ -1,209 +1,279 @@
-/* === Общие переменные цветов === */
-:root {
-    --primary-color: #46828f; /* морская волна */
-    --secondary-color: #7aa9b5; /* серо-голубой */
-    --bg-color: #f4f4f4; /* светлый серый фон */
-    --text-color: #333;
-    --accent-color: #46828f;
+/* ================================
+   RESET
+================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* === Общие стили === */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Arial', sans-serif;
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    line-height: 1.5;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #f5f7f8;
+  color: #2b2b2b;
+  line-height: 1.5;
 }
 
-a {
-    text-decoration: none;
-    color: var(--primary-color);
+/* ================================
+   VARIABLES
+================================ */
+
+:root {
+  --primary: #5f7d8a;
+  --accent: #2fa4a9;
+  --accent-light: #e0f3f4;
+  --text: #2b2b2b;
+  --bg: #f5f7f8;
+  --card-bg: #ffffff;
+  --shadow: 0 8px 24px rgba(0,0,0,0.08);
+  --radius: 16px;
 }
 
-img {
-    max-width: 100%;
-    display: block;
+/* ================================
+   HERO
+================================ */
+
+.hero {
+  position: relative;
+  height: 25vh;
+  min-height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
 }
 
-/* === Hero / верхний баннер === */
-.hero, .item-hero {
-    width: 100%;
-    background-size: cover;
-    background-position: center;
-    color: white;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 2rem 1rem;
+.hero img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
 }
 
-.hero h1, .item-hero h1 {
-    font-size: 2rem;
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  z-index: -1;
 }
 
-.hero p, .item-hero p {
-    font-size: 1.2rem;
-    margin-top: 0.5rem;
+.hero-content {
+  max-width: 900px;
+  padding: 20px;
 }
 
-/* === Sticky Navigation === */
-nav {
-    position: sticky;
-    top: 0;
-    background-color: rgba(255,255,255,0.95);
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    padding: 1rem 0;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    z-index: 100;
+.hero h1 {
+  font-size: 28px;
+  margin-bottom: 10px;
 }
 
-nav a {
-    font-weight: bold;
-    color: var(--text-color);
+.hero p {
+  font-size: 16px;
+  margin-bottom: 20px;
 }
 
-nav a:hover {
-    color: var(--primary-color);
+/* ================================
+   BUTTONS
+================================ */
+
+.button {
+  background: linear-gradient(135deg, var(--accent), #4cc6c9);
+  color: white;
+  padding: 14px 24px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-block;
+  transition: 0.2s ease;
 }
 
-/* === Sections === */
-section {
-    padding: 2rem 1rem;
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
 }
 
-section h2 {
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
+/* ================================
+   STICKY NAV
+================================ */
+
+.sticky-nav {
+  position: sticky;
+  top: 0;
+  background: white;
+  padding: 12px;
+  z-index: 100;
+  box-shadow: var(--shadow);
 }
 
-/* === Карточки для Tours/Places/Activities/Guides === */
-.card-carousel {
-    display: flex;
-    overflow-x: auto;
-    gap: 1rem;
-    padding-bottom: 1rem;
+.nav-container {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
 }
+
+.nav-link {
+  white-space: nowrap;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: var(--accent-light);
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.nav-link:hover {
+  background: var(--accent);
+  color: white;
+}
+
+/* ================================
+   SECTIONS
+================================ */
+
+.section {
+  padding: 40px 20px;
+}
+
+.section h2 {
+  margin-bottom: 20px;
+  font-size: 22px;
+}
+
+/* ================================
+   CAROUSEL
+================================ */
+
+.carousel {
+  display: flex;
+  overflow-x: auto;
+  gap: 16px;
+  padding-bottom: 10px;
+}
+
+.carousel::-webkit-scrollbar {
+  display: none;
+}
+
+/* ================================
+   CARD
+================================ */
 
 .card {
-    min-width: 220px;
-    background-color: white;
-    border-radius: 25px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    flex: 0 0 auto;
-    cursor: pointer;
-    transition: transform 0.2s;
-}
-
-.card:hover {
-    transform: scale(1.05);
+  min-width: 260px;
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  text-decoration: none;
+  color: inherit;
 }
 
 .card img {
-    border-top-left-radius: 25px;
-    border-top-right-radius: 25px;
-    height: 150px;
-    object-fit: cover;
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
 }
 
 .card-content {
-    padding: 0.8rem;
+  padding: 14px;
 }
 
-.card-content h3 {
-    font-size: 1.1rem;
-    margin-bottom: 0.3rem;
+.card-title {
+  font-weight: 600;
+  margin-bottom: 6px;
 }
 
-.card-content p {
-    font-size: 0.9rem;
-    color: #555;
+.card-desc {
+  font-size: 14px;
+  color: #666;
 }
 
-/* === Кнопки === */
-button, .button {
-    padding: 0.8rem 2rem;
-    background-color: var(--accent-color);
-    color: white;
-    border: none;
-    border-radius: 25px; /* полвысоты */
-    cursor: pointer;
-    transition: background-color 0.2s;
+/* ================================
+   ITEM PAGE HEADER
+================================ */
+
+.item-header {
+  height: 25vh;
+  min-height: 200px;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  padding: 20px;
+  color: white;
 }
 
-button:hover, .button:hover {
-    background-color: #21867a;
+.item-header img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
 }
 
-/* === Footer === */
-footer {
-    text-align: center;
-    padding: 2rem 1rem;
-    background-color: var(--secondary-color);
-    color: white;
-    margin-top: 3rem;
+.item-header::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  z-index: -1;
 }
 
-footer a {
-    margin: 0 0.5rem;
-    color: white;
+/* ================================
+   FOOTER
+================================ */
+
+.footer {
+  padding: 60px 20px;
+  text-align: center;
 }
 
-/* === Карусели для item.html === */
-.item-carousel {
-    display: flex;
-    overflow-x: auto;
-    gap: 1rem;
-    padding: 1rem;
+.socials {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
 }
 
-.item-carousel img {
-    border-radius: 12px;
-    height: 200px;
-    flex: 0 0 auto;
+.socials a {
+  text-decoration: none;
+  color: var(--accent);
+  font-weight: 600;
 }
 
-/* === Calculator === */
-.calculator {
-    max-width: 800px;
-    margin: auto;
-    padding: 1rem;
+/* ================================
+   BACK BUTTON
+================================ */
+
+.back-button {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
 }
 
-.calculator label {
-    display: block;
-    margin: 0.5rem 0 0.2rem;
-}
+/* ================================
+   DESKTOP
+================================ */
 
-.calculator select, 
-.calculator input {
-    width: 100%;
-    padding: 0.5rem;
-    border-radius: 25px;
-    border: 1px solid #ccc;
-    margin-bottom: 1rem;
-}
+@media (min-width: 768px) {
 
-/* === Адаптивность === */
-@media (max-width: 768px) {
-    .hero h1, .item-hero h1 {
-        font-size: 1.5rem;
-    }
-    .hero p, .item-hero p {
-        font-size: 1rem;
-    }
-    .card {
-        min-width: 180px;
-    }
-    .item-carousel img {
-        height: 150px;
-    }
+  .hero h1 {
+    font-size: 36px;
+  }
+
+  .hero p {
+    font-size: 18px;
+  }
+
+  .card {
+    min-width: 300px;
+  }
+
 }
