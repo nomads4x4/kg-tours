@@ -1,125 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Item Details</title>
-  <link rel="stylesheet" href="styles.css">
-  <style>
-    /* Дополнительные стили для item.html */
-    .item-hero {
-      width: 100%;
-      height: 25vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 1rem;
-      background-size: cover;
-      background-position: center;
-      color: white;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-    }
-    .item-carousel {
-      display: flex;
-      overflow-x: auto;
-      gap: 1rem;
-      padding: 1rem;
-      scroll-behavior: smooth;
-    }
-    .item-carousel img {
-      height: 200px;
-      object-fit: cover;
-      border-radius: 12px;
-    }
-    .item-details {
-      padding: 1rem;
-      max-width: 800px;
-      margin: auto;
-    }
-    .back-btn {
-      margin: 2rem 1rem;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item</title>
+
+<link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
-  <!-- Hero Section -->
-  <section class="item-hero" id="item-hero">
-    <h1 id="item-title">Loading...</h1>
-    <p id="item-type">Loading type...</p>
-  </section>
+<!-- HERO -->
+<header class="hero" id="item-hero">
+    <div class="hero-content container">
+        <h1 id="item-title"></h1>
+    </div>
+</header>
 
-  <!-- Carousel -->
-  <div class="item-carousel" id="item-carousel">
-    <!-- Фотографии будут рендериться сюда -->
-  </div>
+<!-- IMAGE CAROUSEL -->
+<section class="section">
+    <div class="container">
+        <div class="carousel" id="item-carousel"></div>
+    </div>
+</section>
 
-  <!-- Details -->
-  <div class="item-details" id="item-details">
-    <!-- Описание и данные -->
-  </div>
+<!-- DESCRIPTION -->
+<section class="section">
+    <div class="container">
+        <h2 class="section-title">Description</h2>
+        <p id="item-description"></p>
+    </div>
+</section>
 
-  <!-- Back Button -->
-  <button class="btn back-btn" onclick="window.location.href='index.html'">Back to Home</button>
+<!-- DETAILS -->
+<section class="section">
+    <div class="container">
+        <h2 class="section-title">Details</h2>
+        <div id="item-details"></div>
+    </div>
+</section>
 
-  <script src="app.js"></script>
-  <script>
-    // =========================
-    // Get URL parameters
-    // =========================
+<div class="footer-spacer"></div>
+
+<footer>
+    <div class="container">
+        <a href="index.html" class="btn">← Back to main page</a>
+    </div>
+</footer>
+
+<script>
+async function loadJSON(path) {
+    const response = await fetch(path);
+    return await response.json();
+}
+
+function getParams() {
     const params = new URLSearchParams(window.location.search);
-    const type = params.get('type'); // tours, places, activities, guides
-    const id = params.get('id');
+    return {
+        type: params.get('type'),
+        id: params.get('id')
+    };
+}
 
-    async function fetchJSON(path) {
-      const res = await fetch(path);
-      if (!res.ok) throw new Error(`Failed to load ${path}`);
-      return await res.json();
+function renderImages(images) {
+    const container = document.getElementById('item-carousel');
+
+    images.forEach(img => {
+        const card = document.createElement('div');
+        card.className = 'card';
+
+        card.innerHTML = `<img src="${img}" alt="">`;
+        container.appendChild(card);
+    });
+}
+
+function renderDetails(item) {
+    const container = document.getElementById('item-details');
+
+    let html = '';
+
+    if (item.days)
+        html += `<p><strong>Duration:</strong> ${item.days} days</p>`;
+
+    if (item.price)
+        html += `<p><strong>Price:</strong> $${item.price}</p>`;
+
+    if (item.groupPrice)
+        html += `<p><strong>Group Price:</strong> $${item.groupPrice}</p>`;
+
+    if (item.personPrice)
+        html += `<p><strong>Per Person:</strong> $${item.personPrice}</p>`;
+
+    container.innerHTML = html;
+}
+
+function getTitlePrefix(type) {
+    switch(type) {
+        case 'tours': return 'Tour';
+        case 'places': return 'Place';
+        case 'activities': return 'Activity';
+        case 'guides': return 'Guide';
+        default: return '';
     }
+}
 
-    // =========================
-    // Render Item
-    // =========================
-    async function renderItem() {
-      try {
-        const data = await fetchJSON(`data/${type}.json`);
-        const item = data.find(i => i.id === id);
-        if (!item) throw new Error('Item not found');
+async function init() {
+    const {type, id} = getParams();
 
-        // Hero
-        const heroSection = document.getElementById('item-hero');
-        const mainImage = item.images.find(img => img.main) || item.images[0];
-        heroSection.style.backgroundImage = `url('images/${type}/${mainImage.file}')`;
-        document.getElementById('item-title').textContent = item.name;
-        document.getElementById('item-type').textContent = type.charAt(0).toUpperCase() + type.slice(1);
+    const data = await loadJSON(`data/${type}.json`);
+    const item = data.find(i => i.id === id);
 
-        // Carousel
-        const carousel = document.getElementById('item-carousel');
-        item.images.forEach(img => {
-          const image = document.createElement('img');
-          image.src = `images/${type}/${img.file}`;
-          image.alt = item.name;
-          carousel.appendChild(image);
-        });
+    document.getElementById('item-title').textContent =
+        `${getTitlePrefix(type)} / ${item.title}`;
 
-        // Details
-        const details = document.getElementById('item-details');
-        let html = `<p>${item.description || item.shortDescription}</p>`;
-        if (type === 'tours' || type === 'places') {
-          if (item.days) html += `<p><strong>Duration:</strong> ${item.days} day(s)</p>`;
-          if (item.price) html += `<p><strong>Price:</strong> $${item.price}</p>`;
-        }
-        details.innerHTML = html;
+    document.getElementById('item-description').textContent =
+        item.description;
 
-      } catch (err) {
-        console.error(err);
-        document.getElementById('item-title').textContent = 'Error loading item';
-      }
-    }
+    renderImages(item.images);
+    renderDetails(item);
 
-    document.addEventListener('DOMContentLoaded', renderItem);
-  </script>
+    document.getElementById('item-hero').style.backgroundImage =
+        `url(${item.images[0]})`;
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+
 </body>
 </html>
