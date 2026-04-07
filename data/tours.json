@@ -3,7 +3,7 @@
         "id": "sonkul",
         "name": "Son-Kul Lake Tour",
         "shortDescription": "3 days in the highlands of Kyrgyzstan.",
-        "mainImage": "sonkul_main.jpeg",
+        "mainImage": "sonkul_main.jpg",
         "days": 3,
         "price": 150
     },
@@ -11,7 +11,7 @@
         "id": "issykul",
         "name": "Issyk-Kul Adventure",
         "shortDescription": "4 days around the beautiful Issyk-Kul Lake.",
-        "mainImage": "issykul_main.jpeg",
+        "mainImage": "issykul_main.jpg",
         "days": 4,
         "price": 200
     },
@@ -19,7 +19,7 @@
         "id": "alaarcha",
         "name": "Ala-Archa Hiking",
         "shortDescription": "2-day trekking in Ala-Archa National Park.",
-        "mainImage": "alaarcha_main.jpeg",
+        "mainImage": "alaarcha_main.jpg",
         "days": 2,
         "price": 120
     },
@@ -27,7 +27,7 @@
         "id": "jukuvalley",
         "name": "Juku Valley Trek",
         "shortDescription": "Experience Kyrgyz nature on this 3-day trek.",
-        "mainImage": "jukuvalley_main.jpeg",
+        "mainImage": "jukuvalley_main.jpg",
         "days": 3,
         "price": 160
     },
@@ -35,7 +35,7 @@
         "id": "kara-kol",
         "name": "Kara-Kol Cultural Tour",
         "shortDescription": "Explore local traditions and crafts over 2 days.",
-        "mainImage": "karakol_tour_main.jpeg",
+        "mainImage": "karakol_tour_main.jpg",
         "days": 2,
         "price": 130
     }
