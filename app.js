@@ -1,5 +1,5 @@
 // =========================
-// Общая логика для index.html
+// app.js — Полная логика для index.html
 // =========================
 
 // Список секций и соответствующих JSON файлов
@@ -26,7 +26,6 @@ function renderCards(items, containerId, imgFolder, type) {
   const container = document.getElementById(containerId);
 
   items.forEach(item => {
-    // На главной странице используем только фото, отмеченное как main
     const mainPhoto = item.mainPhoto || item.photos[0];
 
     const card = document.createElement('div');
@@ -46,7 +45,6 @@ function renderCards(items, containerId, imgFolder, type) {
     container.appendChild(card);
   });
 
-  // Добавляем кнопки карусели на десктопе
   addCarouselControls(containerId);
 }
 
@@ -103,5 +101,5 @@ function addCarouselControls(containerId) {
 sections.forEach(loadSection);
 
 // =========================
-// Дополнительно: плавный скролл для sticky nav (уже есть в index.html)
+// Плавный скролл для sticky nav уже есть в index.html
 // =========================
