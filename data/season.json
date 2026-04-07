@@ -1,3 +1,6 @@
-[
-    {"start":"2026-06-01","end":"2026-08-31","multiplier":1}
-]
+{
+  "seasonMultiplier": 1,
+  "offSeasonMultiplier": 0.9,
+  "seasonStart": "2026-06-01",
+  "seasonEnd": "2026-09-30"
+}
