@@ -22,5 +22,21 @@
         "mainImage": "alaarcha_main.jpeg",
         "days": 2,
         "price": 120
+    },
+    {
+        "id": "jukuvalley",
+        "name": "Juku Valley Trek",
+        "shortDescription": "Experience Kyrgyz nature on this 3-day trek.",
+        "mainImage": "jukuvalley_main.jpeg",
+        "days": 3,
+        "price": 160
+    },
+    {
+        "id": "kara-kol",
+        "name": "Kara-Kol Cultural Tour",
+        "shortDescription": "Explore local traditions and crafts over 2 days.",
+        "mainImage": "karakol_tour_main.jpeg",
+        "days": 2,
+        "price": 130
     }
 ]
