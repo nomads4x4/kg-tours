@@ -1,42 +1,10 @@
 [
-    {
-        "id": "jyrgalan",
-        "name": "Jyrgalan Valley",
-        "shortDescription": "A beautiful valley for hiking and horse riding.",
-        "mainImage": "jyrgalan_main.jpg",
-        "days": 1,
-        "price": 30
-    },
-    {
-        "id": "karakolvillage",
-        "name": "Kara-Kol Village",
-        "shortDescription": "Cultural stop with local crafts.",
-        "mainImage": "karakol_main.jpg",
-        "days": 1,
-        "price": 25
-    },
-    {
-        "id": "alamedin",
-        "name": "Alamedin Gorge",
-        "shortDescription": "Scenic gorge ideal for trekking.",
-        "mainImage": "alamedin_main.jpg",
-        "days": 1,
-        "price": 35
-    },
-    {
-        "id": "sary-chelek",
-        "name": "Sary-Chelek Lake",
-        "shortDescription": "Stunning alpine lake surrounded by mountains.",
-        "mainImage": "sarychelek_main.jpg",
-        "days": 2,
-        "price": 60
-    },
-    {
-        "id": "song-kol-pasture",
-        "name": "Son-Kul Pastures",
-        "shortDescription": "Traditional yurt stay and horseback riding.",
-        "mainImage": "sonkul_pasture_main.jpg",
-        "days": 1,
-        "price": 50
-    }
+  { "id": "chong-kemin", "name": "Chong-Kemin Valley", "shortDescription": "Beautiful valley with rivers", "days": 1, "price": 20, "images": [{ "file": "chongkemin_main.jpg", "main": true }] },
+  { "id": "konorchek", "name": "Konorchek Canyon", "shortDescription": "Stunning rock formations", "days": 1, "price": 25, "images": [{ "file": "konorchek_main.jpg", "main": true }] },
+  { "id": "grigoryevka", "name": "Grigoryevka Waterfalls", "shortDescription": "Relaxing nature spot", "days": 1, "price": 15, "images": [{ "file": "grigoryevka_main.jpg", "main": true }] },
+  { "id": "tashkent-peak", "name": "Tashkent Peak", "shortDescription": "Hiking and views", "days": 1, "price": 30, "images": [{ "file": "tashkentpeak_main.jpg", "main": true }] },
+  { "id": "son-kul-pastures", "name": "Son-Kul Pastures", "shortDescription": "Nomad experience", "days": 1, "price": 18, "images": [{ "file": "sonkulpastures_main.jpg", "main": true }] },
+  { "id": "suu-bulak", "name": "Suu-Bulak Springs", "shortDescription": "Crystal clear water", "days": 1, "price": 22, "images": [{ "file": "suubulak_main.jpg", "main": true }] },
+  { "id": "karakol-market", "name": "Karakol Market", "shortDescription": "Local culture and souvenirs", "days": 1, "price": 10, "images": [{ "file": "karakolmarket_main.jpg", "main": true }] },
+  { "id": "almaty-road", "name": "Almaty Road Stop", "shortDescription": "Scenic drive point", "days": 1, "price": 12, "images": [{ "file": "almatyroad_main.jpg", "main": true }] }
 ]
