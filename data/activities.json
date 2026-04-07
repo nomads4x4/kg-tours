@@ -1,24 +1,26 @@
 [
   {
-    "id": "shyrdak_workshop",
-    "name": "Shyrdak Workshop",
-    "shortDescription": "Learn to make traditional Kyrgyz felt carpets.",
-    "pricePerPerson": 20,
-    "photos": [
-      {"filename": "shyrdak_main.jpg", "main": true},
-      {"filename": "shyrdak_1.jpg", "main": false},
-      {"filename": "shyrdak_2.jpg", "main": false}
-    ]
+    "id": "felt-masterclass",
+    "name": "Felt Making Masterclass",
+    "shortDescription": "Learn to make traditional Kyrgyz felt products.",
+    "mainImage": "felt-main.jpg",
+    "images": ["felt-1.jpg","felt-2.jpg"],
+    "pricePerPerson": 15
   },
   {
-    "id": "berkut_show",
-    "name": "Berkut Show",
-    "shortDescription": "Watch an amazing eagle hunting demonstration.",
-    "pricePerPerson": 25,
-    "photos": [
-      {"filename": "berkut_main.jpg", "main": true},
-      {"filename": "berkut_1.jpg", "main": false},
-      {"filename": "berkut_2.jpg", "main": false}
-    ]
+    "id": "eagle-show",
+    "name": "Eagle Hunting Show",
+    "shortDescription": "Watch traditional Berkut hunting demonstration.",
+    "mainImage": "eagle-main.jpg",
+    "images": ["eagle-1.jpg","eagle-2.jpg"],
+    "pricePerGroup": 50
+  },
+  {
+    "id": "horseback-riding",
+    "name": "Horseback Riding",
+    "shortDescription": "Ride horses in scenic valleys.",
+    "mainImage": "horse-main.jpg",
+    "images": ["horse-1.jpg","horse-2.jpg"],
+    "pricePerPerson": 20
   }
 ]
