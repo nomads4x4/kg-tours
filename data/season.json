@@ -1,6 +1,6 @@
 {
-  "seasonMultiplier": 1,
-  "offSeasonMultiplier": 0.9,
-  "seasonStart": "2026-06-01",
-  "seasonEnd": "2026-09-30"
+"start":"2026-05-01",
+"end":"2026-09-30",
+"high":1,
+"low":0.9
 }
