@@ -1,59 +1,26 @@
 [
   {
-    "id": "burana",
-    "name": "Burana Tower",
-    "shortDescription": "Visit the ancient minaret near Tokmok.",
-    "images": [
-      "images/places/burana_main.jpg",
-      "images/places/burana_1.jpg"
-    ],
-    "days": 0,
-    "price": 10
-  },
-  {
-    "id": "jyrgalan",
+    "id": "jyrgalan_valley",
     "name": "Jyrgalan Valley",
-    "shortDescription": "A hidden valley perfect for trekking and nature lovers.",
-    "images": [
-      "images/places/jyrgalan_main.jpg",
-      "images/places/jyrgalan_1.jpg",
-      "images/places/jyrgalan_2.jpg"
-    ],
+    "shortDescription": "Hidden valley with stunning mountain views.",
     "days": 1,
-    "price": 30
+    "price": 50,
+    "photos": [
+      {"filename": "jyrgalan_main.jpg", "main": true},
+      {"filename": "jyrgalan_1.jpg", "main": false},
+      {"filename": "jyrgalan_2.jpg", "main": false}
+    ]
   },
   {
-    "id": "alamedinvalley",
-    "name": "Alamedin Valley",
-    "shortDescription": "Scenic valley with waterfalls and picnic spots.",
-    "images": [
-      "images/places/alamedinvalley_main.jpg",
-      "images/places/alamedinvalley_1.jpg"
-    ],
+    "id": "sary_chelek",
+    "name": "Sary-Chelek Lake",
+    "shortDescription": "Pristine natural lake in western Kyrgyzstan.",
     "days": 1,
-    "price": 25
-  },
-  {
-    "id": "arslanbob",
-    "name": "Arslanbob Walnut Forest",
-    "shortDescription": "Walk through the largest walnut forest in the world.",
-    "images": [
-      "images/places/arslanbob_main.jpg",
-      "images/places/arslanbob_1.jpg",
-      "images/places/arslanbob_2.jpg"
-    ],
-    "days": 1,
-    "price": 20
-  },
-  {
-    "id": "sonkulcamp",
-    "name": "Song-Kul Nomad Camp",
-    "shortDescription": "Experience authentic nomadic lifestyle and yurts.",
-    "images": [
-      "images/places/sonkulcamp_main.jpg",
-      "images/places/sonkulcamp_1.jpg"
-    ],
-    "days": 0,
-    "price": 40
+    "price": 60,
+    "photos": [
+      {"filename": "sary_main.jpg", "main": true},
+      {"filename": "sary_1.jpg", "main": false},
+      {"filename": "sary_2.jpg", "main": false}
+    ]
   }
 ]
