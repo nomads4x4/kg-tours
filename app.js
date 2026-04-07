@@ -1,105 +1,116 @@
-// =========================
-// app.js — Полная логика для index.html
-// =========================
+/* =================== Общий JS для kg-tours =================== */
 
-// Список секций и соответствующих JSON файлов
-const sections = [
-  { id: 'tours', json: 'data/tours.json', imgFolder: 'tours' },
-  { id: 'places', json: 'data/places.json', imgFolder: 'places' },
-  { id: 'activities', json: 'data/activities.json', imgFolder: 'activities' },
-  { id: 'guides', json: 'data/guides.json', imgFolder: 'guides' },
-];
+/* ======= Функция рендера карточек ======= */
+async function renderSection(sectionId, jsonPath, carouselId) {
+    try {
+        const res = await fetch(jsonPath);
+        const data = await res.json();
+        const carousel = document.getElementById(carouselId);
+        carousel.innerHTML = ''; // очистка перед рендером
 
-// Функция для подгрузки JSON и рендера карточек
-async function loadSection(section) {
-  try {
-    const res = await fetch(section.json);
-    const data = await res.json();
-    renderCards(data, section.id + '-carousel', section.imgFolder, section.id);
-  } catch (err) {
-    console.error(`Ошибка загрузки ${section.json}:`, err);
-  }
+        data.forEach(item => {
+            // выберем главное фото для карточки
+            const mainPhoto = item.photos.find(p => p.main) || item.photos[0];
+
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.addEventListener('click', () => {
+                window.location.href = `item.html?type=${sectionId}&id=${item.id}`;
+            });
+
+            card.innerHTML = `
+                <img src="images/${sectionId}/${mainPhoto.filename}" alt="${item.name}">
+                <div class="card-content">
+                    <h3>${item.name}</h3>
+                    <p>${item.shortDescription}</p>
+                </div>
+            `;
+            carousel.appendChild(card);
+        });
+    } catch (err) {
+        console.error(`Ошибка загрузки ${jsonPath}:`, err);
+    }
 }
 
-// Рендер карточек в контейнер
-function renderCards(items, containerId, imgFolder, type) {
-  const container = document.getElementById(containerId);
+/* ======= Рендер всех секций ======= */
+renderSection('tours', 'data/tours.json', 'tours-carousel');
+renderSection('places', 'data/places.json', 'places-carousel');
+renderSection('activities', 'data/activities.json', 'activities-carousel');
+renderSection('guides', 'data/guides.json', 'guides-carousel');
 
-  items.forEach(item => {
-    const mainPhoto = item.mainPhoto || item.photos[0];
+/* ======= Sticky nav — плавный scroll + позиционирование ======= */
+document.querySelectorAll('nav a').forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        const navHeight = document.querySelector('nav').offsetHeight;
+        const targetPosition = target.getBoundingClientRect().top + window.scrollY - navHeight;
+        window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+        });
+    });
+});
 
-    const card = document.createElement('div');
-    card.classList.add('card');
-    card.innerHTML = `
-      <img src="images/${imgFolder}/${mainPhoto}" alt="${item.name}">
-      <div class="card-info">
-        <h3>${item.name}</h3>
-        <p>${item.shortDescription}</p>
-      </div>
-    `;
+/* ======= Hero — фон из JSON ======= */
+async function loadHero() {
+    try {
+        const res = await fetch('data/hero.json');
+        const heroData = await res.json();
+        const heroSection = document.querySelector('.hero');
+        heroSection.style.backgroundImage = `url('images/hero/${heroData.background}')`;
+        document.getElementById('hero-title').textContent = heroData.title;
+        document.getElementById('hero-description').textContent = heroData.description;
+    } catch (err) {
+        console.error('Ошибка загрузки hero.json:', err);
+    }
+}
+loadHero();
 
-    card.addEventListener('click', () => {
-      window.location.href = `item.html?type=${type}&id=${item.id}`;
+/* ======= Carousel свайп на мобилке (touch) ======= */
+function enableSwipe(carouselId) {
+    const carousel = document.getElementById(carouselId);
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    carousel.addEventListener('mousedown', (e) => {
+        isDown = true;
+        carousel.classList.add('active');
+        startX = e.pageX - carousel.offsetLeft;
+        scrollLeft = carousel.scrollLeft;
     });
 
-    container.appendChild(card);
-  });
+    carousel.addEventListener('mouseleave', () => {
+        isDown = false;
+        carousel.classList.remove('active');
+    });
 
-  addCarouselControls(containerId);
+    carousel.addEventListener('mouseup', () => {
+        isDown = false;
+        carousel.classList.remove('active');
+    });
+
+    carousel.addEventListener('mousemove', (e) => {
+        if(!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - carousel.offsetLeft;
+        const walk = (x - startX) * 2; // скорость скролла
+        carousel.scrollLeft = scrollLeft - walk;
+    });
+
+    // touch events
+    let startTouchX = 0;
+    let scrollStart = 0;
+    carousel.addEventListener('touchstart', (e) => {
+        startTouchX = e.touches[0].pageX;
+        scrollStart = carousel.scrollLeft;
+    });
+    carousel.addEventListener('touchmove', (e) => {
+        const touchX = e.touches[0].pageX;
+        const walk = (touchX - startTouchX) * 2;
+        carousel.scrollLeft = scrollStart - walk;
+    });
 }
 
-// =========================
-// Горизонтальная карусель
-// =========================
-function addCarouselControls(containerId) {
-  const container = document.getElementById(containerId);
-
-  // Создаем кнопки
-  const btnPrev = document.createElement('button');
-  btnPrev.innerHTML = '&#8592;';
-  btnPrev.classList.add('carousel-btn', 'prev-btn');
-
-  const btnNext = document.createElement('button');
-  btnNext.innerHTML = '&#8594;';
-  btnNext.classList.add('carousel-btn', 'next-btn');
-
-  // Стили кнопок через JS
-  [btnPrev, btnNext].forEach(btn => {
-    btn.style.position = 'absolute';
-    btn.style.top = '50%';
-    btn.style.transform = 'translateY(-50%)';
-    btn.style.background = 'rgba(93, 173, 226, 0.8)';
-    btn.style.border = 'none';
-    btn.style.color = 'white';
-    btn.style.fontSize = '1.5rem';
-    btn.style.cursor = 'pointer';
-    btn.style.padding = '0.3rem 0.8rem';
-    btn.style.borderRadius = '50%';
-    btn.style.zIndex = 10;
-  });
-
-  btnPrev.style.left = '5px';
-  btnNext.style.right = '5px';
-
-  // Навешиваем события
-  btnPrev.addEventListener('click', () => {
-    container.scrollBy({ left: -container.offsetWidth * 0.8, behavior: 'smooth' });
-  });
-  btnNext.addEventListener('click', () => {
-    container.scrollBy({ left: container.offsetWidth * 0.8, behavior: 'smooth' });
-  });
-
-  // Позиционируем контейнер относительно для кнопок
-  container.style.position = 'relative';
-  container.appendChild(btnPrev);
-  container.appendChild(btnNext);
-}
-
-// =========================
-// Инициализация всех секций
-// =========================
-sections.forEach(loadSection);
-
-// =========================
-// Плавный скролл для sticky nav уже есть в index.html
-// =========================
+['tours-carousel','places-carousel','activities-carousel','guides-carousel'].forEach(enableSwipe);
