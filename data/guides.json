@@ -1,26 +1,37 @@
 [
-  {
-    "id": "erkin",
-    "name": "Erkin",
-    "shortDescription": "Experienced guide with 10+ years of mountain tours.",
-    "mainImage": "erkin-main.jpg",
-    "images": ["erkin-1.jpg","erkin-2.jpg"],
-    "pricePerDay": 40
-  },
-  {
-    "id": "aida",
-    "name": "Aida",
-    "shortDescription": "Specializes in cultural and historical tours.",
-    "mainImage": "aida-main.jpg",
-    "images": ["aida-1.jpg","aida-2.jpg"],
-    "pricePerDay": 35
-  },
-  {
-    "id": "bek",
-    "name": "Bek",
-    "shortDescription": "Expert in adventure and hiking tours.",
-    "mainImage": "bek-main.jpg",
-    "images": ["bek-1.jpg","bek-2.jpg"],
-    "pricePerDay": 45
-  }
+    {
+        "id": "erkin",
+        "name": "Erkin",
+        "shortDescription": "Expert guide with 10 years of experience.",
+        "mainImage": "erkin_main.jpeg",
+        "price": 60
+    },
+    {
+        "id": "gulmira",
+        "name": "Gulmira",
+        "shortDescription": "Friendly guide who knows every hidden path.",
+        "mainImage": "gulmira_main.jpeg",
+        "price": 55
+    },
+    {
+        "id": "bek",
+        "name": "Bek",
+        "shortDescription": "Experienced trek leader and photographer.",
+        "mainImage": "bek_main.jpeg",
+        "price": 50
+    },
+    {
+        "id": "aijan",
+        "name": "Aijan",
+        "shortDescription": "Local expert with passion for history.",
+        "mainImage": "aijan_main.jpeg",
+        "price": 45
+    },
+    {
+        "id": "talant",
+        "name": "Talant",
+        "shortDescription": "Adventure guide specializing in mountains.",
+        "mainImage": "talant_main.jpeg",
+        "price": 65
+    }
 ]
