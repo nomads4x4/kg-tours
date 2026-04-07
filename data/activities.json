@@ -1,26 +1,37 @@
 [
-  {
-    "id": "felt-masterclass",
-    "name": "Felt Making Masterclass",
-    "shortDescription": "Learn to make traditional Kyrgyz felt products.",
-    "mainImage": "felt-main.jpg",
-    "images": ["felt-1.jpg","felt-2.jpg"],
-    "pricePerPerson": 15
-  },
-  {
-    "id": "eagle-show",
-    "name": "Eagle Hunting Show",
-    "shortDescription": "Watch traditional Berkut hunting demonstration.",
-    "mainImage": "eagle-main.jpg",
-    "images": ["eagle-1.jpg","eagle-2.jpg"],
-    "pricePerGroup": 50
-  },
-  {
-    "id": "horseback-riding",
-    "name": "Horseback Riding",
-    "shortDescription": "Ride horses in scenic valleys.",
-    "mainImage": "horse-main.jpg",
-    "images": ["horse-1.jpg","horse-2.jpg"],
-    "pricePerPerson": 20
-  }
+    {
+        "id": "berkut",
+        "name": "Berkut Falcon Show",
+        "shortDescription": "Traditional eagle hunting demonstration.",
+        "mainImage": "berkut_main.jpeg",
+        "price": 50
+    },
+    {
+        "id": "shyrdak",
+        "name": "Shyrdak Workshop",
+        "shortDescription": "Make your own Kyrgyz felt carpet.",
+        "mainImage": "shyrdak_main.jpeg",
+        "price": 40
+    },
+    {
+        "id": "horseback",
+        "name": "Horseback Riding",
+        "shortDescription": "Ride through scenic pastures and valleys.",
+        "mainImage": "horseback_main.jpeg",
+        "price": 30
+    },
+    {
+        "id": "canoeing",
+        "name": "Canoeing on Issyk-Kul",
+        "shortDescription": "Enjoy water adventures on the lake.",
+        "mainImage": "canoeing_main.jpeg",
+        "price": 35
+    },
+    {
+        "id": "cooking",
+        "name": "Kyrgyz Cooking Class",
+        "shortDescription": "Learn to cook traditional dishes.",
+        "mainImage": "cooking_main.jpeg",
+        "price": 25
+    }
 ]
