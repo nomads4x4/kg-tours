@@ -1,80 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kyrgyzstan Tours</title>
-
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kyrgyzstan Tours</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<!-- HERO -->
-<header class="hero" id="hero">
-    <div class="hero-overlay container">
-        <h1 id="hero-title">Kyrgyzstan Tours</h1>
-        <p id="hero-description">
-            Discover Kyrgyzstan with professional guides
-        </p>
-        <a href="calculator.html">
-            <button class="button">Calculate Tour</button>
-        </a>
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-content container">
+      <h1 id="hero-title">Tours in Kyrgyzstan with Professional Guides</h1>
+      <p id="hero-description">Discover the best routes, activities, and places in Kyrgyzstan</p>
+      <a href="calculator.html" class="button">Calculate Your Tour</a>
     </div>
-</header>
+  </section>
 
-<!-- STICKY NAV -->
-<nav class="nav">
-    <div class="nav-inner">
-        <a href="#tours">Tours</a>
-        <a href="#places">Places</a>
-        <a href="#activities">Activities</a>
-        <a href="#guides">Guides</a>
+  <!-- STICKY NAV -->
+  <nav class="sticky-nav">
+    <div class="container nav-list">
+      <a href="#tours">Tours</a>
+      <a href="#places">Places</a>
+      <a href="#activities">Activities</a>
+      <a href="#guides">Guides</a>
     </div>
-</nav>
+  </nav>
 
-<!-- TOURS -->
-<section class="section container" id="tours">
-    <h2>Tours</h2>
-    <div class="carousel" id="tours-carousel">
-        <!-- cards from JS -->
+  <!-- TOURS SECTION -->
+  <section id="tours">
+    <h2 class="section-title container">Main Tours</h2>
+    <div class="container carousel" id="tours-carousel">
+      <!-- JS will render tour cards here -->
     </div>
-</section>
+  </section>
 
-<!-- PLACES -->
-<section class="section container" id="places">
-    <h2>Places</h2>
-    <div class="carousel" id="places-carousel">
-        <!-- cards from JS -->
+  <!-- PLACES SECTION -->
+  <section id="places">
+    <h2 class="section-title container">Additional Places</h2>
+    <div class="container carousel" id="places-carousel">
+      <!-- JS will render place cards here -->
     </div>
-</section>
+  </section>
 
-<!-- ACTIVITIES -->
-<section class="section container" id="activities">
-    <h2>Activities</h2>
-    <div class="carousel" id="activities-carousel">
-        <!-- cards from JS -->
+  <!-- ACTIVITIES SECTION -->
+  <section id="activities">
+    <h2 class="section-title container">Activities</h2>
+    <div class="container carousel" id="activities-carousel">
+      <!-- JS will render activity cards here -->
     </div>
-</section>
+  </section>
 
-<!-- GUIDES -->
-<section class="section container" id="guides">
-    <h2>Guides</h2>
-    <div class="carousel" id="guides-carousel">
-        <!-- cards from JS -->
+  <!-- GUIDES SECTION -->
+  <section id="guides">
+    <h2 class="section-title container">Professional Guides</h2>
+    <div class="container carousel" id="guides-carousel">
+      <!-- JS will render guide cards here -->
     </div>
-</section>
+  </section>
 
-<!-- FOOTER -->
-<footer class="footer">
-    <div>
-        <p>Follow us</p>
-        <p>
-            Instagram · TikTok · Telegram
-        </p>
-    </div>
-</footer>
+  <!-- FOOTER SPACER -->
+  <div class="footer-spacer"></div>
 
-<script src="app.js"></script>
+  <!-- FOOTER -->
+  <footer>
+    <p>Follow us on:</p>
+    <a href="#" target="_blank">Instagram</a> |
+    <a href="#" target="_blank">TikTok</a> |
+    <a href="#" target="_blank">Telegram</a>
+  </footer>
 
+  <!-- JS -->
+  <script src="app.js"></script>
 </body>
 </html>
