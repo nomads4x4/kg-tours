@@ -1,189 +1,226 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tour Calculator</title>
-  <link rel="stylesheet" href="styles.css">
-  <style>
-    .item-hero {
-      width: 100%;
-      height: 25vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 1rem;
-      background-color: #4c9ca0;
-      color: white;
-    }
-    .calculator {
-      max-width: 800px;
-      margin: 2rem auto;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      padding: 1rem;
-    }
-    label {
-      font-weight: bold;
-    }
-    select, input {
-      padding: 0.5rem;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      width: 100%;
-    }
-    .btn-calc {
-      padding: 0.75rem;
-      background-color: #4c9ca0;
-      color: white;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      font-size: 1rem;
-    }
-    .result {
-      margin-top: 1rem;
-      font-weight: bold;
-    }
-    .back-btn {
-      margin: 2rem 1rem;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tour Calculator</title>
+
+<link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
-  <section class="item-hero">
-    <h1>Tour Calculator</h1>
-    <p>Calculate your trip cost with selected parameters</p>
-  </section>
+<header class="hero">
+    <div class="hero-content container">
+        <h1>Tour / Calculator</h1>
+    </div>
+</header>
 
-  <div class="calculator">
-    <label for="people">Number of People</label>
-    <input type="number" id="people" min="1" value="1">
+<section class="section">
+<div class="container">
 
-    <label for="date">Trip Date</label>
-    <input type="date" id="date">
+<h2 class="section-title">Tour Parameters</h2>
 
-    <label for="tour">Select Tour</label>
-    <select id="tour"></select>
+<!-- PEOPLE -->
+<div class="form-block">
+<label>Number of People</label>
+<select id="people"></select>
+</div>
 
-    <label for="places">Additional Places</label>
-    <select id="places" multiple></select>
+<!-- DATE -->
+<div class="form-block">
+<label>Trip Date</label>
+<input type="date" id="tripDate">
+</div>
 
-    <label for="activities">Additional Activities</label>
-    <select id="activities" multiple></select>
+<!-- TOUR -->
+<div class="form-block">
+<label>Select Tour</label>
+<select id="tour"></select>
+</div>
 
-    <label for="guide">Select Guide</label>
-    <select id="guide"></select>
+<!-- PLACES -->
+<div class="form-block">
+<label>Additional Places</label>
+<div id="places"></div>
+</div>
 
-    <button class="btn-calc" id="calculate-btn">Calculate Total</button>
+<!-- ACTIVITIES -->
+<div class="form-block">
+<label>Additional Activities</label>
+<div id="activities"></div>
+</div>
 
-    <div class="result" id="result"></div>
-    <a id="contact-link" target="_blank" style="display:none;">Contact via WhatsApp/Telegram</a>
-  </div>
+<!-- GUIDE -->
+<div class="form-block">
+<label>Select Guide</label>
+<select id="guide"></select>
+</div>
 
-  <button class="btn back-btn" onclick="window.location.href='index.html'">Back to Home</button>
+<br>
 
-  <script src="app.js"></script>
-  <script>
-    async function fetchJSON(path) {
-      const res = await fetch(path);
-      if (!res.ok) throw new Error(`Failed to load ${path}`);
-      return await res.json();
+<button class="btn" onclick="calculate()">Calculate</button>
+<span id="total" style="margin-left:20px;font-weight:bold;"></span>
+
+<br><br>
+
+<button class="btn" id="whatsapp">WhatsApp</button>
+<button class="btn" id="telegram">Telegram</button>
+
+</div>
+</section>
+
+<div class="footer-spacer"></div>
+
+<footer>
+<div class="container">
+<a href="index.html" class="btn">← Back to main page</a>
+</div>
+</footer>
+
+<script>
+
+async function loadJSON(path){
+    const r = await fetch(path);
+    return await r.json();
+}
+
+let tours, places, activities, guides, season;
+
+async function init(){
+
+    tours = await loadJSON('data/tours.json');
+    places = await loadJSON('data/places.json');
+    activities = await loadJSON('data/activities.json');
+    guides = await loadJSON('data/guides.json');
+    season = await loadJSON('data/season.json');
+
+    // people
+    const people = document.getElementById('people');
+    for(let i=1;i<=32;i++){
+        people.innerHTML += `<option value="${i}">${i}</option>`;
     }
 
-    async function initCalculator() {
-      const tours = await fetchJSON('data/tours.json');
-      const places = await fetchJSON('data/places.json');
-      const activities = await fetchJSON('data/activities.json');
-      const guides = await fetchJSON('data/guides.json');
-      const season = await fetchJSON('data/season.json');
+    // tours
+    const tour = document.getElementById('tour');
+    tours.forEach(t=>{
+        tour.innerHTML += `<option value="${t.id}">${t.title}</option>`;
+    });
 
-      const tourSelect = document.getElementById('tour');
-      tours.forEach(t => {
-        const opt = document.createElement('option');
-        opt.value = t.id;
-        opt.textContent = t.name;
-        tourSelect.appendChild(opt);
-      });
+    // places
+    const placesDiv = document.getElementById('places');
+    places.forEach(p=>{
+        placesDiv.innerHTML += `
+        <div>
+            <input type="checkbox" value="${p.id}">
+            ${p.title}
+        </div>`;
+    });
 
-      const placesSelect = document.getElementById('places');
-      places.forEach(p => {
-        const opt = document.createElement('option');
-        opt.value = p.id;
-        opt.textContent = `${p.name} (+${p.days} days, $${p.price})`;
-        placesSelect.appendChild(opt);
-      });
+    // activities
+    const actDiv = document.getElementById('activities');
+    activities.forEach(a=>{
+        actDiv.innerHTML += `
+        <div>
+            <input type="checkbox" value="${a.id}">
+            ${a.title}
+        </div>`;
+    });
 
-      const activitiesSelect = document.getElementById('activities');
-      activities.forEach(a => {
-        const opt = document.createElement('option');
-        opt.value = a.id;
-        opt.textContent = `${a.name} ($${a.price})`;
-        activitiesSelect.appendChild(opt);
-      });
+    // guides
+    const guide = document.getElementById('guide');
+    guides.forEach(g=>{
+        guide.innerHTML += `<option value="${g.id}">${g.title}</option>`;
+    });
 
-      const guideSelect = document.getElementById('guide');
-      guides.forEach(g => {
-        const opt = document.createElement('option');
-        opt.value = g.id;
-        opt.textContent = `${g.name} ($${g.price}/day)`;
-        guideSelect.appendChild(opt);
-      });
+}
 
-      document.getElementById('calculate-btn').addEventListener('click', () => {
-        const people = parseInt(document.getElementById('people').value);
-        const date = new Date(document.getElementById('date').value);
-        const tour = tours.find(t => t.id === tourSelect.value);
-        const selectedPlaces = Array.from(placesSelect.selectedOptions).map(o => places.find(p => p.id === o.value));
-        const selectedActivities = Array.from(activitiesSelect.selectedOptions).map(o => activities.find(a => a.id === o.value));
-        const guide = guides.find(g => g.id === guideSelect.value);
+function getSeasonMultiplier(date){
+    const d = new Date(date);
+    const start = new Date(season.start);
+    const end = new Date(season.end);
 
-        // total days
-        const totalDays = tour.days + selectedPlaces.reduce((sum,p)=>sum+p.days,0);
-
-        // number of guides
-        const guidesCount = Math.ceil(people / 4);
-
-        // activities price
-        const activitiesPrice = selectedActivities.reduce((sum,a)=>sum+a.price,0);
-
-        // season multiplier
-        const seasonStart = new Date(season.seasonStart);
-        const seasonEnd = new Date(season.seasonEnd);
-        const multiplier = (date >= seasonStart && date <= seasonEnd) ? season.seasonMultiplier : season.offSeasonMultiplier;
-
-        // total price
-        let totalPrice = (tour.price + selectedPlaces.reduce((sum,p)=>sum+p.price,0) + activitiesPrice + (guidesCount * guide.price * totalDays)) * multiplier;
-
-        totalPrice = Math.round(totalPrice);
-
-        const resultDiv = document.getElementById('result');
-        resultDiv.textContent = `Total Price: $${totalPrice} for ${people} people, ${totalDays} days, ${guidesCount} guide(s).`;
-
-        // Contact link
-        const contactLink = document.getElementById('contact-link');
-        let message = `Добрый день! Я подобрал следующие параметры для тура:\n`;
-        message += `People: ${people}\n`;
-        message += `Date: ${date.toLocaleDateString()}\n`;
-        message += `Tour: ${tour.name}\n`;
-        if(selectedPlaces.length) message += `Places: ${selectedPlaces.map(p=>p.name).join(', ')}\n`;
-        if(selectedActivities.length) message += `Activities: ${selectedActivities.map(a=>a.name).join(', ')}\n`;
-        message += `Guide: ${guide.name}\n`;
-        message += `Total Price: $${totalPrice}`;
-
-        const whatsappUrl = `https://wa.me/996555900855?text=${encodeURIComponent(message)}`;
-        contactLink.href = whatsappUrl;
-        contactLink.style.display = 'inline-block';
-        contactLink.textContent = 'Contact via WhatsApp/Telegram';
-      });
+    if(d >= start && d <= end){
+        return season.high;
     }
+    return season.low;
+}
 
-    document.addEventListener('DOMContentLoaded', initCalculator);
-  </script>
+function calculate(){
+
+    const people = parseInt(document.getElementById('people').value);
+    const date = document.getElementById('tripDate').value;
+
+    const tourId = document.getElementById('tour').value;
+    const guideId = document.getElementById('guide').value;
+
+    const tour = tours.find(t=>t.id===tourId);
+    const guide = guides.find(g=>g.id===guideId);
+
+    let selectedPlaces = [...document.querySelectorAll('#places input:checked')]
+        .map(i=>places.find(p=>p.id===i.value));
+
+    let selectedActivities = [...document.querySelectorAll('#activities input:checked')]
+        .map(i=>activities.find(a=>a.id===i.value));
+
+    const totalDays =
+        tour.days +
+        selectedPlaces.reduce((s,p)=>s+p.days,0);
+
+    const guidesCount = Math.ceil(people/4);
+
+    const placesPrice =
+        selectedPlaces.reduce((s,p)=>s+p.price,0);
+
+    const activitiesPrice =
+        selectedActivities.reduce((s,a)=>{
+            if(a.personPrice)
+                return s + a.personPrice * people;
+            if(a.groupPrice)
+                return s + a.groupPrice;
+            return s;
+        },0);
+
+    const seasonMultiplier = getSeasonMultiplier(date);
+
+    const total =
+        (
+        tour.price +
+        placesPrice +
+        activitiesPrice +
+        (guidesCount * guide.price * totalDays)
+        ) * seasonMultiplier;
+
+    document.getElementById('total').textContent =
+        "Total: $" + Math.round(total);
+
+    const params =
+        `People: ${people}, `+
+        `Date: ${date}, `+
+        `Tour: ${tour.title}`;
+
+    const text =
+`Hello, I have selected the following parameters for the tour:
+${params}
+and would like to discuss booking this tour (-:`;
+
+    document.getElementById('whatsapp').onclick = () => {
+        window.open(
+            "https://wa.me/996555900855?text="+encodeURIComponent(text)
+        );
+    };
+
+    document.getElementById('telegram').onclick = () => {
+        window.open(
+            "https://t.me/ErkinMms?text="+encodeURIComponent(text)
+        );
+    };
+
+}
+
+document.addEventListener('DOMContentLoaded', init);
+
+</script>
 
 </body>
 </html>
