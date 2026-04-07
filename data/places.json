@@ -1,38 +1,42 @@
 [
-  {
-    "id": "son-kul-island",
-    "name": "Son-Kul Island",
-    "shortDescription": "Peaceful island in the middle of Son-Kul lake.",
-    "mainImage": "son-island-main.jpg",
-    "images": ["son-island-1.jpg","son-island-2.jpg"],
-    "days": 0,
-    "price": 10
-  },
-  {
-    "id": "ala-archa-waterfall",
-    "name": "Ala-Archa Waterfall",
-    "shortDescription": "Hidden waterfall on the hiking route.",
-    "mainImage": "ala-water-main.jpg",
-    "images": ["ala-water-1.jpg","ala-water-2.jpg"],
-    "days": 0,
-    "price": 5
-  },
-  {
-    "id": "burana-tower",
-    "name": "Burana Tower",
-    "shortDescription": "Historic minaret near Tokmok city.",
-    "mainImage": "burana-main.jpg",
-    "images": ["burana-1.jpg","burana-2.jpg"],
-    "days": 0,
-    "price": 8
-  },
-  {
-    "id": "issyk-beach",
-    "name": "Issyk-Kul Beach",
-    "shortDescription": "Relaxing beach with crystal clear water.",
-    "mainImage": "issyk-beach-main.jpg",
-    "images": ["issyk-beach-1.jpg","issyk-beach-2.jpg"],
-    "days": 0,
-    "price": 0
-  }
+    {
+        "id": "jyrgalan",
+        "name": "Jyrgalan Valley",
+        "shortDescription": "A beautiful valley for hiking and horse riding.",
+        "mainImage": "jyrgalan_main.jpeg",
+        "days": 1,
+        "price": 30
+    },
+    {
+        "id": "karakolvillage",
+        "name": "Kara-Kol Village",
+        "shortDescription": "Cultural stop with local crafts.",
+        "mainImage": "karakol_main.jpeg",
+        "days": 1,
+        "price": 25
+    },
+    {
+        "id": "alamedin",
+        "name": "Alamedin Gorge",
+        "shortDescription": "Scenic gorge ideal for trekking.",
+        "mainImage": "alamedin_main.jpeg",
+        "days": 1,
+        "price": 35
+    },
+    {
+        "id": "sary-chelek",
+        "name": "Sary-Chelek Lake",
+        "shortDescription": "Stunning alpine lake surrounded by mountains.",
+        "mainImage": "sarychelek_main.jpeg",
+        "days": 2,
+        "price": 60
+    },
+    {
+        "id": "song-kol-pasture",
+        "name": "Son-Kul Pastures",
+        "shortDescription": "Traditional yurt stay and horseback riding.",
+        "mainImage": "sonkul_pasture_main.jpeg",
+        "days": 1,
+        "price": 50
+    }
 ]
