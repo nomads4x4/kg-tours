@@ -1,26 +1,47 @@
 [
   {
     "id": "sonkul",
-    "name": "Son-Kul Lake",
-    "shortDescription": "A high-altitude alpine lake surrounded by nomadic pastures.",
+    "name": "Son-Kul Tour",
+    "shortDescription": "3 days tour to the beautiful Son-Kul lake.",
+    "mainImage": "sonkul-main.jpg",
+    "images": ["sonkul-1.jpg","sonkul-2.jpg","sonkul-3.jpg"],
     "days": 3,
-    "price": 200,
-    "photos": [
-      {"filename": "sonkul_main.jpg", "main": true},
-      {"filename": "sonkul_1.jpg", "main": false},
-      {"filename": "sonkul_2.jpg", "main": false}
-    ]
+    "price": 100
   },
   {
-    "id": "issykul",
-    "name": "Issyk-Kul Lake",
-    "shortDescription": "The world’s second largest alpine lake with crystal waters.",
+    "id": "issyk-kul",
+    "name": "Issyk-Kul Tour",
+    "shortDescription": "2 days around Issyk-Kul lake with amazing scenery.",
+    "mainImage": "issyk-main.jpg",
+    "images": ["issyk-1.jpg","issyk-2.jpg","issyk-3.jpg"],
     "days": 2,
-    "price": 180,
-    "photos": [
-      {"filename": "issykul_main.jpg", "main": true},
-      {"filename": "issykul_1.jpg", "main": false},
-      {"filename": "issykul_2.jpg", "main": false}
-    ]
+    "price": 80
+  },
+  {
+    "id": "ala-archa",
+    "name": "Ala-Archa Hiking",
+    "shortDescription": "Day trip to Ala-Archa gorge with guide.",
+    "mainImage": "ala-main.jpg",
+    "images": ["ala-1.jpg","ala-2.jpg","ala-3.jpg"],
+    "days": 1,
+    "price": 50
+  },
+  {
+    "id": "tash-rabat",
+    "name": "Tash-Rabat Adventure",
+    "shortDescription": "Explore the historic caravanserai in mountains.",
+    "mainImage": "tash-main.jpg",
+    "images": ["tash-1.jpg","tash-2.jpg","tash-3.jpg"],
+    "days": 2,
+    "price": 70
+  },
+  {
+    "id": "jyrgalan",
+    "name": "Jyrgalan Valley Tour",
+    "shortDescription": "Mountain valley experience with horseback riding.",
+    "mainImage": "jyrgalan-main.jpg",
+    "images": ["jyrgalan-1.jpg","jyrgalan-2.jpg","jyrgalan-3.jpg"],
+    "days": 3,
+    "price": 120
   }
 ]
