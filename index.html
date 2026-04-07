@@ -26,53 +26,44 @@
 <!-- Tours Section -->
 <section id="tours-section">
     <h2>Tours</h2>
-    <div class="card-container" id="tours-container">
-        <!-- JS will render tour cards here -->
-    </div>
+    <div class="card-container" id="tours-container"></div>
 </section>
 
 <!-- Places Section -->
 <section id="places-section">
     <h2>Additional Places</h2>
-    <div class="card-container" id="places-container">
-        <!-- JS will render place cards here -->
-    </div>
+    <div class="card-container" id="places-container"></div>
 </section>
 
 <!-- Activities Section -->
 <section id="activities-section">
     <h2>Activities</h2>
-    <div class="card-container" id="activities-container">
-        <!-- JS will render activity cards here -->
-    </div>
+    <div class="card-container" id="activities-container"></div>
 </section>
 
 <!-- Guides Section -->
 <section id="guides-section">
     <h2>Guides</h2>
-    <div class="card-container" id="guides-container">
-        <!-- JS will render guide cards here -->
-    </div>
+    <div class="card-container" id="guides-container"></div>
 </section>
 
 <!-- Footer -->
-<footer>
+<footer id="main-footer">
     <p>Follow us:</p>
     <a href="https://instagram.com" target="_blank">Instagram</a>
     <a href="https://t.me" target="_blank">Telegram</a>
     <a href="https://tiktok.com" target="_blank">TikTok</a>
 </footer>
 
-<!-- JS -->
 <script src="app.js"></script>
 <script>
-    // Scroll offset for sticky nav links
+    // Sticky nav scroll offset
     document.querySelectorAll('.sticky-nav a').forEach(link => {
         link.addEventListener('click', e => {
             e.preventDefault();
             const targetId = link.getAttribute('href').substring(1);
             const targetEl = document.getElementById(targetId);
-            const offset = window.innerHeight / 3; // 1/3 от экрана
+            const offset = window.innerHeight / 3; // 1/3 экрана
             window.scrollTo({
                 top: targetEl.offsetTop - offset,
                 behavior: 'smooth'
