@@ -6,66 +6,171 @@
 <title>Tour Calculator</title>
 
 <link rel="stylesheet" href="styles.css">
+
+<style>
+/* LAYOUT */
+.calc-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:24px;
+}
+
+.calc-block{
+background:white;
+padding:20px;
+border-radius:16px;
+box-shadow:0 10px 25px rgba(0,0,0,0.05);
+}
+
+.calc-block h3{
+margin-bottom:12px;
+}
+
+/* FULL WIDTH */
+.calc-full{
+grid-column:1/-1;
+}
+
+/* INPUTS */
+select,input[type="date"]{
+width:100%;
+padding:14px;
+border-radius:10px;
+border:1px solid #ddd;
+font-size:16px;
+}
+
+/* CHECKBOX LIST */
+.checkbox-list{
+display:flex;
+flex-direction:column;
+gap:8px;
+}
+
+.checkbox-list label{
+display:flex;
+gap:10px;
+cursor:pointer;
+}
+
+/* RESULT BAR */
+.total-bar{
+position:sticky;
+bottom:0;
+background:white;
+padding:16px;
+margin-top:20px;
+border-radius:16px;
+box-shadow:0 -5px 20px rgba(0,0,0,0.08);
+display:flex;
+justify-content:space-between;
+align-items:flex-start;
+flex-wrap:wrap;
+gap:12px;
+}
+
+.total-price{
+font-size:24px;
+font-weight:bold;
+}
+
+/* BREAKDOWN */
+.breakdown{
+font-size:14px;
+margin-top:8px;
+color:#333;
+}
+
+/* BUTTONS */
+.btn-whatsapp{
+background:#25D366;
+color:white;
+border:none;
+padding:10px 14px;
+border-radius:12px;
+cursor:pointer;
+}
+
+.btn-telegram{
+background:#229ED9;
+color:white;
+border:none;
+padding:10px 14px;
+border-radius:12px;
+cursor:pointer;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+.calc-grid{
+grid-template-columns:1fr;
+}
+.total-bar{
+flex-direction:column;
+align-items:flex-start;
+}
+}
+</style>
+
 </head>
 
 <body>
 
 <header class="hero">
-    <div class="hero-content container">
-        <h1>Tour / Calculator</h1>
-    </div>
+<div class="hero-content container">
+<h1>Tour / Calculator</h1>
+</div>
 </header>
 
 <section class="section">
 <div class="container">
 
-<h2 class="section-title">Tour Parameters</h2>
+<div class="calc-grid">
 
-<!-- PEOPLE -->
-<div class="form-block">
-<label>Number of People</label>
+<div class="calc-block">
+<h3>Number of People</h3>
 <select id="people"></select>
 </div>
 
-<!-- DATE -->
-<div class="form-block">
-<label>Trip Date</label>
+<div class="calc-block">
+<h3>Trip Date</h3>
 <input type="date" id="tripDate">
 </div>
 
-<!-- TOUR -->
-<div class="form-block">
-<label>Select Tour</label>
+<div class="calc-block">
+<h3>Select Tour</h3>
 <select id="tour"></select>
 </div>
 
-<!-- PLACES -->
-<div class="form-block">
-<label>Additional Places</label>
-<div id="places"></div>
-</div>
-
-<!-- ACTIVITIES -->
-<div class="form-block">
-<label>Additional Activities</label>
-<div id="activities"></div>
-</div>
-
-<!-- GUIDE -->
-<div class="form-block">
-<label>Select Guide</label>
+<div class="calc-block">
+<h3>Select Guide</h3>
 <select id="guide"></select>
 </div>
 
-<br>
+<div class="calc-block calc-full">
+<h3>Additional Places</h3>
+<div id="places" class="checkbox-list"></div>
+</div>
 
-<button class="btn" onclick="calculate()">Calculate</button>
-<span id="total" style="margin-left:20px;font-weight:bold;"></span>
+<div class="calc-block calc-full">
+<h3>Additional Activities</h3>
+<div id="activities" class="checkbox-list"></div>
+</div>
 
-<br><br>
+</div>
 
-<button class="btn" id="whatsapp">WhatsApp</button>
-<button class="btn" id="telegram">Telegram</button>
+<div class="total-bar">
+<div>
+<div>Total Price</div>
+<div id="total" class="total-price">$0</div>
+<div class="breakdown" id="breakdown"></div>
+</div>
+
+<div>
+<button class="btn-whatsapp" id="whatsapp">WhatsApp</button>
+<button class="btn-telegram" id="telegram">Telegram</button>
+</div>
+</div>
 
 </div>
 </section>
@@ -79,146 +184,108 @@
 </footer>
 
 <script>
+async function loadJSON(p){const r=await fetch(p);return await r.json();}
 
-async function loadJSON(path){
-    const r = await fetch(path);
-    return await r.json();
-}
-
-let tours, places, activities, guides, season;
+let tours,places,activities,guides,season;
 
 async function init(){
 
-    tours = await loadJSON('data/tours.json');
-    places = await loadJSON('data/places.json');
-    activities = await loadJSON('data/activities.json');
-    guides = await loadJSON('data/guides.json');
-    season = await loadJSON('data/season.json');
+tours=await loadJSON('data/tours.json');
+places=await loadJSON('data/places.json');
+activities=await loadJSON('data/activities.json');
+guides=await loadJSON('data/guides.json');
+season=await loadJSON('data/season.json');
 
-    // people
-    const people = document.getElementById('people');
-    for(let i=1;i<=32;i++){
-        people.innerHTML += `<option value="${i}">${i}</option>`;
-    }
+for(let i=1;i<=32;i++)
+people.innerHTML+=`<option>${i}</option>`;
 
-    // tours
-    const tour = document.getElementById('tour');
-    tours.forEach(t=>{
-        tour.innerHTML += `<option value="${t.id}">${t.title}</option>`;
-    });
+tours.forEach(t=>tour.innerHTML+=`<option value="${t.id}">${t.title}</option>`);
+guides.forEach(g=>guide.innerHTML+=`<option value="${g.id}">${g.title}</option>`);
 
-    // places
-    const placesDiv = document.getElementById('places');
-    places.forEach(p=>{
-        placesDiv.innerHTML += `
-        <div>
-            <input type="checkbox" value="${p.id}">
-            ${p.title}
-        </div>`;
-    });
+places.forEach(p=>{
+document.getElementById('places').innerHTML+=`
+<label><input type="checkbox" value="${p.id}"> ${p.title}</label>`;
+});
 
-    // activities
-    const actDiv = document.getElementById('activities');
-    activities.forEach(a=>{
-        actDiv.innerHTML += `
-        <div>
-            <input type="checkbox" value="${a.id}">
-            ${a.title}
-        </div>`;
-    });
+activities.forEach(a=>{
+document.getElementById('activities').innerHTML+=`
+<label><input type="checkbox" value="${a.id}"> ${a.title}</label>`;
+});
 
-    // guides
-    const guide = document.getElementById('guide');
-    guides.forEach(g=>{
-        guide.innerHTML += `<option value="${g.id}">${g.title}</option>`;
-    });
+// Live recalculation
+document.querySelectorAll('select,input,#places input,#activities input').forEach(el=>{
+    el.addEventListener('input',calculate);
+});
 
+calculate(); // initial
 }
 
 function getSeasonMultiplier(date){
-    const d = new Date(date);
-    const start = new Date(season.start);
-    const end = new Date(season.end);
-
-    if(d >= start && d <= end){
-        return season.high;
-    }
-    return season.low;
+if(!date) return 1;
+const d=new Date(date);
+const start=new Date(season.start);
+const end=new Date(season.end);
+return (d>=start&&d<=end)?season.high:season.low;
 }
 
 function calculate(){
 
-    const people = parseInt(document.getElementById('people').value);
-    const date = document.getElementById('tripDate').value;
+const peopleCount=parseInt(document.getElementById('people').value);
+const date=document.getElementById('tripDate').value;
 
-    const tourId = document.getElementById('tour').value;
-    const guideId = document.getElementById('guide').value;
+const tourObj=tours.find(t=>t.id===tour.value);
+const guideObj=guides.find(g=>g.id===guide.value);
 
-    const tour = tours.find(t=>t.id===tourId);
-    const guide = guides.find(g=>g.id===guideId);
+const selectedPlaces=[...document.querySelectorAll('#places input:checked')]
+.map(i=>places.find(p=>p.id===i.value));
 
-    let selectedPlaces = [...document.querySelectorAll('#places input:checked')]
-        .map(i=>places.find(p=>p.id===i.value));
+const selectedActivities=[...document.querySelectorAll('#activities input:checked')]
+.map(i=>activities.find(a=>a.id===i.value));
 
-    let selectedActivities = [...document.querySelectorAll('#activities input:checked')]
-        .map(i=>activities.find(a=>a.id===i.value));
+const totalDays=tourObj.days+selectedPlaces.reduce((s,p)=>s+p.days,0);
 
-    const totalDays =
-        tour.days +
-        selectedPlaces.reduce((s,p)=>s+p.days,0);
+// automatic guides
+const guidesCount=Math.ceil(peopleCount/4);
 
-    const guidesCount = Math.ceil(people/4);
+const placesPrice=selectedPlaces.reduce((s,p)=>s+p.price,0);
+const activitiesPrice=selectedActivities.reduce((s,a)=>{
+    if(a.personPrice)return s+a.personPrice*peopleCount;
+    if(a.groupPrice)return s+a.groupPrice;
+    return s;
+},0);
 
-    const placesPrice =
-        selectedPlaces.reduce((s,p)=>s+p.price,0);
+const guidesPrice=guidesCount*guideObj.price*totalDays;
 
-    const activitiesPrice =
-        selectedActivities.reduce((s,a)=>{
-            if(a.personPrice)
-                return s + a.personPrice * people;
-            if(a.groupPrice)
-                return s + a.groupPrice;
-            return s;
-        },0);
+const seasonMultiplier = getSeasonMultiplier(date);
+const total=(tourObj.price+placesPrice+activitiesPrice+guidesPrice)*seasonMultiplier;
 
-    const seasonMultiplier = getSeasonMultiplier(date);
+document.getElementById('total').textContent="$"+Math.round(total);
 
-    const total =
-        (
-        tour.price +
-        placesPrice +
-        activitiesPrice +
-        (guidesCount * guide.price * totalDays)
-        ) * seasonMultiplier;
+// BREAKDOWN
+let breakdown=`Tour: $${tourObj.price}<br>
+Places: $${placesPrice}<br>
+Activities: $${activitiesPrice}<br>
+Guides (${guidesCount} x ${totalDays} days): $${guidesPrice}<br>
+Season multiplier: x${seasonMultiplier}`;
 
-    document.getElementById('total').textContent =
-        "Total: $" + Math.round(total);
+document.getElementById('breakdown').innerHTML=breakdown;
 
-    const params =
-        `People: ${people}, `+
-        `Date: ${date}, `+
-        `Tour: ${tour.title}`;
+// TEXT FOR MESSENGERS
+const text = `Hello, I have selected the following parameters for the tour:
+- People: ${peopleCount}
+- Trip Date: ${date}
+- Tour: ${tourObj.title}
+- Guide: ${guideObj.title} (x${guidesCount} guides)
+- Additional Places: ${selectedPlaces.map(p=>p.title).join(', ') || 'None'}
+- Additional Activities: ${selectedActivities.map(a=>a.title).join(', ') || 'None'}
+- Total Price: $${Math.round(total)}
+I would like to discuss booking this tour (-:`;
 
-    const text =
-`Hello, I have selected the following parameters for the tour:
-${params}
-and would like to discuss booking this tour (-:`;
-
-    document.getElementById('whatsapp').onclick = () => {
-        window.open(
-            "https://wa.me/996555900855?text="+encodeURIComponent(text)
-        );
-    };
-
-    document.getElementById('telegram').onclick = () => {
-        window.open(
-            "https://t.me/ErkinMms?text="+encodeURIComponent(text)
-        );
-    };
-
+document.getElementById('whatsapp').onclick=()=>window.open("https://wa.me/996555900855?text="+encodeURIComponent(text));
+document.getElementById('telegram').onclick=()=>window.open("https://t.me/ErkinMms?text="+encodeURIComponent(text));
 }
 
-document.addEventListener('DOMContentLoaded', init);
+document.addEventListener('DOMContentLoaded',init);
 
 </script>
 
