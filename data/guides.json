@@ -3,35 +3,35 @@
         "id": "erkin",
         "name": "Erkin",
         "shortDescription": "Expert guide with 10 years of experience.",
-        "mainImage": "erkin_main.jpeg",
+        "mainImage": "erkin_main.jpg",
         "price": 60
     },
     {
         "id": "gulmira",
         "name": "Gulmira",
         "shortDescription": "Friendly guide who knows every hidden path.",
-        "mainImage": "gulmira_main.jpeg",
+        "mainImage": "gulmira_main.jpg",
         "price": 55
     },
     {
         "id": "bek",
         "name": "Bek",
         "shortDescription": "Experienced trek leader and photographer.",
-        "mainImage": "bek_main.jpeg",
+        "mainImage": "bek_main.jpg",
         "price": 50
     },
     {
         "id": "aijan",
         "name": "Aijan",
         "shortDescription": "Local expert with passion for history.",
-        "mainImage": "aijan_main.jpeg",
+        "mainImage": "aijan_main.jpg",
         "price": 45
     },
     {
         "id": "talant",
         "name": "Talant",
         "shortDescription": "Adventure guide specializing in mountains.",
-        "mainImage": "talant_main.jpeg",
+        "mainImage": "talant_main.jpg",
         "price": 65
     }
 ]
