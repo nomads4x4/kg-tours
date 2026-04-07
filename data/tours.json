@@ -1,98 +1,109 @@
 [
-  {
-    "id": "sonkul",
-    "name": "Son-Kul Tour",
-    "shortDescription": "A scenic trip to Son-Kul Lake",
-    "days": 3,
-    "price": 120,
-    "images": [
-      { "file": "sonkul_main.jpg", "main": true },
-      { "file": "sonkul_1.jpg" },
-      { "file": "sonkul_2.jpg" }
-    ]
-  },
-  {
-    "id": "issykul",
-    "name": "Issyk-Kul Lake Tour",
-    "shortDescription": "Relax at the largest alpine lake",
-    "days": 2,
-    "price": 100,
-    "images": [
-      { "file": "issykul_main.jpg", "main": true },
-      { "file": "issykul_1.jpg" },
-      { "file": "issykul_2.jpg" }
-    ]
-  },
-  {
-    "id": "alaarcha",
-    "name": "Ala-Archa National Park",
-    "shortDescription": "Hike through mountains and valleys",
-    "days": 1,
-    "price": 50,
-    "images": [
-      { "file": "alaarcha_main.jpg", "main": true },
-      { "file": "alaarcha_1.jpg" },
-      { "file": "alaarcha_2.jpg" }
-    ]
-  },
-  {
-    "id": "tashrabat",
-    "name": "Tash-Rabat Adventure",
-    "shortDescription": "Explore ancient caravanserai",
-    "days": 2,
-    "price": 90,
-    "images": [
-      { "file": "tashrabat_main.jpg", "main": true },
-      { "file": "tashrabat_1.jpg" },
-      { "file": "tashrabat_2.jpg" }
-    ]
-  },
-  {
-    "id": "karakol",
-    "name": "Karakol Discovery",
-    "shortDescription": "Mountain hiking and cultural tour",
-    "days": 3,
-    "price": 150,
-    "images": [
-      { "file": "karakol_main.jpg", "main": true },
-      { "file": "karakol_1.jpg" },
-      { "file": "karakol_2.jpg" }
-    ]
-  },
-  {
-    "id": "sarychelek",
-    "name": "Sary-Chelek Lake Tour",
-    "shortDescription": "Nature reserve with beautiful lake",
-    "days": 2,
-    "price": 110,
-    "images": [
-      { "file": "sarychelek_main.jpg", "main": true },
-      { "file": "sarychelek_1.jpg" },
-      { "file": "sarychelek_2.jpg" }
-    ]
-  },
-  {
-    "id": "narynvalley",
-    "name": "Naryn Valley Trip",
-    "shortDescription": "Experience nomad culture and mountains",
-    "days": 3,
-    "price": 140,
-    "images": [
-      { "file": "narynvalley_main.jpg", "main": true },
-      { "file": "narynvalley_1.jpg" },
-      { "file": "narynvalley_2.jpg" }
-    ]
-  },
-  {
-    "id": "jalalabad",
-    "name": "Jalalabad Excursion",
-    "shortDescription": "Discover southern Kyrgyzstan",
-    "days": 2,
-    "price": 95,
-    "images": [
-      { "file": "jalalabad_main.jpg", "main": true },
-      { "file": "jalalabad_1.jpg" },
-      { "file": "jalalabad_2.jpg" }
-    ]
-  }
+{
+"id":"issyk-kul",
+"title":"Issyk Kul",
+"short":"Classic lake tour",
+"description":"Explore Issyk Kul lake, canyons and mountain views.",
+"days":3,
+"price":450,
+"mainImage":"images/tours/issyk-kul/main.jpg",
+"images":[
+"images/tours/issyk-kul/main.jpg",
+"images/tours/issyk-kul/2.jpg",
+"images/tours/issyk-kul/3.jpg"
+]
+},
+{
+"id":"son-kul",
+"title":"Son Kul",
+"short":"High mountain lake",
+"description":"Nomadic life experience near Son Kul lake.",
+"days":4,
+"price":550,
+"mainImage":"images/tours/son-kul/main.jpg",
+"images":[
+"images/tours/son-kul/main.jpg",
+"images/tours/son-kul/2.jpg",
+"images/tours/son-kul/3.jpg"
+]
+},
+{
+"id":"ala-kul",
+"title":"Ala Kul",
+"short":"Trekking adventure",
+"description":"Alpine trekking to Ala Kul lake.",
+"days":5,
+"price":650,
+"mainImage":"images/tours/ala-kul/main.jpg",
+"images":[
+"images/tours/ala-kul/main.jpg",
+"images/tours/ala-kul/2.jpg",
+"images/tours/ala-kul/3.jpg"
+]
+},
+{
+"id":"kel-suu",
+"title":"Kel Suu",
+"short":"Remote canyon lake",
+"description":"Remote adventure to Kel Suu.",
+"days":4,
+"price":620,
+"mainImage":"images/tours/kel-suu/main.jpg",
+"images":[
+"images/tours/kel-suu/main.jpg",
+"images/tours/kel-suu/2.jpg"
+]
+},
+{
+"id":"tash-rabat",
+"title":"Tash Rabat",
+"short":"Silk road caravanserai",
+"description":"Historic Silk Road tour.",
+"days":3,
+"price":480,
+"mainImage":"images/tours/tash-rabat/main.jpg",
+"images":[
+"images/tours/tash-rabat/main.jpg",
+"images/tours/tash-rabat/2.jpg"
+]
+},
+{
+"id":"aryn",
+"title":"Arslanbob",
+"short":"Walnut forests",
+"description":"Nature and waterfalls.",
+"days":3,
+"price":430,
+"mainImage":"images/tours/arslanbob/main.jpg",
+"images":[
+"images/tours/arslanbob/main.jpg",
+"images/tours/arslanbob/2.jpg"
+]
+},
+{
+"id":"alabai",
+"title":"Alabai Valley",
+"short":"Hidden valley",
+"description":"Less known scenic valley.",
+"days":2,
+"price":390,
+"mainImage":"images/tours/alabai/main.jpg",
+"images":[
+"images/tours/alabai/main.jpg",
+"images/tours/alabai/2.jpg"
+]
+},
+{
+"id":"naryn",
+"title":"Naryn Region",
+"short":"Mountain roads",
+"description":"Remote mountain landscapes.",
+"days":5,
+"price":700,
+"mainImage":"images/tours/naryn/main.jpg",
+"images":[
+"images/tours/naryn/main.jpg",
+"images/tours/naryn/2.jpg"
+]
+}
 ]
