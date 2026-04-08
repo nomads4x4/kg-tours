@@ -1,5 +1,10 @@
-{
-  "title": "Kyrgyzstan Tours with Professional Guides",
-  "subtitle": "Mountains, lakes, nomadic culture and unforgettable adventures",
-  "image": "images/hero/hero.jpg"
-}
+[
+  {"id":"hero1","title":"Explore Kyrgyzstan","subtitle":"Discover the best tours in KG"},
+  {"id":"hero2","title":"Adventure Awaits","subtitle":"Pick your perfect trip"},
+  {"id":"hero3","title":"Nature & Culture","subtitle":"Experience mountains and lakes"},
+  {"id":"hero4","title":"Family Tours","subtitle":"Fun trips for everyone"},
+  {"id":"hero5","title":"Guided Journeys","subtitle":"Experts show you the way"},
+  {"id":"hero6","title":"Seasonal Highlights","subtitle":"Enjoy the best time to travel"},
+  {"id":"hero7","title":"Adventure Tours","subtitle":"Hiking, rafting and more"},
+  {"id":"hero8","title":"Custom Trips","subtitle":"Tailor-made just for you"}
+]
