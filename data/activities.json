@@ -1,10 +1,10 @@
 [
-{"id":"eagle","title":"Eagle Hunting Show","short":"Traditional show","description":"Eagle hunting.","groupPrice":150,"mainImage":"images/activities/eagle/main.jpg","images":["images/activities/eagle/main.jpg"]},
-{"id":"yurt","title":"Yurt Stay","short":"Nomadic life","description":"Stay in yurt.","personPrice":40,"mainImage":"images/activities/yurt/main.jpg","images":["images/activities/yurt/main.jpg"]},
-{"id":"horse","title":"Horse Riding","short":"Mountain riding","description":"Horse trip.","personPrice":50,"mainImage":"images/activities/horse/main.jpg","images":["images/activities/horse/main.jpg"]},
-{"id":"felt","title":"Felt Workshop","short":"Handcraft","description":"Make felt.","groupPrice":120,"mainImage":"images/activities/felt/main.jpg","images":["images/activities/felt/main.jpg"]},
-{"id":"photo","title":"Photo Session","short":"Professional photos","description":"Photo tour.","groupPrice":200,"mainImage":"images/activities/photo/main.jpg","images":["images/activities/photo/main.jpg"]},
-{"id":"hike","title":"Guided Hike","short":"Short trekking","description":"Easy hike.","personPrice":30,"mainImage":"images/activities/hike/main.jpg","images":["images/activities/hike/main.jpg"]},
-{"id":"cook","title":"Cooking Class","short":"Local food","description":"Cook local dishes.","groupPrice":110,"mainImage":"images/activities/cook/main.jpg","images":["images/activities/cook/main.jpg"]},
-{"id":"archery","title":"Archery","short":"Traditional archery","description":"Bow shooting.","personPrice":20,"mainImage":"images/activities/archery/main.jpg","images":["images/activities/archery/main.jpg"]}
+  {"id":"rafting","title":"Rafting","price":40,"perPerson":true},
+  {"id":"horseback","title":"Horseback Riding","price":60,"perPerson":true},
+  {"id":"cycling","title":"Cycling Tour","price":50,"perPerson":true},
+  {"id":"camping","title":"Camping","price":80,"perGroup":true},
+  {"id":"fishing","title":"Fishing","price":30,"perPerson":true},
+  {"id":"kayaking","title":"Kayaking","price":45,"perPerson":true},
+  {"id":"photography","title":"Photography Tour","price":100,"perGroup":true},
+  {"id":"cultural","title":"Cultural Visit","price":70,"perGroup":true}
 ]
