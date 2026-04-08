@@ -1,10 +1,11 @@
 [
-  {"id":"guide1","name":"Aibek","price":50},
-  {"id":"guide2","name":"Bakyt","price":60},
-  {"id":"guide3","name":"Cholpon","price":55},
-  {"id":"guide4","name":"Dastan","price":45},
-  {"id":"guide5","name":"Erlan","price":50},
-  {"id":"guide6","name":"Farida","price":60},
-  {"id":"guide7","name":"Gulnara","price":55},
-  {"id":"guide8","name":"Hassan","price":50}
+{"id":"aman","name":"Aman","price":120},
+{"id":"bek","name":"Bek","price":110},
+{"id":"nurlan","name":"Nurlan","price":115},
+{"id":"azamat","name":"Azamat","price":130},
+{"id":"erlan","name":"Erlan","price":100},
+{"id":"kuban","name":"Kuban","price":105},
+{"id":"talant","name":"Talant","price":125},
+{"id":"temir","name":"Temir","price":120},
+{"id":"ulan","name":"Ulan","price":110}
 ]
