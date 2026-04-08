@@ -1,10 +1,11 @@
 [
-  {"id":"issyk-kul","title":"Issyk-Kul Lake","shortDesc":"Beautiful lake tour","description":"Full description of Issyk-Kul tour","price":200,"days":3},
-  {"id":"sonkul","title":"Son-Kul Adventure","shortDesc":"Nomad experience","description":"3 days at Son-Kul","price":180,"days":3},
-  {"id":"ala-archa","title":"Ala-Archa Hiking","shortDesc":"Mountain trekking","description":"Explore Ala-Archa National Park","price":150,"days":2},
-  {"id":"karakol","title":"Karakol Discovery","shortDesc":"Culture & Nature","description":"Karakol city and surroundings","price":220,"days":4},
-  {"id":"sary-chelek","title":"Sary-Chelek Lake","shortDesc":"Pristine nature","description":"Hiking and camping at Sary-Chelek","price":210,"days":3},
-  {"id":"tash-rabat","title":"Tash-Rabat Caravanserai","shortDesc":"Historical tour","description":"Ancient caravanserai visit","price":170,"days":2},
-  {"id":"jyrgalan","title":"Jyrgalan Valley","shortDesc":"Offbeat trekking","description":"Hike in remote valley","price":190,"days":3},
-  {"id":"alamedin","title":"Alamedin Gorge","shortDesc":"Adventure & picnic","description":"Gorge exploration and picnic","price":160,"days":2}
+{"id":"sonkul","title":"Sonkul Tour","days":3,"price":400,"description":"Alpine lake adventure"},
+{"id":"issyk-kul","title":"Issyk Kul Tour","days":4,"price":550,"description":"Lake and canyon"},
+{"id":"ala-archa","title":"Ala Archa Trek","days":2,"price":250,"description":"National park trekking"},
+{"id":"tash-rabat","title":"Tash Rabat Caravan","days":5,"price":720,"description":"Silk road caravanserai"},
+{"id":"kel-suu","title":"Kel Suu Expedition","days":4,"price":680,"description":"Remote alpine lake"},
+{"id":"sary-chelek","title":"Sary Chelek Lakes","days":3,"price":430,"description":"Forest and lakes"},
+{"id":"naryn","title":"Naryn Mountains","days":3,"price":390,"description":"High mountain valleys"},
+{"id":"jyrgalan","title":"Jyrgalan Adventure","days":4,"price":610,"description":"Eastern Kyrgyzstan"},
+{"id":"bishkek","title":"Bishkek City","days":1,"price":120,"description":"City highlights"}
 ]
