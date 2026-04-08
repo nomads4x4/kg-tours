@@ -1,10 +1,11 @@
 [
-  {"id":"rafting","title":"Rafting","price":40,"perPerson":true},
-  {"id":"horseback","title":"Horseback Riding","price":60,"perPerson":true},
-  {"id":"cycling","title":"Cycling Tour","price":50,"perPerson":true},
-  {"id":"camping","title":"Camping","price":80,"perGroup":true},
-  {"id":"fishing","title":"Fishing","price":30,"perPerson":true},
-  {"id":"kayaking","title":"Kayaking","price":45,"perPerson":true},
-  {"id":"photography","title":"Photography Tour","price":100,"perGroup":true},
-  {"id":"cultural","title":"Cultural Visit","price":70,"perGroup":true}
+{"id":"horse","title":"Horse riding","price":40,"type":"perPerson"},
+{"id":"boat","title":"Boat trip","price":120,"type":"perGroup"},
+{"id":"eagle","title":"Eagle hunting show","price":150,"type":"perGroup"},
+{"id":"yurt","title":"Yurt stay","price":35,"type":"perPerson"},
+{"id":"hiking","title":"Guided hiking","price":25,"type":"perPerson"},
+{"id":"rafting","title":"Rafting","price":60,"type":"perPerson"},
+{"id":"cycling","title":"Cycling","price":45,"type":"perPerson"},
+{"id":"jeep","title":"Jeep safari","price":200,"type":"perGroup"},
+{"id":"cooking","title":"Cooking class","price":30,"type":"perPerson"}
 ]
