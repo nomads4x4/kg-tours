@@ -1,177 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-page="calculator">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tour Calculator</title>
-
-<link rel="stylesheet" href="styles.css">
-
-<style>
-.calc-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:24px;
-}
-
-.calc-block{
-background:white;
-padding:20px;
-border-radius:16px;
-box-shadow:0 10px 25px rgba(0,0,0,0.05);
-}
-
-.calc-block h3{
-margin-bottom:12px;
-}
-
-select,input[type="date"]{
-width:100%;
-padding:14px;
-border-radius:10px;
-border:1px solid #ddd;
-font-size:16px;
-}
-
-.checkbox-list{
-display:flex;
-flex-direction:column;
-gap:8px;
-}
-
-.checkbox-list label{
-display:flex;
-gap:10px;
-cursor:pointer;
-}
-
-.total-bar{
-position:relative;
-background:white;
-padding:16px;
-margin-top:20px;
-border-radius:16px;
-box-shadow:0 0 20px rgba(0,0,0,0.05);
-display:flex;
-justify-content:space-between;
-align-items:flex-start;
-flex-wrap:wrap;
-gap:12px;
-}
-
-.total-price{
-font-size:24px;
-font-weight:bold;
-}
-
-.breakdown{
-font-size:14px;
-margin-top:8px;
-color:#333;
-}
-
-.btn-whatsapp{
-background:#25D366;
-color:white;
-border:none;
-padding:10px 14px;
-border-radius:12px;
-cursor:pointer;
-}
-
-.btn-telegram{
-background:#229ED9;
-color:white;
-border:none;
-padding:10px 14px;
-border-radius:12px;
-cursor:pointer;
-}
-
-@media(max-width:768px){
-.calc-grid{
-grid-template-columns:1fr;
-}
-.total-bar{
-position:sticky;
-bottom:0;
-flex-direction:column;
-align-items:flex-start;
-}
-}
-</style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tour Calculator</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
+    <section class="calculator-section">
+        <h1>Calculate Your Tour</h1>
 
-<header class="hero">
-<div class="hero-content container">
-<h1>Tour / Calculator</h1>
-</div>
-</header>
+        <div class="calculator-form">
+            <label>Number of People
+                <input type="number" id="people-input" min="1" value="1">
+            </label>
 
-<section class="section">
-<div class="container">
+            <label>Trip Date
+                <input type="date" id="date-input">
+            </label>
 
-<div class="calc-grid">
+            <label>Select Tour
+                <select id="tour-select"></select>
+            </label>
 
-<div class="calc-block">
-<h3>Number of People</h3>
-<select id="people"></select>
-</div>
+            <label>Select Guide(s)
+                <select id="guide-select" multiple></select>
+            </label>
 
-<div class="calc-block">
-<h3>Trip Date</h3>
-<input type="date" id="tripDate">
-</div>
+            <label>Additional Destinations
+                <select id="destination-select" multiple></select>
+            </label>
 
-<div class="calc-block">
-<h3>Select Tour</h3>
-<select id="tour"></select>
-</div>
+            <label>Additional Activities
+                <select id="activity-select" multiple></select>
+            </label>
+        </div>
 
-<div class="calc-block">
-<h3>Select Guide(s)</h3>
-<div id="guides" class="checkbox-list"></div>
-<small>Minimum number of guides is automatically calculated based on group size (1 guide per 4 tourists)</small>
-</div>
+        <div class="price-block">
+            <h2>Total Price: <span id="total-price">-</span></h2>
+            <div id="price-breakdown"></div>
+            <button id="whatsapp-btn" class="btn contact-btn" disabled>WhatsApp</button>
+            <button id="telegram-btn" class="btn contact-btn" disabled>Telegram</button>
+        </div>
+    </section>
 
-<div class="calc-block">
-<h3>Additional Places</h3>
-<div id="places" class="checkbox-list"></div>
-</div>
-
-<div class="calc-block">
-<h3>Additional Activities</h3>
-<div id="activities" class="checkbox-list"></div>
-</div>
-
-</div>
-
-<div class="total-bar">
-<div>
-<div>Total Price</div>
-<div id="total" class="total-price">$0</div>
-<div class="breakdown" id="breakdown"></div>
-</div>
-
-<div>
-<button class="btn-whatsapp" id="whatsapp">WhatsApp</button>
-<button class="btn-telegram" id="telegram">Telegram</button>
-</div>
-</div>
-
-</div>
-</section>
-
-<footer>
-<div class="container">
-<a href="index.html" class="btn">← Back to main page</a>
-</div>
-</footer>
-
-<script src="app.js"></script>
-
+    <script src="app.js"></script>
 </body>
 </html>
