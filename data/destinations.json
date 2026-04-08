@@ -1,10 +1,11 @@
 [
-  {"id":"balykchy","title":"Balykchy","price":20,"days":1},
-  {"id":"tokmok","title":"Tokmok","price":15,"days":1},
-  {"id":"cholpon-ata","title":"Cholpon-Ata","price":25,"days":1},
-  {"id":"karakol-city","title":"Karakol City","price":30,"days":1},
-  {"id":"jalalabad","title":"Jalal-Abad","price":18,"days":1},
-  {"id":"naryn","title":"Naryn","price":22,"days":1},
-  {"id":"osh","title":"Osh","price":28,"days":1},
-  {"id":"batken","title":"Batken","price":20,"days":1}
+{"id":"skazka","title":"Skazka Canyon","days":1,"price":90},
+{"id":"jeti-oguz","title":"Jeti Oguz","days":1,"price":80},
+{"id":"burana","title":"Burana Tower","days":1,"price":70},
+{"id":"chong-kemin","title":"Chong Kemin","days":1,"price":100},
+{"id":"alamedin","title":"Alamedin Gorge","days":1,"price":75},
+{"id":"arslanbob","title":"Arslanbob","days":2,"price":160},
+{"id":"karakol","title":"Karakol","days":1,"price":95},
+{"id":"tamga","title":"Tamga","days":1,"price":85},
+{"id":"kochkor","title":"Kochkor","days":1,"price":65}
 ]
