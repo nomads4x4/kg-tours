@@ -1,258 +1,150 @@
-// -------------------- app.js --------------------
-async function loadJSON(path){const r=await fetch(path);return await r.json();}
+const DATA = {
+    hero: [], tours: [], guides: [], destinations: [], activities: [], season: []
+};
 
-let tours, places, activities, guides, season, heroData;
-
-async function init(){
-    [tours, places, activities, guides, season, heroData] = await Promise.all([
-        loadJSON('data/tours.json'),
-        loadJSON('data/places.json'),
-        loadJSON('data/activities.json'),
-        loadJSON('data/guides.json'),
-        loadJSON('data/season.json'),
-        loadJSON('data/hero.json')
-    ]);
-
-    const body=document.body;
-
-    if(body.classList.contains('index-page')) indexPageInit();
-    if(body.classList.contains('item-page')) itemPageInit();
-    if(body.classList.contains('calculator-page')) calculatorInit();
+async function loadAllData() {
+    const files = ['hero','tours','guides','destinations','activities','season'];
+    await Promise.all(files.map(f => fetch(`data/${f}.json`).then(r=>r.json()).then(j=>DATA[f]=j)));
 }
 
-// -------------------- INDEX PAGE --------------------
-function indexPageInit(){
+function init() {
+    loadAllData().then(()=>{
+        const page = document.body.dataset.page;
+        if(page==='index') initIndexPage();
+        else if(page==='item') initItemPage();
+        else if(page==='calculator') initCalculatorPage();
+    });
+}
+
+// ---------- INDEX PAGE ----------
+function initIndexPage() {
     renderHero();
-    renderSections();
-    initStickyNav();
-    initCarousels();
+    renderCards('tours','tours-cards');
+    renderCards('destinations','destinations-cards');
+    renderCards('activities','activities-cards');
+    renderCards('guides','guides-cards');
 }
 
-function renderHero(){
-    const hero=document.getElementById('hero-content');
-    if(!hero) return;
-    const h=heroData;
-    hero.innerHTML=`
-        <h1>${h.title}</h1>
-        <p>${h.description}</p>
-        <a href="calculator.html" class="btn">Calculate Your Tour</a>
-    `;
-    const heroDiv=document.querySelector('.hero');
-    if(heroDiv) heroDiv.style.backgroundImage=`url('images/hero/${h.image}')`;
+function renderHero() {
+    const container = document.querySelector('#hero');
+    DATA.hero.forEach(item=>{
+        const div = document.createElement('div');
+        div.innerHTML=`<h1>${item.title}</h1><p>${item.subtitle||''}</p><a href="calculator.html" class="btn">Calculate Tour</a>`;
+        container.appendChild(div);
+        container.style.backgroundImage=`url(${getMainImage('hero',item.id)})`;
+    });
 }
 
-function renderSections(){
-    const sections=['tours','places','activities','guides'];
-    sections.forEach(sec=>{
-        const container=document.getElementById(sec);
-        if(!container) return;
-        let data;
-        switch(sec){
-            case 'tours': data=tours; break;
-            case 'places': data=places; break;
-            case 'activities': data=activities; break;
-            case 'guides': data=guides; break;
+function renderCards(type, containerId){
+    const container=document.getElementById(containerId);
+    DATA[type].forEach(item=>{
+        const card=document.createElement('div');
+        card.className='card';
+        card.innerHTML=`<img src="${getMainImage(type,item.id)}" alt="${item.title}"><h3>${item.title}</h3><p>${item.shortDesc||''}</p>`;
+        card.onclick=()=>window.location.href=`item.html?id=${item.id}`;
+        container.appendChild(card);
+    });
+}
+
+// ---------- ITEM PAGE ----------
+function initItemPage(){
+    const id=new URLSearchParams(window.location.search).get('id');
+    if(!id) return;
+    const item=DATA.tours.find(t=>t.id===id);
+    if(!item) return;
+    document.querySelector('.item-title').textContent=item.title;
+    document.querySelector('.item-description').textContent=item.description||'';
+    const gallery=document.querySelector('.item-gallery');
+    getGalleryImages('tours',id).forEach(src=>{
+        const img=document.createElement('img');
+        img.src=src; img.alt=item.title; img.loading='lazy'; img.className='gallery-image';
+        gallery.appendChild(img);
+    });
+}
+
+// ---------- CALCULATOR PAGE ----------
+function initCalculatorPage(){
+    const peopleInput=document.getElementById('people-input');
+    const dateInput=document.getElementById('date-input');
+    const tourSelect=document.getElementById('tour-select');
+    const guideSelect=document.getElementById('guide-select');
+    const destinationSelect=document.getElementById('destination-select');
+    const activitySelect=document.getElementById('activity-select');
+    const totalPriceEl=document.getElementById('total-price');
+    const breakdownEl=document.getElementById('price-breakdown');
+    const whatsappBtn=document.getElementById('whatsapp-btn');
+    const telegramBtn=document.getElementById('telegram-btn');
+
+    // Populate selects
+    DATA.tours.forEach(t=>{const o=document.createElement('option');o.value=t.id;o.text=t.title;tourSelect.appendChild(o)});
+    DATA.guides.forEach(g=>{const o=document.createElement('option');o.value=g.id;o.text=g.name;guideSelect.appendChild(o)});
+    DATA.destinations.forEach(d=>{const o=document.createElement('option');o.value=d.id;o.text=d.title;destinationSelect.appendChild(o)});
+    DATA.activities.forEach(a=>{const o=document.createElement('option');o.value=a.id;o.text=a.title;activitySelect.appendChild(o)});
+
+    function calculate(){
+        const people=parseInt(peopleInput.value)||0;
+        const tour=DATA.tours.find(t=>t.id===tourSelect.value);
+        const selectedGuides=[...guideSelect.selectedOptions].map(o=>DATA.guides.find(g=>g.id===o.value));
+        const selectedDest=[...destinationSelect.selectedOptions].map(o=>DATA.destinations.find(d=>d.id===o.value));
+        const selectedAct=[...activitySelect.selectedOptions].map(o=>DATA.activities.find(a=>a.id===o.value));
+
+        if(!tour || !people || !selectedGuides.length) {
+            totalPriceEl.textContent='Select parameters'; breakdownEl.innerHTML=''; whatsappBtn.disabled=true; telegramBtn.disabled=true; return;
         }
-        data.forEach(item=>{
-            const card=document.createElement('div');
-            card.className='card';
-            card.innerHTML=`
-                <img src="images/${sec}/${item.mainImage}" alt="${item.title}">
-                <h4>${item.title}</h4>
-                <p>${item.description}</p>
-            `;
-            card.addEventListener('click',()=>{ window.location=`item.html?type=${sec}&id=${item.id}`; });
-            container.appendChild(card);
+
+        const guidesCount=Math.ceil(people/4);
+        const totalDays=tour.days+selectedDest.reduce((a,b)=>a+b.days,0);
+        const destinationsPrice=selectedDest.reduce((a,b)=>a+b.price,0);
+        const activitiesPrice=selectedAct.reduce((sum,a)=>{
+            return sum+(a.perPerson? a.price*people : a.price*guidesCount);
+        },0);
+
+        let seasonMultiplier=1;
+        const selectedDate=new Date(dateInput.value);
+        DATA.season.forEach(s=>{
+            const start=new Date(s.start); const end=new Date(s.end);
+            if(selectedDate>=start && selectedDate<=end) seasonMultiplier=s.multiplier;
         });
-    });
-}
 
-function initStickyNav(){
-    document.querySelectorAll('.sticky-nav a').forEach(a=>{
-        a.addEventListener('click',e=>{
-            e.preventDefault();
-            const target=document.querySelector(a.getAttribute('href'));
-            if(target){
-                const offset=window.innerHeight/4;
-                window.scrollTo({top:target.offsetTop - offset, behavior:'smooth'});
-            }
-        });
-    });
-}
+        const totalPrice=(guidesCount*((tour.price)+destinationsPrice+selectedGuides.reduce((a,g)=>a+g.price*totalDays,0))+activitiesPrice)*seasonMultiplier;
+        totalPriceEl.textContent=`$${totalPrice.toFixed(2)}`;
 
-function initCarousels(){
-    document.querySelectorAll('.carousel').forEach(carousel=>{
-        const cards=carousel.querySelectorAll('.card');
-        let index=0;
-        const prevBtn=carousel.querySelector('.prev');
-        const nextBtn=carousel.querySelector('.next');
-        const showIndex=i=>{
-            cards.forEach((c,j)=>c.style.display=(j===i)?'block':'none');
-        };
-        showIndex(index);
-        if(prevBtn) prevBtn.addEventListener('click',()=>{ index=(index-1+cards.length)%cards.length; showIndex(index); });
-        if(nextBtn) nextBtn.addEventListener('click',()=>{ index=(index+1)%cards.length; showIndex(index); });
-    });
-}
+        // breakdown
+        breakdownEl.innerHTML=`<ul>
+            <li>Tour: $${tour.price}</li>
+            <li>Destinations: $${destinationsPrice}</li>
+            <li>Activities: $${activitiesPrice}</li>
+            <li>Guides: $${selectedGuides.reduce((a,g)=>a+g.price*totalDays,0)}</li>
+            <li>Multiplier: x${seasonMultiplier}</li>
+        </ul>`;
 
-// -------------------- ITEM PAGE --------------------
-function itemPageInit(){
-    const params=new URLSearchParams(window.location.search);
-    const type=params.get('type');
-    const id=params.get('id');
-    if(!type || !id) return;
-
-    let data;
-    switch(type){
-        case 'tours': data=tours; break;
-        case 'places': data=places; break;
-        case 'activities': data=activities; break;
-        case 'guides': data=guides; break;
-        default: return;
+        // contact links
+        const paramText=`people: ${people}, date: ${dateInput.value}, tour: ${tour.title}, destinations: ${selectedDest.map(d=>d.title).join(', ')}, activities: ${selectedAct.map(a=>a.title).join(', ')}, guides: ${selectedGuides.map(g=>g.name).join(', ')}, total price: $${totalPrice.toFixed(2)}`;
+        whatsappBtn.href=`https://wa.me/?text=Hello, I have selected the following parameters for the tour (${paramText}) and would like to discuss booking this tour (-:`;
+        telegramBtn.href=`https://t.me/share/url?url=&text=Hello, I have selected the following parameters for the tour (${paramText}) and would like to discuss booking this tour (-:`;
+        whatsappBtn.disabled=false; telegramBtn.disabled=false;
     }
 
-    const item=data.find(i=>i.id==id);
-    if(!item) return;
-
-    const page=document.getElementById('item-page');
-    if(!page) return;
-
-    page.innerHTML=`
-        <h1>${type.slice(0,-1).toUpperCase()}/${item.title}</h1>
-        <div class="item-carousel">
-            ${item.images.map(img=>`<img src="images/${type}/${img}" alt="${item.title}">`).join('')}
-        </div>
-        <p>${item.description}</p>
-        ${item.days?`<p>Duration: ${item.days} days</p>`:''}
-        ${item.price?`<p>Price: $${item.price}</p>`:''}
-        <a href="index.html" class="btn">← Back to main page</a>
-    `;
-}
-
-// -------------------- CALCULATOR PAGE --------------------
-function calculatorInit(){
-    const peopleEl=document.getElementById('people');
-    const tourEl=document.getElementById('tour');
-    const placesEl=document.getElementById('places');
-    const activitiesEl=document.getElementById('activities');
-    const guidesEl=document.getElementById('guides');
-
-    if(!peopleEl || !tourEl || !placesEl || !activitiesEl || !guidesEl) return;
-
-    for(let i=1;i<=32;i++) peopleEl.innerHTML+=`<option>${i}</option>`;
-    tours.forEach(t=>tourEl.innerHTML+=`<option value="${t.id}">${t.title}</option>`);
-
-    // Additional Places two-column
-    places.forEach((p,i)=>{
-        const label=document.createElement('label');
-        label.className = (i%2===0)?'left-col':'right-col';
-        label.innerHTML=`<input type="checkbox" value="${p.id}"> ${p.title}`;
-        placesEl.appendChild(label);
-    });
-
-    // Additional Activities two-column
-    activities.forEach((a,i)=>{
-        const label=document.createElement('label');
-        label.className = (i%2===0)?'left-col':'right-col';
-        label.innerHTML=`<input type="checkbox" value="${a.id}"> ${a.title}`;
-        activitiesEl.appendChild(label);
-    });
-
-    document.querySelectorAll('select,input,#places input,#activities input').forEach(el=>{
-        el.addEventListener('input',()=>{ updateGuides(); calculate(); });
-    });
-
-    updateGuides();
+    [peopleInput,dateInput,tourSelect,guideSelect,destinationSelect,activitySelect].forEach(el=>el.addEventListener('change',calculate));
     calculate();
 }
 
-function getSeasonMultiplier(date){
-    if(!date) return 1;
-    const d=new Date(date);
-    const start=new Date(season.start);
-    const end=new Date(season.end);
-    return (d>=start && d<=end)?season.high:season.low;
+// ---------- IMAGE HELPERS ----------
+function getMainImage(type,id){
+    return `images/${type}/${id}_main.jpg`;
 }
 
-function updateGuides(){
-    const peopleCount=parseInt(document.getElementById('people')?.value || 0);
-    const minGuides=Math.ceil(peopleCount/4);
-    const container=document.getElementById('guides');
-    if(!container) return;
-    container.innerHTML='';
-
-    guides.forEach((g,i)=>{
-        const checkbox=document.createElement('input');
-        checkbox.type='checkbox';
-        checkbox.value=g.id;
-        checkbox.id='guide_'+i;
-        if(i<minGuides) checkbox.checked=true;
-
-        const label=document.createElement('label');
-        label.appendChild(checkbox);
-        label.appendChild(document.createTextNode(' '+g.title));
-        container.appendChild(label);
-    });
-
-    container.querySelectorAll('input[type=checkbox]').forEach(cb=>{
-        cb.addEventListener('change',()=>{
-            const checked=container.querySelectorAll('input[type=checkbox]:checked');
-            const minGuides=Math.ceil(parseInt(document.getElementById('people').value)/4);
-            if(checked.length>minGuides) cb.checked=false;
-            calculate();
-        });
-    });
-}
-
-function calculate(){
-    const peopleCount=parseInt(document.getElementById('people')?.value || 0);
-    const date=document.getElementById('tripDate')?.value;
-    const tourObj=tours.find(t=>t.id==document.getElementById('tour')?.value);
-    if(!tourObj) return;
-
-    const selectedGuides=[...document.querySelectorAll('#guides input:checked')].map(i=>guides.find(g=>g.id==i.value));
-    const selectedPlaces=[...document.querySelectorAll('#places input:checked')].map(i=>places.find(p=>p.id==i.value));
-    const selectedActivities=[...document.querySelectorAll('#activities input:checked')].map(i=>activities.find(a=>a.id==i.value));
-
-    const totalDays=tourObj.days + selectedPlaces.reduce((s,p)=>s+p.days,0);
-
-    const placesPrice=selectedPlaces.reduce((s,p)=>s+p.price,0);
-    const activitiesPrice=selectedActivities.reduce((s,a)=>{
-        if(a.personPrice) return s+a.personPrice*peopleCount;
-        if(a.groupPrice) return s+a.groupPrice;
-        return s;
-    },0);
-    const guidesPrice=selectedGuides.reduce((s,g)=>s+g.price*totalDays,0);
-
-    const seasonMultiplier=getSeasonMultiplier(date);
-    const total=(tourObj.price + placesPrice + activitiesPrice + guidesPrice)*seasonMultiplier;
-
-    const totalEl=document.getElementById('total');
-    if(totalEl) totalEl.textContent="$"+Math.round(total);
-
-    const breakdownEl=document.getElementById('breakdown');
-    if(breakdownEl){
-        breakdownEl.innerHTML=`Tour: $${tourObj.price}<br>
-Places: $${placesPrice}<br>
-Activities: $${activitiesPrice}<br>
-Guides (${selectedGuides.length} x ${totalDays} days): $${guidesPrice}<br>
-Season multiplier: x${seasonMultiplier}`;
+function getGalleryImages(type,id){
+    const images=[];
+    let i=1;
+    while(true){
+        const path=`images/${type}/${id}_${i}.jpg`;
+        if(i>5) break; // limit max images
+        images.push(path);
+        i++;
     }
-
-    const text=`Hello, I have selected the following parameters for the tour:
-- People: ${peopleCount}
-- Trip Date: ${date}
-- Tour: ${tourObj.title}
-- Guides: ${selectedGuides.map(g=>g.title).join(', ')}
-- Additional Places: ${selectedPlaces.map(p=>p.title).join(', ') || 'None'}
-- Additional Activities: ${selectedActivities.map(a=>a.title).join(', ') || 'None'}
-- Total Price: $${Math.round(total)}
-I would like to discuss booking this tour (-:`;
-
-    const waBtn=document.getElementById('whatsapp');
-    const tgBtn=document.getElementById('telegram');
-    if(waBtn) waBtn.onclick=()=>window.open("https://wa.me/996555900855?text="+encodeURIComponent(text));
-    if(tgBtn) tgBtn.onclick=()=>window.open("https://t.me/ErkinMms?text="+encodeURIComponent(text));
+    return images;
 }
 
-document.addEventListener('DOMContentLoaded',init);
+// ---------- INIT ----------
+document.addEventListener('DOMContentLoaded', init);
