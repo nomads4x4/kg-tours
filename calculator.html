@@ -1,49 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" data-page="calculator">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tour Calculator</title>
-    <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Calculator</title>
+<link rel="stylesheet" href="styles.css" />
 </head>
-<body>
-    <section class="calculator-section">
-        <h1>Calculate Your Tour</h1>
-
-        <div class="calculator-form">
-            <label>Number of People
-                <input type="number" id="people-input" min="1" value="1">
-            </label>
-
-            <label>Trip Date
-                <input type="date" id="date-input">
-            </label>
-
-            <label>Select Tour
-                <select id="tour-select"></select>
-            </label>
-
-            <label>Select Guide(s)
-                <select id="guide-select" multiple></select>
-            </label>
-
-            <label>Additional Destinations
-                <select id="destination-select" multiple></select>
-            </label>
-
-            <label>Additional Activities
-                <select id="activity-select" multiple></select>
-            </label>
-        </div>
-
-        <div class="price-block">
-            <h2>Total Price: <span id="total-price">-</span></h2>
-            <div id="price-breakdown"></div>
-            <button id="whatsapp-btn" class="btn contact-btn" disabled>WhatsApp</button>
-            <button id="telegram-btn" class="btn contact-btn" disabled>Telegram</button>
-        </div>
-    </section>
-
-    <script src="app.js"></script>
+<body data-page="calculator">
+<header id="calc-hero"></header>
+<main class="calculator-layout">
+<div id="calc-controls"></div>
+<div id="calc-price"></div>
+</main>
+<script src="app.js"></script>
 </body>
 </html>
