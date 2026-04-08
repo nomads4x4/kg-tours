@@ -1,0 +1,10 @@
+[
+  {"id":"balykchy","title":"Balykchy","price":20,"days":1},
+  {"id":"tokmok","title":"Tokmok","price":15,"days":1},
+  {"id":"cholpon-ata","title":"Cholpon-Ata","price":25,"days":1},
+  {"id":"karakol-city","title":"Karakol City","price":30,"days":1},
+  {"id":"jalalabad","title":"Jalal-Abad","price":18,"days":1},
+  {"id":"naryn","title":"Naryn","price":22,"days":1},
+  {"id":"osh","title":"Osh","price":28,"days":1},
+  {"id":"batken","title":"Batken","price":20,"days":1}
+]
